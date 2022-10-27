@@ -1,15 +1,16 @@
 package command;
 
+
 import Image.Image;
 import Image.Pixel;
 import model.ImageProcessorModel;
 
-public class DarkenCommand implements Command {
+public class BrightenCommand implements Command {
     private String imageName;
     private int intensity;
     private String newName;
 
-    public DarkenCommand(String imageName, int intensity, String newName) {
+    public BrightenCommand(String imageName, int intensity, String newName) {
         this.imageName = imageName;
         this.intensity = intensity;
         this.newName = newName;
@@ -21,9 +22,9 @@ public class DarkenCommand implements Command {
         for (int y = 0; y < image.getHeight(); y++) {
             for (int x = 0; x < image.getWidth(); x++) {
                 Pixel old = image.getPixel(x, y);
-                Pixel newPix = new Pixel(old.getRed() - intensity,
-                        old.getGreen() - intensity,
-                        old.getBlue() - intensity);
+                Pixel newPix = new Pixel(old.getRed() + intensity,
+                        old.getGreen() + intensity,
+                        old.getBlue() + intensity);
                 image.setPixel(newPix, x, y);
             }
         }
@@ -31,3 +32,4 @@ public class DarkenCommand implements Command {
         model.saveImageToModel(image, newName);
     }
 }
+

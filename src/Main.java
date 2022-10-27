@@ -1,7 +1,17 @@
-public class Main {
-    public static void main(String[] args) {
+import controller.ImageProcessorControllerImpl;
+import model.ImageProcessorModelImpl;
+import view.ImageProcessorTextView;
 
-        System.out.println("Hello world!");
-        System.out.println("ood rox");
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        new ImageProcessorControllerImpl(
+                new ImageProcessorModelImpl(new HashMap<>()),
+                new ImageProcessorTextView(System.out),
+        new Scanner(System.in)).runProgram();
     }
 }

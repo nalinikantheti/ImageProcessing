@@ -1,8 +1,8 @@
 package controller;
 
+import command.*;
 import model.ImageProcessorModel;
 import view.ImageProcessorView;
-import command.Command;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -20,6 +20,7 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
         this.model = model;
         this.view = view;
         this.scan = scan;
+        this.addCommands();
     }
 
     @Override
@@ -40,19 +41,20 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
         }
     }
 
-    private void addCommand(){
-        commands.put("brighten", s -> new BrightenCommand(s.next()));
-        commands.put("darken", s -> new DarkenCommand(s.next()));
-        commands.put("greyscaleRed", s -> new GreyScaleRedCommand(s.next()));
-        commands.put("greyscaleGreen", s -> new GreyScaleGreenCommand(s.next()));
-        commands.put("greyscaleBlue", s -> new GreyScaleBlueCommand(s.next()));
-        commands.put("value", s -> new ValueCommand(s.next()));
-        commands.put("intensity", s -> new IntensityCommand(s.next()));
-        commands.put("luma", s -> new LumaCommand(s.next()));
-        commands.put("flipHorizontal", s -> new FlipHorizontalCommand(s.next()));
-        commands.put("flipVertical", s -> new FlipVerticalCommand(s.next()));
-        commands.put("loadImage", s -> new LoadCommand(s.next()));
-        commands.put("saveImage", s -> new SaveCommand(s.next()));
+    private void addCommands(){
+        commands = new HashMap<>();
+        commands.put("brighten", s -> new BrightenCommand(s.next(), s.nextInt(), s.next()));
+        commands.put("darken", s -> new DarkenCommand(s.next(), s.nextInt(), s.next()));
+        commands.put("greyscaleRed", s -> new GreyScaleRedCommand(s.next(), s.next()));
+        commands.put("greyscaleGreen", s -> new GreyScaleGreenCommand(s.next(), s.next()));
+        commands.put("greyscaleBlue", s -> new GreyScaleBlueCommand(s.next(), s.next()));
+        commands.put("value", s -> new ValueCommand(s.next(), s.next()));
+        commands.put("intensity", s -> new IntensityCommand(s.next(), s.next()));
+        commands.put("luma", s -> new LumaCommand(s.next(), s.next()));
+        commands.put("flipHorizontal", s -> new FlipHorizontalCommand(s.next(), s.next()));
+        commands.put("flipVertical", s -> new FlipVerticalCommand(s.next(), s.next()));
+        commands.put("load", s -> new LoadCommand(s.next(), s.next()));
+        commands.put("save", s -> new SaveCommand(s.next(), s.next()));
 
     }
 }

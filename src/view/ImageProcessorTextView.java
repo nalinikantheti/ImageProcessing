@@ -5,7 +5,7 @@ import java.io.IOException;
 public class ImageProcessorTextView implements ImageProcessorView{
     Appendable ap;
 
-    ImageProcessorTextView(Appendable ap){
+    public ImageProcessorTextView(Appendable ap){
         this.ap = ap;
     }
 
