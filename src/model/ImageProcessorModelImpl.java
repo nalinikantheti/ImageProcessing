@@ -19,6 +19,7 @@ import static util.ImageProcessorUtils.ensureNotNull;
 public class ImageProcessorModelImpl implements ImageProcessorModel{
     private HashMap<String, Image> imageNames;
 
+
     public ImageProcessorModelImpl() {
         imageNames = new HashMap<>();
     }

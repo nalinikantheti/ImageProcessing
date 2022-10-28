@@ -98,6 +98,6 @@ public class ModelTests {
         assertEquals(black, newImage.getPixel(1,0));
         assertEquals(black, newImage.getPixel(1,1));
 
-//        Files.delete(path);
+        Files.delete(path);
     }
 }

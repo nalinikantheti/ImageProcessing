@@ -15,7 +15,7 @@ public class SaveCommand implements Command{
     @Override
     public void go(ImageProcessorModel model) {
         try {
-            model.saveImageToFileSystem(filepath, newName);
+            model.saveImageToFileSystem(newName, filepath);
         } catch(IOException e){
             throw new IllegalArgumentException("file not found");
         }
