@@ -1,4 +1,4 @@
-package Image;
+package image;
 
 public interface Image {
 

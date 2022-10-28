@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws IOException {
         new ImageProcessorControllerImpl(
-                new ImageProcessorModelImpl(new HashMap<>()),
+                new ImageProcessorModelImpl(),
                 new ImageProcessorTextView(System.out),
         new Scanner(System.in)).runProgram();
     }

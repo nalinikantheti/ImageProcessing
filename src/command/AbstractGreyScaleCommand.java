@@ -3,8 +3,8 @@ package command;
 import model.ImageProcessorModel;
 
 
-import Image.Image;
-import Image.Pixel;
+import image.Image;
+import image.Pixel;
 
 public abstract class AbstractGreyScaleCommand implements Command {
     protected String imageName;

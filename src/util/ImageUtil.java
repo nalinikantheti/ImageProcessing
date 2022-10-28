@@ -1,6 +1,9 @@
-package Image;
+package util;
 
-import java.util.ArrayList;
+import image.Image;
+import image.Pixel;
+import image.RGBImage;
+
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;
@@ -52,7 +55,7 @@ public class ImageUtil {
     int maxValue = sc.nextInt();
     System.out.println("Maximum value of a color in this file (usually 255): " + maxValue);
 
-    Image image = new RGBImage(new ArrayList<ArrayList<Pixel>>());
+    Image image = new RGBImage(width, height);
 
     for (int y = 0;y<height;y++) {
         for (int x = 0;x<width;x++) {

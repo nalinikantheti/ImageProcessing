@@ -1,7 +1,7 @@
 package model;
 
 
-import Image.Image;
+import image.Image;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

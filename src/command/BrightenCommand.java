@@ -1,8 +1,8 @@
 package command;
 
 
-import Image.Image;
-import Image.Pixel;
+import image.Image;
+import image.Pixel;
 import model.ImageProcessorModel;
 
 public class BrightenCommand implements Command {

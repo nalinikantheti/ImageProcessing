@@ -1,8 +1,7 @@
 package model;
 
-import Image.Image;
+import image.Image;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 public interface ImageProcessorModelState {

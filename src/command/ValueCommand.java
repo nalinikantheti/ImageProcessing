@@ -1,6 +1,6 @@
 package command;
 
-import Image.Pixel;
+import image.Pixel;
 
 public class ValueCommand extends AbstractGreyScaleCommand{
     public ValueCommand(String imageName, String newName) {

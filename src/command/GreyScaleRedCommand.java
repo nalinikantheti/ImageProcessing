@@ -1,10 +1,7 @@
 package command;
 
-import model.ImageProcessorModel;
 
-
-import Image.Image;
-import Image.Pixel;
+import image.Pixel;
 
 public class GreyScaleRedCommand extends AbstractGreyScaleCommand {
 

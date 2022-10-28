@@ -1,6 +1,6 @@
 package command;
 
-import Image.Image;
+import image.Image;
 import model.ImageProcessorModel;
 
 public class FlipHorizontalCommand implements Command{

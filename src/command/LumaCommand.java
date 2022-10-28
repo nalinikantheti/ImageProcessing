@@ -1,6 +1,6 @@
 package command;
 
-import Image.Pixel;
+import image.Pixel;
 
 public class LumaCommand extends AbstractGreyScaleCommand{
     public LumaCommand(String imageName, String newName) {
