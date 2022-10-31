@@ -10,8 +10,8 @@ public class ImageProcessorTextView implements ImageProcessorView{
     }
 
     @Override
-    public void show() {
-        System.out.println("Image!");
+    public void show() throws IOException {
+        ap.append("Image!");
     }
 
     @Override

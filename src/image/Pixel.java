@@ -45,4 +45,8 @@ public class Pixel {
     public int hashCode() {
         return Objects.hash(red, green, blue);
     }
+
+    public String toString(){
+        return "red:" + this.red + " green:" + this.green + " blue:" + this.blue;
+    }
 }

@@ -3,6 +3,7 @@ package command;
 import image.Image;
 import image.Pixel;
 import model.ImageProcessorModel;
+import util.ImageProcessorUtils;
 
 public class DarkenCommand implements Command {
     private String imageName;
@@ -21,7 +22,7 @@ public class DarkenCommand implements Command {
         for (int y = 0; y < image.getHeight(); y++) {
             for (int x = 0; x < image.getWidth(); x++) {
                 Pixel old = image.getPixel(x, y);
-                Pixel newPix = new Pixel(old.getRed() - intensity,
+                Pixel newPix = ImageProcessorUtils.createValidPixel(old.getRed() - intensity,
                         old.getGreen() - intensity,
                         old.getBlue() - intensity);
                 image.setPixel(newPix, x, y);

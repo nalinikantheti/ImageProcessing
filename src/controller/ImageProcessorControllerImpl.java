@@ -41,6 +41,10 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
         }
     }
 
+    public void registerCommand(Command cmd){
+
+    }
+
     private void addCommands(){
         commands = new HashMap<>();
         commands.put("brighten", s -> new BrightenCommand(s.next(), s.nextInt(), s.next()));

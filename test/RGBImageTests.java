@@ -1,13 +1,29 @@
 import image.Image;
 import image.Pixel;
 import image.RGBImage;
+import org.junit.Before;
 import org.junit.Test;
+import util.ImageUtil;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
 public class RGBImageTests {
+    Pixel black;
+    Pixel red;
+    Pixel green;
+    Pixel blue;
+
+
+    @Before
+    public void setup(){
+        black = new Pixel(0,0,0);
+        red = new Pixel(255,0,0);
+        green = new Pixel(0, 255, 0);
+        blue = new Pixel(0,0,255);
+    }
     @Test
     public void testMain() {
         Image image = new RGBImage(2,3);
@@ -164,4 +180,18 @@ public class RGBImageTests {
         assertThrows(IllegalArgumentException.class,
                 () -> new Pixel(33, 128, 2334));
     }
+
+    @Test
+    public void testImageUtilReadPPM() throws FileNotFoundException {
+        Image image = ImageUtil.readPPM("test.ppm");
+
+        assertEquals(black, image.getPixel(0,0));
+        assertEquals(black, image.getPixel(1,0));
+        assertEquals(black, image.getPixel(2,0));
+        assertEquals(red, image.getPixel(0,1));
+        assertEquals(green, image.getPixel(1,1));
+        assertEquals(blue, image.getPixel(2,1));
+    }
+
+
 }
