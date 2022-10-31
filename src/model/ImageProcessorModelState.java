@@ -9,6 +9,4 @@ public interface ImageProcessorModelState {
 
     public Set<String> getImageNames();
 
-
-
 }

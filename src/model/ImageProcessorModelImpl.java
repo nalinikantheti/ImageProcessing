@@ -74,6 +74,7 @@ public class ImageProcessorModelImpl implements ImageProcessorModel{
     public Set<String> getImageNames() {
         return imageNames.keySet();
     }
+
     private void ensureImageExists(String name) {
         if(!imageNames.containsKey(name)) {
             throw new IllegalArgumentException("Image not found.");

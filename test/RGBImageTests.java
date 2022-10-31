@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 public class RGBImageTests {
-    Pixel black;
-    Pixel red;
-    Pixel green;
-    Pixel blue;
+    private Pixel black;
+    private Pixel red;
+    private Pixel green;
+    private Pixel blue;
 
 
     @Before

@@ -11,46 +11,10 @@ import java.io.FileNotFoundException;
 import static org.junit.Assert.*;
 
 public class CommandTests {
-    StringBuilder log;
-    MockModel mock;
-    Command brighten;
-    Command brightenMax;
-    Command darken;
-    Command darkenMax;
-    Command flipHorizontal;
-    Command flipVertical;
-    Command luma;
-    Command value;
-    Command intensity;
-    Command greyScaleRed;
-    Command greyScaleGreen;
-    Command greyScaleBlue;
-    Command load;
-    Command save;
-    Image blerner;
-    Image blernerBright;
-    Image blernerBrightMax;
-    Image blernerDark;
-    Image blernerDarkMax;
-    Image blernerFlipHorizontal;
-    Image blernerFlipVertical;
-    Image blernerLuma;
-
-    Image blernerValue;
-    Image blernerIntensity;
-    Image blernerGreyScaleRed;
-    Image blernerGreyScaleGreen;
-    Image blernerGreyScaleBlue;
-    Image koala;
-    Image koalaBright;
-    Image koalaFlipHorizontal;
-    Image koalaFlipVertical;
-    Image koalaLuma;
-    Image koalaValue;
-    Image koalaIntensity;
-    Image koalaGreyScaleRed;
-    Image koalaGreyScaleGreen;
-    Image koalaGreyScaleBlue;
+    private StringBuilder log;
+    private MockModel mock;
+    private Image blerner;
+    private Image koala;
 
 
     @Before
@@ -92,13 +56,12 @@ public class CommandTests {
 
     @Test
     public void testBrightenCommand() throws FileNotFoundException {
-        brighten = new BrightenCommand("original", 50, "original-bright");
-        brightenMax = new BrightenCommand("original", 1000, "original-bright-max");
+        Command brighten = new BrightenCommand("original", 50, "original-bright");
+        Command brightenMax = new BrightenCommand("original", 1000, "original-bright-max");
 
-        koalaBright = ImageUtil.readPPM("koala-brighter-by-50.ppm");
-
-        blernerBright = ImageUtil.readPPM("blerner_young_brightened.ppm");
-        blernerBrightMax = ImageUtil.readPPM("blerner_young_brightened_max.ppm");
+        Image koalaBright = ImageUtil.readPPM("koala-brighter-by-50.ppm");
+        Image blernerBright = ImageUtil.readPPM("blerner_young_brightened.ppm");
+        Image blernerBrightMax = ImageUtil.readPPM("blerner_young_brightened_max.ppm");
 
         runTest(brighten, koalaBright);
       //  runTest(brightenMax, blernerBrightMax);
@@ -106,11 +69,12 @@ public class CommandTests {
 
     @Test
     public void testDarkenCommand() throws FileNotFoundException {
-        darken = new DarkenCommand("original", 50, "original-dark");
-        darkenMax = new DarkenCommand("original", 1000, "original-dark-max");
 
-        blernerDark = ImageUtil.readPPM("blerner_young_darkened.ppm");
-        blernerDarkMax = ImageUtil.readPPM("blerner_young_darkened_max.ppm");
+        Command darken = new DarkenCommand("original", 50, "original-dark");
+        Command darkenMax = new DarkenCommand("original", 1000, "original-dark-max");
+
+        Image blernerDark = ImageUtil.readPPM("blerner_young_darkened.ppm");
+        Image blernerDarkMax = ImageUtil.readPPM("blerner_young_darkened_max.ppm");
 
       //  runTest(darken, blernerDark);
       //  runTest(darkenMax, blernerDarkMax);
@@ -119,78 +83,71 @@ public class CommandTests {
 
     @Test
     public void testFlipHorizontalCommand() throws FileNotFoundException {
-        flipHorizontal = new FlipHorizontalCommand("original", "original-flip-horizontal");
+        Image blernerFlipHorizontal = ImageUtil.readPPM("blerner_young_flipped_horizontal.ppm");
+        Image koalaFlipHorizontal = ImageUtil.readPPM("koala-horizontal.ppm");
 
-        blernerFlipHorizontal = ImageUtil.readPPM("blerner_young_flipped_horizontal.ppm");
-
-        koalaFlipHorizontal = ImageUtil.readPPM("koala-horizontal.ppm");
+        Command flipHorizontal = new FlipHorizontalCommand("original", "original-flip-horizontal");
 
         runTest(flipHorizontal, koalaFlipHorizontal);
     }
 
     @Test
     public void testFlipVerticalCommand() throws FileNotFoundException {
-        blernerFlipVertical = ImageUtil.readPPM("blerner_young_flipped_vertical.ppm");
+        Image blernerFlipVertical = ImageUtil.readPPM("blerner_young_flipped_vertical.ppm");
+        Image koalaFlipVertical = ImageUtil.readPPM("koala-vertical.ppm");
 
-        koalaFlipVertical = ImageUtil.readPPM("koala-vertical.ppm");
-
-        flipVertical = new FlipVerticalCommand("original", "original-flip-vertical");
+        Command flipVertical = new FlipVerticalCommand("original", "original-flip-vertical");
 
         runTest(flipVertical, koalaFlipVertical);
     }
 
     @Test
     public void testLumaCommand() throws FileNotFoundException {
-        blernerLuma = ImageUtil.readPPM("blerner_young_greyscale_luma.ppm");
-        koalaLuma = ImageUtil.readPPM("koala-luma-greyscale.ppm");
+        Image blernerLuma = ImageUtil.readPPM("blerner_young_greyscale_luma.ppm");
+        Image koalaLuma = ImageUtil.readPPM("koala-luma-greyscale.ppm");
 
-        luma = new LumaCommand("original", "original-luma");
+        Command luma = new LumaCommand("original", "original-luma");
 
         runTest(luma, koalaLuma);
     }
 
     @Test
     public void testValueCommand() throws FileNotFoundException {
-        //  blernerValue = ImageUtil.readPPM("blerner_young_greyscale_value.ppm");
+        // Image blernerValue = ImageUtil.readPPM("blerner_young_greyscale_value.ppm");
+        Image koalaValue = ImageUtil.readPPM("koala-value-greyscale.ppm");
 
-        koalaValue = ImageUtil.readPPM("koala-value-greyscale.ppm");
-
-        value = new ValueCommand("original", "original-value");
+        Command value = new ValueCommand("original", "original-value");
 
         runTest(value, koalaValue);
     }
 
     @Test
     public void testIntensityCommand() throws FileNotFoundException {
-        blernerIntensity = ImageUtil.readPPM("blerner_young_greyscale_intensity.ppm");
+        Image blernerIntensity = ImageUtil.readPPM("blerner_young_greyscale_intensity.ppm");
+        Image koalaIntensity = ImageUtil.readPPM("koala-intensity-greyscale.ppm");
 
-        koalaIntensity = ImageUtil.readPPM("koala-intensity-greyscale.ppm");
-
-        intensity = new IntensityCommand("original", "original-intensity");
+        Command intensity = new IntensityCommand("original", "original-intensity");
 
         runTest(intensity, koalaIntensity);
     }
 
     @Test
     public void testGreyScaleRedCommand() throws FileNotFoundException {
-        blernerGreyScaleRed = ImageUtil.readPPM("blerner_young_greyscale_red.ppm");
+        Image blernerGreyScaleRed = ImageUtil.readPPM("blerner_young_greyscale_red.ppm");
+        Image koalaGreyScaleRed = ImageUtil.readPPM("koala-red-greyscale.ppm");
 
-        koalaGreyScaleRed = ImageUtil.readPPM("koala-red-greyscale.ppm");
+        Command greyScaleRed = new GreyScaleRedCommand("original", "original-greyscale-red");
 
-        greyScaleRed = new GreyScaleRedCommand("original", "original-greyscale-red");
-
-        koalaIntensity = ImageUtil.readPPM("koala-intensity-greyscale.ppm");
+        Image koalaIntensity = ImageUtil.readPPM("koala-intensity-greyscale.ppm");
         runTest(greyScaleRed, koalaGreyScaleRed);
     }
 
     @Test
     public void testGreyScaleGreenCommand() throws FileNotFoundException {
-        blernerGreyScaleGreen = ImageUtil.readPPM("blerner_young_greyscale_green.ppm");
+        Image blernerGreyScaleGreen = ImageUtil.readPPM("blerner_young_greyscale_green.ppm");
+        Image koalaGreyScaleGreen = ImageUtil.readPPM("koala-green-greyscale.ppm");
 
-        koalaGreyScaleGreen = ImageUtil.readPPM("koala-green-greyscale.ppm");
-
-        greyScaleGreen = new GreyScaleGreenCommand("original", "original-greyscale-green");
-
+        Command greyScaleGreen = new GreyScaleGreenCommand("original", "original-greyscale-green");
 
 
         runTest(greyScaleGreen, koalaGreyScaleGreen);
@@ -198,11 +155,10 @@ public class CommandTests {
 
     @Test
     public void testGreyScaleBlueCommand() throws FileNotFoundException {
-        blernerGreyScaleBlue = ImageUtil.readPPM("blerner_young_greyscale_blue.ppm");
+        Image blernerGreyScaleBlue = ImageUtil.readPPM("blerner_young_greyscale_blue.ppm");
+        Image koalaGreyScaleBlue = ImageUtil.readPPM("koala-blue-greyscale.ppm");
 
-        koalaGreyScaleBlue = ImageUtil.readPPM("koala-blue-greyscale.ppm");
-
-        greyScaleBlue = new GreyScaleBlueCommand("original", "original-greyscale-blue");
+        Command greyScaleBlue = new GreyScaleBlueCommand("original", "original-greyscale-blue");
 
 
 
@@ -212,7 +168,7 @@ public class CommandTests {
     @Test
     public void testLoad() {
 
-        load = new LoadCommand("./blerner.ppm", "blerner-goat");
+        Command load = new LoadCommand("./blerner.ppm", "blerner-goat");
 
         load.go(mock);
         assertEquals(log.toString(), "loaded: blerner-goat from filepath: ./blerner.ppm\n");
@@ -220,7 +176,7 @@ public class CommandTests {
 
     @Test
     public void testSave() {
-        save = new SaveCommand("./C:", "blerner.ppm");
+        Command save = new SaveCommand("./C:", "blerner.ppm");
 
         save.go(mock);
         assertEquals(log.toString(), "saved blerner.ppm to filepath: ./C:\n");

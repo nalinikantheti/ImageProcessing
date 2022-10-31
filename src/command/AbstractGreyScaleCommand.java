@@ -10,7 +10,7 @@ public abstract class AbstractGreyScaleCommand implements Command {
     protected String imageName;
     protected String newName;
 
-    public AbstractGreyScaleCommand(String imageName, String newName) {
+    protected AbstractGreyScaleCommand(String imageName, String newName) {
         this.imageName = imageName;
         this.newName = newName;
     }

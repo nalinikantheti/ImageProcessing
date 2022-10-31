@@ -16,11 +16,11 @@ import java.util.Set;
 import static org.junit.Assert.*;
 
 public class ModelTests {
-    ImageProcessorModel model;
-    Pixel black;
-    Pixel red;
-    Pixel green;
-    Pixel blue;
+    private ImageProcessorModel model;
+    private Pixel black;
+    private Pixel red;
+    private Pixel green;
+    private Pixel blue;
     @Before
     public void setup() {
         model = new ImageProcessorModelImpl();

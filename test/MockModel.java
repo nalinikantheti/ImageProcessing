@@ -8,10 +8,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class MockModel implements ImageProcessorModel {
-    StringBuilder log;
+    private StringBuilder log;
 
-    Image lastSavedImage;
-    Image dummy;
+    private Image lastSavedImage;
+    private Image dummy;
 
     MockModel(StringBuilder ap){
       this.log = ap;

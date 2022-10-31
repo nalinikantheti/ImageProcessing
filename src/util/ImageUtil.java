@@ -21,6 +21,7 @@ public class ImageUtil {
    * @param filename the path of the file. 
    */
   public static Image readPPM(String filename) throws FileNotFoundException {
+
     Scanner sc;
     
     try {
@@ -31,6 +32,7 @@ public class ImageUtil {
     }
 
     StringBuilder builder = new StringBuilder();
+
     //read the file line by line, and populate a string. This will throw away any comment lines
     while (sc.hasNextLine()) {
         String s = sc.nextLine();

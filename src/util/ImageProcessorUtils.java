@@ -18,7 +18,7 @@ public class ImageProcessorUtils {
 
     }
 
-    public static int clamp(int value, int min, int max){
+    private static int clamp(int value, int min, int max){
         if (value < min){
             return min;
         }

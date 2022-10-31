@@ -10,11 +10,11 @@ import java.util.Scanner;
 import java.util.function.Function;
 
 public class ImageProcessorControllerImpl implements ImageProcessorController {
-    HashMap<String, Function<Scanner, Command>> commands;
+    private HashMap<String, Function<Scanner, Command>> commands;
 
-    ImageProcessorModel model;
-    ImageProcessorView view;
-    Scanner scan;
+    private ImageProcessorModel model;
+    private ImageProcessorView view;
+    private Scanner scan;
 
     public ImageProcessorControllerImpl(ImageProcessorModel model, ImageProcessorView view, Scanner scan) {
         this.model = model;
@@ -41,8 +41,8 @@ public class ImageProcessorControllerImpl implements ImageProcessorController {
         }
     }
 
-    public void registerCommand(Command cmd){
-
+    private void registerCommand(String name, Command cmd){
+        this.commands.put(name, s -> cmd);
     }
 
     private void addCommands(){

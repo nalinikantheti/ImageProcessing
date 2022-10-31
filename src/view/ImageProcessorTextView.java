@@ -3,7 +3,7 @@ package view;
 import java.io.IOException;
 
 public class ImageProcessorTextView implements ImageProcessorView{
-    Appendable ap;
+    private Appendable ap;
 
     public ImageProcessorTextView(Appendable ap){
         this.ap = ap;
