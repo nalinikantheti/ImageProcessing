@@ -1,5 +1,8 @@
+package factory;
+
 import controller.factory.terminal.CommandFactory;
 import controller.factory.terminal.DarkenFactory;
+import factory.AbstractFactoryTests;
 import view.ImageProcessorView;
 
 import java.util.Scanner;
@@ -7,7 +10,7 @@ import java.util.Scanner;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class DarkenFactoryTest extends AbstractFactoryTests{
+public class DarkenFactoryTests extends AbstractFactoryTests {
     @Override
     public void testSuccess() {
         input("original 50 original-dark");

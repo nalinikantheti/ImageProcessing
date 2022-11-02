@@ -1,3 +1,5 @@
+package factory;
+
 import command.Command;
 import controller.factory.terminal.BrightenFactory;
 import controller.factory.terminal.CommandFactory;
@@ -11,8 +13,8 @@ import java.io.StringReader;
 import java.util.Optional;
 import java.util.Scanner;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
 
 public abstract class AbstractFactoryTests {
     StringBuilder expectedOutput;
@@ -27,14 +29,41 @@ public abstract class AbstractFactoryTests {
     }
 
     @Test
-    public abstract void testSuccess();
+    public void testSuccess() {
+        input("original original-modified");
+        assertTrue(runTest().isPresent());
+    }
 
     @Test
-    public abstract void testQuit();
+    public void testQuit() {
+        input("quit");
+        output("Quitting program...");
+
+        assertFalse(runTest().isPresent());
+
+        setup();
+        input("qUiT broriginal");
+        output("Quitting program...");
+
+        assertFalse(runTest().isPresent());
+
+        setup();
+        input("original Q");
+        output("Quitting program...");
+        assertFalse(runTest().isPresent());
+    }
 
     @Test
-    public abstract void testEndOfInput();
+    public void testEndOfInput() {
+        input("original");
+        output("Reached end of input.");
+        assertFalse(runTest().isPresent());
 
+        setup();
+        input("originaljfkdla");
+        output("Reached end of input.");
+        assertFalse(runTest().isPresent());
+    }
     @Test
     public void testConstructorThrows() {
         assertThrows(IllegalArgumentException.class,

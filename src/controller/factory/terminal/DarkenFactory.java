@@ -8,20 +8,15 @@ import view.ImageProcessorView;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class DarkenFactory extends AbstractCommandFactory{
+public class DarkenFactory extends AbstractShadeChangeFactory{
     public DarkenFactory(ImageProcessorView view, Scanner s) {
         super(view, s);
     }
 
     @Override
-    public Optional<Command> make() {
-        Optional<String> imageName = waitForString(true);
-        Optional<Integer> intensity = waitForInteger(imageName.isPresent(), "Expected integer for intensity") ;
-        Optional<String> newName = waitForString(intensity.isPresent());
-        if(imageName.isEmpty() || intensity.isEmpty() || newName.isEmpty()) {
-            return Optional.empty();
-        }
-        return Optional.of(new DarkenCommand(imageName.get(), intensity.get(), newName.get()));
+    protected Optional<Command> makeCommand
+            (Optional<String> old, Optional<Integer> intensity, Optional<String> newName) {
+        return Optional.of(new DarkenCommand(old.get(), intensity.get(), newName.get()));
     }
 
 

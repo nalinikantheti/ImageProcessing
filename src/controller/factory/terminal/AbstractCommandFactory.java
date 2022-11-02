@@ -1,5 +1,6 @@
 package controller.factory.terminal;
 
+import command.Command;
 import view.ImageProcessorView;
 
 import java.io.IOException;
@@ -17,6 +18,16 @@ public abstract class AbstractCommandFactory implements CommandFactory {
         ensureNotNull(s, "Scanner cannot be null.");
         this.view = view;
         this.s = s;
+    }
+
+    public Optional<Command> make(){
+            Optional<String> imageName = waitForString(true);
+            Optional<String> newName = waitForString(imageName.isPresent());
+            if(imageName.isEmpty() || newName.isEmpty()) {
+                return Optional.empty();
+            }
+            return makeCommand(imageName, newName);
+
     }
 
     protected Optional<String> waitForString(boolean hadPreviousValue) {
@@ -69,4 +80,6 @@ public abstract class AbstractCommandFactory implements CommandFactory {
         }
         return Optional.empty();
     }
+
+    protected abstract Optional<Command> makeCommand(Optional<String> old, Optional<String> newName);
 }

@@ -1,12 +1,10 @@
+package factory;
+
 import controller.factory.terminal.BrightenFactory;
 import controller.factory.terminal.CommandFactory;
-import org.junit.Before;
 import org.junit.Test;
-import view.ImageProcessorTextView;
 import view.ImageProcessorView;
 
-import java.io.IOException;
-import java.io.StringReader;
 import java.util.Scanner;
 
 import static org.junit.Assert.*;
@@ -14,7 +12,6 @@ import static org.junit.Assert.*;
 public class BrightenFactoryTests extends AbstractFactoryTests {
 
     @Override
-    @Test
     public void testSuccess() {
         input("original 50 original-bright");
         assertTrue(runTest().isPresent());
@@ -38,7 +35,6 @@ public class BrightenFactoryTests extends AbstractFactoryTests {
     }
 
     @Override
-    @Test
     public void testQuit() {
         input("quit");
         output("Quitting program...");
@@ -58,7 +54,6 @@ public class BrightenFactoryTests extends AbstractFactoryTests {
     }
 
     @Override
-    @Test
     public void testEndOfInput() {
         input("original");
         output("Reached end of input.");
