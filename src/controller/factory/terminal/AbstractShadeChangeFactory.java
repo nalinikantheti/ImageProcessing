@@ -25,9 +25,4 @@ public abstract class AbstractShadeChangeFactory extends AbstractCommandFactory{
     protected abstract Optional<Command> makeCommand
             (Optional<String> old, Optional<Integer> intensity, Optional<String> newName);
 
-    @Override
-    protected Optional<Command> makeCommand
-            (Optional<String> old, Optional<String> newName){
-        return Optional.empty();
-    }
 }

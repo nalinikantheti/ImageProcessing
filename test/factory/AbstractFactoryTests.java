@@ -32,6 +32,10 @@ public abstract class AbstractFactoryTests {
     public void testSuccess() {
         input("original original-modified");
         assertTrue(runTest().isPresent());
+
+        setup();
+        input("clap your-hands");
+        assertTrue(runTest().isPresent());
     }
 
     @Test
