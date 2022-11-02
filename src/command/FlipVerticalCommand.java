@@ -16,7 +16,7 @@ public class FlipVerticalCommand implements Command{
     @Override
     public void go(ImageProcessorModel model) {
         Image oldImage = model.getImage(imageName);
-        Image newImage = model.getImage(imageName).clone();
+        Image newImage = oldImage.clone();
 
         for (int y = 0; y < oldImage.getHeight(); y++) {
             for (int x = 0; x < oldImage.getWidth(); x++) {

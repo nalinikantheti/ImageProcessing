@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 
 public class CommandTests {
     private StringBuilder log;
+    private StringBuilder log2;
     private MockModel mock;
 
     private MockModel mock2;
@@ -20,13 +21,14 @@ public class CommandTests {
     @Before
     public void setup() throws FileNotFoundException {
         log = new StringBuilder();
+        log2 = new StringBuilder();
         sixbit = ImageUtil.readPPM("test.ppm");
         koala = ImageUtil.readPPM("Koala.ppm");
         mock = new MockModel(log, koala);
-        mock2 = new MockModel(log, sixbit);
+        mock2 = new MockModel(log2, sixbit);
     }
 
-    public void assertImageEquals(Image expected, Image actual) {
+    private void assertImageEquals(Image expected, Image actual) {
         assertEquals(expected.getWidth(), actual.getWidth());
         assertEquals(expected.getHeight(), actual.getHeight());
 
@@ -42,6 +44,13 @@ public class CommandTests {
         }
     }
 
+    private void assertLog(StringBuilder log, String name, String newName) {
+        assertEquals("retrieved: " + name +"\n"+"saved " + newName + " to model"+"\n", log.toString());
+    }
+    private void assertLog(StringBuilder log, String newName) {
+        assertLog(log, "original", newName);
+    }
+
     @Test
     public void testAssertImageEquals() throws FileNotFoundException {
         assertThrows(AssertionError.class,
@@ -50,7 +59,7 @@ public class CommandTests {
     }
 
 
-    public void runTest(Command command, Image expectedImage, MockModel mock) {
+    private void runTest(Command command, Image expectedImage, MockModel mock) {
         command.go(mock);
         assertImageEquals(expectedImage, mock.getLastSavedImage());
     }
@@ -66,7 +75,12 @@ public class CommandTests {
 
         runTest(brighten, koalaBright, mock);
         runTest(brighten, sixbitBright, mock2);
+
+        assertLog(log, "original", "original-bright");
+        assertLog(log2, "original", "original-bright");
+        log2.setLength(0);
         runTest(brightenMax, sixbitBrightMax, mock2);
+        assertLog(log2, "original", "original-bright-max");
     }
 
     @Test
@@ -79,7 +93,10 @@ public class CommandTests {
         Image sixbitDarkMax = ImageUtil.readPPM("sixbit-darken-max.ppm");
 
         runTest(darken, sixbitDark, mock2);
+        assertLog(log2, "original", "original-dark");
+        log2.setLength(0);
         runTest(darkenMax, sixbitDarkMax, mock2);
+        assertLog(log2, "original", "original-dark-max");
     }
 
 
@@ -92,6 +109,8 @@ public class CommandTests {
 
         runTest(flipHorizontal, koalaFlipHorizontal, mock);
         runTest(flipHorizontal, sixbitFlipHorizontal, mock2);
+        assertLog(log, "original", "original-flip-horizontal");
+        assertLog(log2, "original-flip-horizontal");
     }
 
     @Test
@@ -99,10 +118,12 @@ public class CommandTests {
         Image sixbitFlipVertical = ImageUtil.readPPM("sixbit-vertical-flip.ppm");
         Image koalaFlipVertical = ImageUtil.readPPM("koala-vertical.ppm");
 
-        Command flipVertical = new FlipVerticalCommand("original", "original-flip-vertical");
+        Command flipVertical = new FlipVerticalCommand("boriginal", "original-flip-vertical");
 
         runTest(flipVertical, koalaFlipVertical, mock);
         runTest(flipVertical, sixbitFlipVertical, mock2);
+        assertLog(log, "boriginal", "original-flip-vertical");
+        assertLog(log2, "boriginal", "original-flip-vertical");
     }
 
     @Test
@@ -110,11 +131,13 @@ public class CommandTests {
         Image sixbitLuma = ImageUtil.readPPM("sixbit-luma-greyscale.ppm");
         Image koalaLuma = ImageUtil.readPPM("koala-luma-greyscale.ppm");
 
-        Command luma = new LumaCommand("original", "original-luma");
+        Command luma = new LumaCommand("hi", "original-luma");
 
         runTest(luma, sixbitLuma, mock2);
+        assertLog(log2, "hi", "original-luma");
 
         runTest(luma, koalaLuma, mock);
+        assertLog(log, "hi", "original-luma");
     }
 
     @Test
@@ -126,6 +149,9 @@ public class CommandTests {
 
         runTest(value, sixbitValue, mock2);
         runTest(value, koalaValue, mock);
+        assertLog(log, "original-value");
+        assertLog(log2, "original-value");
+
     }
 
     @Test
@@ -137,6 +163,8 @@ public class CommandTests {
 
         runTest(intensity, koalaIntensity, mock);
         runTest(intensity, sixbitIntensity, mock2);
+        assertLog(log, "original-intensity");
+        assertLog(log2, "original-intensity");
     }
 
     @Test
@@ -144,10 +172,12 @@ public class CommandTests {
         Image sixbitGreyScaleRed = ImageUtil.readPPM("sixbit-red-greyscale.ppm");
         Image koalaGreyScaleRed = ImageUtil.readPPM("koala-red-greyscale.ppm");
 
-        Command greyScaleRed = new GreyScaleRedCommand("original", "original-greyscale-red");
+        Command greyScaleRed = new GreyScaleRedCommand("original", "original-red");
 
         runTest(greyScaleRed, koalaGreyScaleRed, mock);
         runTest(greyScaleRed, sixbitGreyScaleRed, mock2);
+        assertLog(log, "original-red");
+        assertLog(log2, "original-red");
     }
 
     @Test
@@ -160,6 +190,8 @@ public class CommandTests {
 
         runTest(greyScaleGreen, koalaGreyScaleGreen, mock);
         runTest(greyScaleGreen, sixbitGreyScaleGreen, mock2);
+        assertLog(log, "original-greyscale-green");
+        assertLog(log2, "original-greyscale-green");
     }
 
     @Test
@@ -171,6 +203,8 @@ public class CommandTests {
 
         runTest(greyScaleBlue, koalaGreyScaleBlue, mock);
         runTest(greyScaleBlue, sixbitGreyScaleBlue, mock2);
+        assertLog(log, "original-greyscale-blue");
+        assertLog(log2, "original-greyscale-blue");
     }
 
     @Test

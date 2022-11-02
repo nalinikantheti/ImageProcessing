@@ -9,7 +9,7 @@ public class LumaCommand extends AbstractGreyScaleCommand{
 
     @Override
     protected int getValue(Pixel pixel) {
-        return (int) ((2126 * pixel.getRed() + 7152 * pixel.getGreen() + 722 * pixel.getBlue())/ 10000.0);
+        return (int) (0.2126 * pixel.getRed() + 0.7152 * pixel.getGreen() + 0.0722 * pixel.getBlue());
     }
 
 }
