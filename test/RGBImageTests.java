@@ -12,6 +12,8 @@ import static org.junit.Assert.*;
 
 public class RGBImageTests {
     private Pixel black;
+    private Pixel grey;
+    private Pixel white;
     private Pixel red;
     private Pixel green;
     private Pixel blue;
@@ -20,6 +22,8 @@ public class RGBImageTests {
     @Before
     public void setup(){
         black = new Pixel(0,0,0);
+        grey = new Pixel(127,127,127);
+        white = new Pixel(255,255,255);
         red = new Pixel(255,0,0);
         green = new Pixel(0, 255, 0);
         blue = new Pixel(0,0,255);
@@ -186,8 +190,8 @@ public class RGBImageTests {
         Image image = ImageUtil.readPPM("test.ppm");
 
         assertEquals(black, image.getPixel(0,0));
-        assertEquals(black, image.getPixel(1,0));
-        assertEquals(black, image.getPixel(2,0));
+        assertEquals(grey, image.getPixel(1,0));
+        assertEquals(white, image.getPixel(2,0));
         assertEquals(red, image.getPixel(0,1));
         assertEquals(green, image.getPixel(1,1));
         assertEquals(blue, image.getPixel(2,1));

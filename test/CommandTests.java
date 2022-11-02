@@ -1,28 +1,29 @@
 import command.*;
 import image.Image;
-import image.RGBImage;
 import model.ImageProcessorModel;
 import org.junit.Before;
 import org.junit.Test;
 import util.ImageUtil;
 
 import java.io.FileNotFoundException;
-
 import static org.junit.Assert.*;
 
 public class CommandTests {
     private StringBuilder log;
     private MockModel mock;
-    private Image blerner;
+
+    private MockModel mock2;
+    private Image sixbit;
     private Image koala;
 
 
     @Before
     public void setup() throws FileNotFoundException {
         log = new StringBuilder();
-        blerner = ImageUtil.readPPM("blerner_young.ppm");
+        sixbit = ImageUtil.readPPM("test.ppm");
         koala = ImageUtil.readPPM("Koala.ppm");
         mock = new MockModel(log, koala);
+        mock2 = new MockModel(log, sixbit);
     }
 
     public void assertImageEquals(Image expected, Image actual) {
@@ -44,12 +45,12 @@ public class CommandTests {
     @Test
     public void testAssertImageEquals() throws FileNotFoundException {
         assertThrows(AssertionError.class,
-                () -> assertImageEquals(blerner, koala));
-        assertImageEquals(blerner, ImageUtil.readPPM("blerner_young.ppm"));
+                () -> assertImageEquals(sixbit, koala));
+        assertImageEquals(sixbit, ImageUtil.readPPM("test.ppm"));
     }
 
 
-    public void runTest(Command command, Image expectedImage) {
+    public void runTest(Command command, Image expectedImage, MockModel mock) {
         command.go(mock);
         assertImageEquals(expectedImage, mock.getLastSavedImage());
     }
@@ -60,11 +61,12 @@ public class CommandTests {
         Command brightenMax = new BrightenCommand("original", 1000, "original-bright-max");
 
         Image koalaBright = ImageUtil.readPPM("koala-brighter-by-50.ppm");
-        Image blernerBright = ImageUtil.readPPM("blerner_young_brightened.ppm");
-        Image blernerBrightMax = ImageUtil.readPPM("blerner_young_brightened_max.ppm");
+        Image sixbitBright = ImageUtil.readPPM("sixbit-brighten.ppm");
+        Image sixbitBrightMax = ImageUtil.readPPM("sixbit-brighten-max.ppm");
 
-        runTest(brighten, koalaBright);
-      //  runTest(brightenMax, blernerBrightMax);
+        runTest(brighten, koalaBright, mock);
+        runTest(brighten, sixbitBright, mock2);
+        runTest(brightenMax, sixbitBrightMax, mock2);
     }
 
     @Test
@@ -73,114 +75,120 @@ public class CommandTests {
         Command darken = new DarkenCommand("original", 50, "original-dark");
         Command darkenMax = new DarkenCommand("original", 1000, "original-dark-max");
 
-        Image blernerDark = ImageUtil.readPPM("blerner_young_darkened.ppm");
-        Image blernerDarkMax = ImageUtil.readPPM("blerner_young_darkened_max.ppm");
+        Image sixbitDark = ImageUtil.readPPM("sixbit-darken.ppm");
+        Image sixbitDarkMax = ImageUtil.readPPM("sixbit-darken-max.ppm");
 
-      //  runTest(darken, blernerDark);
-      //  runTest(darkenMax, blernerDarkMax);
+        runTest(darken, sixbitDark, mock2);
+        runTest(darkenMax, sixbitDarkMax, mock2);
     }
 
 
     @Test
     public void testFlipHorizontalCommand() throws FileNotFoundException {
-        Image blernerFlipHorizontal = ImageUtil.readPPM("blerner_young_flipped_horizontal.ppm");
+        Image sixbitFlipHorizontal = ImageUtil.readPPM("sixbit-horizontal-flip.ppm");
         Image koalaFlipHorizontal = ImageUtil.readPPM("koala-horizontal.ppm");
 
         Command flipHorizontal = new FlipHorizontalCommand("original", "original-flip-horizontal");
 
-        runTest(flipHorizontal, koalaFlipHorizontal);
+        runTest(flipHorizontal, koalaFlipHorizontal, mock);
+        runTest(flipHorizontal, sixbitFlipHorizontal, mock2);
     }
 
     @Test
     public void testFlipVerticalCommand() throws FileNotFoundException {
-        Image blernerFlipVertical = ImageUtil.readPPM("blerner_young_flipped_vertical.ppm");
+        Image sixbitFlipVertical = ImageUtil.readPPM("sixbit-vertical-flip.ppm");
         Image koalaFlipVertical = ImageUtil.readPPM("koala-vertical.ppm");
 
         Command flipVertical = new FlipVerticalCommand("original", "original-flip-vertical");
 
-        runTest(flipVertical, koalaFlipVertical);
+        runTest(flipVertical, koalaFlipVertical, mock);
+        runTest(flipVertical, sixbitFlipVertical, mock2);
     }
 
     @Test
     public void testLumaCommand() throws FileNotFoundException {
-        Image blernerLuma = ImageUtil.readPPM("blerner_young_greyscale_luma.ppm");
+        Image sixbitLuma = ImageUtil.readPPM("sixbit-luma-greyscale.ppm");
         Image koalaLuma = ImageUtil.readPPM("koala-luma-greyscale.ppm");
 
         Command luma = new LumaCommand("original", "original-luma");
 
-        runTest(luma, koalaLuma);
+        runTest(luma, sixbitLuma, mock2);
+
+        runTest(luma, koalaLuma, mock);
     }
 
     @Test
     public void testValueCommand() throws FileNotFoundException {
-        // Image blernerValue = ImageUtil.readPPM("blerner_young_greyscale_value.ppm");
+        Image sixbitValue = ImageUtil.readPPM("sixbit-value-greyscale.ppm");
         Image koalaValue = ImageUtil.readPPM("koala-value-greyscale.ppm");
 
         Command value = new ValueCommand("original", "original-value");
 
-        runTest(value, koalaValue);
+        runTest(value, sixbitValue, mock2);
+        runTest(value, koalaValue, mock);
     }
 
     @Test
     public void testIntensityCommand() throws FileNotFoundException {
-        Image blernerIntensity = ImageUtil.readPPM("blerner_young_greyscale_intensity.ppm");
+        Image sixbitIntensity = ImageUtil.readPPM("sixbit-intensity-greyscale.ppm");
         Image koalaIntensity = ImageUtil.readPPM("koala-intensity-greyscale.ppm");
 
         Command intensity = new IntensityCommand("original", "original-intensity");
 
-        runTest(intensity, koalaIntensity);
+        runTest(intensity, koalaIntensity, mock);
+        runTest(intensity, sixbitIntensity, mock2);
     }
 
     @Test
     public void testGreyScaleRedCommand() throws FileNotFoundException {
-        Image blernerGreyScaleRed = ImageUtil.readPPM("blerner_young_greyscale_red.ppm");
+        Image sixbitGreyScaleRed = ImageUtil.readPPM("sixbit-red-greyscale.ppm");
         Image koalaGreyScaleRed = ImageUtil.readPPM("koala-red-greyscale.ppm");
 
         Command greyScaleRed = new GreyScaleRedCommand("original", "original-greyscale-red");
 
-        Image koalaIntensity = ImageUtil.readPPM("koala-intensity-greyscale.ppm");
-        runTest(greyScaleRed, koalaGreyScaleRed);
+        runTest(greyScaleRed, koalaGreyScaleRed, mock);
+        runTest(greyScaleRed, sixbitGreyScaleRed, mock2);
     }
 
     @Test
     public void testGreyScaleGreenCommand() throws FileNotFoundException {
-        Image blernerGreyScaleGreen = ImageUtil.readPPM("blerner_young_greyscale_green.ppm");
+        Image sixbitGreyScaleGreen = ImageUtil.readPPM("sixbit-green-greyscale.ppm");
         Image koalaGreyScaleGreen = ImageUtil.readPPM("koala-green-greyscale.ppm");
 
         Command greyScaleGreen = new GreyScaleGreenCommand("original", "original-greyscale-green");
 
 
-        runTest(greyScaleGreen, koalaGreyScaleGreen);
+        runTest(greyScaleGreen, koalaGreyScaleGreen, mock);
+        runTest(greyScaleGreen, sixbitGreyScaleGreen, mock2);
     }
 
     @Test
     public void testGreyScaleBlueCommand() throws FileNotFoundException {
-        Image blernerGreyScaleBlue = ImageUtil.readPPM("blerner_young_greyscale_blue.ppm");
+        Image sixbitGreyScaleBlue = ImageUtil.readPPM("sixbit-blue-greyscale.ppm");
         Image koalaGreyScaleBlue = ImageUtil.readPPM("koala-blue-greyscale.ppm");
 
         Command greyScaleBlue = new GreyScaleBlueCommand("original", "original-greyscale-blue");
 
-
-
-        runTest(greyScaleBlue, koalaGreyScaleBlue);
+        runTest(greyScaleBlue, koalaGreyScaleBlue, mock);
+        runTest(greyScaleBlue, sixbitGreyScaleBlue, mock2);
     }
 
     @Test
     public void testLoad() {
 
-        Command load = new LoadCommand("./blerner.ppm", "blerner-goat");
+        Command load = new LoadCommand("./sixbit.ppm", "sixbit-goat");
 
         load.go(mock);
-        assertEquals(log.toString(), "loaded: blerner-goat from filepath: ./blerner.ppm\n");
+        assertEquals(log.toString(), "loaded: sixbit-goat from filepath: ./sixbit.ppm\n");
     }
 
     @Test
     public void testSave() {
-        Command save = new SaveCommand("./C:", "blerner.ppm");
+        Command save = new SaveCommand("./C:", "sixbit.ppm");
 
         save.go(mock);
-        assertEquals(log.toString(), "saved blerner.ppm to filepath: ./C:\n");
+        assertEquals(log.toString(), "saved sixbit.ppm to filepath: ./C:\n");
     }
-
+    
 
 }

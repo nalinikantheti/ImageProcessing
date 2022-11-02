@@ -16,7 +16,7 @@ public class Pixel {
 
     private int requireValid(int value) {
         if(value < 0 || value > 255) {
-            throw new IllegalArgumentException("Values must be in range [0, 255]");
+            throw new IllegalArgumentException("Value: " + value + " must be in range [0, 255]");
         }
         return value;
     }
