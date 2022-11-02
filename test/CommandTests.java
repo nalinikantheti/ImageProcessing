@@ -1,6 +1,6 @@
 import command.*;
 import image.Image;
-import model.ImageProcessorModel;
+import mock.MockModel;
 import org.junit.Before;
 import org.junit.Test;
 import util.ImageUtil;

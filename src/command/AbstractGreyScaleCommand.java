@@ -5,6 +5,7 @@ import model.ImageProcessorModel;
 
 import image.Image;
 import image.Pixel;
+import util.ImageProcessorUtils;
 
 public abstract class AbstractGreyScaleCommand implements Command {
     protected String imageName;
@@ -21,7 +22,7 @@ public abstract class AbstractGreyScaleCommand implements Command {
         for (int y = 0; y < image.getHeight(); y++) {
             for (int x = 0; x < image.getWidth(); x++) {
                 Pixel old = image.getPixel(x, y);
-                Pixel newPix = new Pixel(getValue(old),
+                Pixel newPix = ImageProcessorUtils.createValidPixel(getValue(old),
                         getValue(old),
                         getValue(old));
                 image.setPixel(newPix, x, y);

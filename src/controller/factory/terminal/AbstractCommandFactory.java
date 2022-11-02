@@ -20,16 +20,6 @@ public abstract class AbstractCommandFactory implements CommandFactory {
         this.s = s;
     }
 
-    public Optional<Command> make(){
-            Optional<String> imageName = waitForString(true);
-            Optional<String> newName = waitForString(imageName.isPresent());
-            if(imageName.isEmpty() || newName.isEmpty()) {
-                return Optional.empty();
-            }
-            return makeCommand(imageName, newName);
-
-    }
-
     protected Optional<String> waitForString(boolean hadPreviousValue) {
         if (s.hasNext() && hadPreviousValue) {
             String next = s.next();
@@ -81,5 +71,4 @@ public abstract class AbstractCommandFactory implements CommandFactory {
         return Optional.empty();
     }
 
-    protected abstract Optional<Command> makeCommand(Optional<String> old, Optional<String> newName);
 }

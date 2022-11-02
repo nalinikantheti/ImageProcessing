@@ -13,6 +13,8 @@ public class DarkenFactory extends AbstractShadeChangeFactory{
         super(view, s);
     }
 
+
+
     @Override
     protected Optional<Command> makeCommand
             (Optional<String> old, Optional<Integer> intensity, Optional<String> newName) {

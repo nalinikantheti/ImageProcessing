@@ -1,3 +1,5 @@
+package mock;
+
 import image.Image;
 import image.RGBImage;
 import model.ImageProcessorModel;
@@ -13,13 +15,13 @@ public class MockModel implements ImageProcessorModel {
     private Image lastSavedImage;
     private Image dummy;
 
-    MockModel(StringBuilder ap){
+    public MockModel(StringBuilder ap){
       this.log = ap;
       lastSavedImage = new RGBImage(0,0);
       this.dummy = new RGBImage(0,0);
     }
 
-    MockModel(StringBuilder ap, Image dummy){
+    public MockModel(StringBuilder ap, Image dummy){
         this.log = ap;
         lastSavedImage = new RGBImage(0,0);
         this.dummy = dummy;
