@@ -25,9 +25,9 @@ public abstract class AbstractCommandFactory implements CommandFactory {
             if (isQuit(next)) {
                 return quitSequence();
             }
-            return Optional.of(s.next());
+            return Optional.of(next);
         }
-        return endOfInputSequence();
+        return endOfInputSequence(hadPreviousValue);
     }
 
     protected Optional<Integer> waitForInteger(boolean hadPreviousValue, String message) {
@@ -40,9 +40,10 @@ public abstract class AbstractCommandFactory implements CommandFactory {
                     return quitSequence();
                 }
                 transmit(message + ", got: " + next);
+                transmit("Re-enter value.");
             }
         }
-        return endOfInputSequence();
+        return endOfInputSequence(hadPreviousValue);
     }
 
     private void transmit(String message) {
@@ -62,8 +63,10 @@ public abstract class AbstractCommandFactory implements CommandFactory {
         return Optional.empty();
     }
 
-    private <T> Optional<T> endOfInputSequence() {
-        transmit("Reached end of input.");
+    private <T> Optional<T> endOfInputSequence(boolean hadPreviousValue) {
+        if(hadPreviousValue) {
+            transmit("Reached end of input.");
+        }
         return Optional.empty();
     }
 }

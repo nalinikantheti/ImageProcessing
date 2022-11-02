@@ -1,44 +1,25 @@
-import controller.factory.terminal.BrightenFactory;
 import controller.factory.terminal.CommandFactory;
-import org.junit.Before;
-import org.junit.Test;
-import view.ImageProcessorTextView;
+import controller.factory.terminal.DarkenFactory;
 import view.ImageProcessorView;
 
-import java.io.IOException;
-import java.io.StringReader;
 import java.util.Scanner;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-public class BrightenFactoryTests extends AbstractFactoryTests {
-
+public class DarkenFactoryTest extends AbstractFactoryTests{
     @Override
-    @Test
     public void testSuccess() {
-        input("original 50 original-bright");
+        input("original 50 original-dark");
         assertTrue(runTest().isPresent());
 
 
         setup();
-        input("original 10000 original-bright-max");
-        assertTrue(runTest().isPresent());
-
-    }
-
-    @Test
-    public void testBadInteger() {
-        input("original blerner");
-        output("Expected integer for intensity, got: blerner");
-        output("Re-enter value.");
-
-        input("30 original-bright");
-
+        input("original 10000 original-dark-max");
         assertTrue(runTest().isPresent());
     }
 
     @Override
-    @Test
     public void testQuit() {
         input("quit");
         output("Quitting program...");
@@ -58,7 +39,6 @@ public class BrightenFactoryTests extends AbstractFactoryTests {
     }
 
     @Override
-    @Test
     public void testEndOfInput() {
         input("original");
         output("Reached end of input.");
@@ -78,9 +58,9 @@ public class BrightenFactoryTests extends AbstractFactoryTests {
         assertFalse(runTest().isPresent());
     }
 
-    @Override
-    protected CommandFactory makeFactory(ImageProcessorView view, Scanner scanner) {
-        return new BrightenFactory(view, scanner);
-    }
 
+    @Override
+    public CommandFactory makeFactory(ImageProcessorView view, Scanner s){
+        return new DarkenFactory(view, s);
+    }
 }
