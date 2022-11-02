@@ -97,13 +97,13 @@ public class ControllerTests {
     @Test
     public void testQuitRunProgram(){
         input("q");
-        viewOutput("Quitting program... ");
+        viewOutput("Quitting program... \n");
         makeMVC();
         runTest();
 
         setup();
         input("quIt");
-        viewOutput("Quitting program... ");
+        viewOutput("Quitting program... \n");
         makeMVC();
         runTest();
     }
@@ -111,12 +111,13 @@ public class ControllerTests {
     @Test public void testRunProgram(){
 
         input("mock");
-        viewOutput("unknown command");
+        viewOutput("unknown command\n");
         makeMVC();
         runTest();
 
         setup();
         input("mock");
+        viewOutput("Successfully ran command!\n");
         modelOutput("made some changes to an image.");
 
         makeMVC();
@@ -125,7 +126,7 @@ public class ControllerTests {
 
         setup();
         input("mock q");
-        viewOutput("Quitting program... ");
+        viewOutput("Quitting program... \n");
 
         makeMVC();
         controller.registerCommand("mock", () -> Optional.empty());

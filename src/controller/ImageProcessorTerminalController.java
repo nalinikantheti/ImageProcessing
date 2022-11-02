@@ -41,10 +41,19 @@ public class ImageProcessorTerminalController implements ImageProcessorControlle
             if (cmdfac == null){
                 transmit("unknown command");
             } else {
-
                 Optional<Command> c = cmdfac.make();
                 if(c.isPresent()) {
-                    c.get().go(model);
+                    try{
+                        c.get().go(model);
+                        transmit("Successfully ran command!");
+                    } catch(IllegalArgumentException e){
+                        transmit(e.getMessage());
+                    }
+                } else {
+                    if(input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit")){
+                        transmit("Quitting program... ");
+                        return;
+                    }
                 }
             }
         }
@@ -61,7 +70,7 @@ public class ImageProcessorTerminalController implements ImageProcessorControlle
 
     public void transmit(String message) throws IllegalStateException{
         try{
-            this.view.renderMessage(message);
+            this.view.renderMessage(message + "\n");
         } catch(IOException e){
             throw new IllegalStateException("unable to transmit to view.");
         }
