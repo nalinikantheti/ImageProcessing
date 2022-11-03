@@ -1,14 +1,17 @@
 package image;
 
+/**
+ * A rectangular Image represented by an ArrayList<ArrayList<Pixel>>.
+ */
 public interface Image {
 
-    public void setPixel(Pixel pix, int x , int y);
+    void setPixel(Pixel pix, int x, int y);
 
-    public Pixel getPixel(int x, int y);
+    Pixel getPixel(int x, int y);
 
-    public int getHeight();
+    int getHeight();
 
-    public int getWidth();
+    int getWidth();
 
     Image clone();
 }

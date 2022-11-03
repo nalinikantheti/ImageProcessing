@@ -1,22 +1,37 @@
 package command;
 
 import model.ImageProcessorModel;
+
 import java.io.IOException;
 
-public class SaveCommand implements Command{
-    String filepath;
-    String newName;
+/**
+ * A command that saves a given image to a filesystem using a given filepath.
+ */
+public class SaveCommand implements Command {
+    private String filepath;
+    private String name;
 
-    public SaveCommand(String filepath, String newName) {
+    /**
+     * A constructor for a SaveCommand that uses two arguments.
+     *
+     * @param filepath the filepath the image is being saved to.
+     * @param name     the name of the image being saved.
+     */
+    public SaveCommand(String filepath, String name) {
         this.filepath = filepath;
-        this.newName = newName;
+        this.name = name;
     }
 
+    /**
+     * Runs this SaveCommand by calling the save method using a given model.
+     *
+     * @param model model used to save image to given filepath.
+     */
     @Override
     public void go(ImageProcessorModel model) {
         try {
-            model.saveImageToFileSystem(newName, filepath);
-        } catch(IOException e){
+            model.saveImageToFileSystem(name, filepath);
+        } catch (IOException e) {
             throw new IllegalArgumentException("file not found");
         }
     }

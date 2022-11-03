@@ -10,8 +10,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.Scanner;
-import java.util.function.Function;
 
+/**
+ * An ImageProcessorController that handles interactions between
+ * inputs from terminal commands and a given model. Also handles
+ * errors thrown due to bad inputs.
+ */
 public class ImageProcessorTerminalController implements ImageProcessorController {
     private HashMap<String, CommandFactory> commandFactories;
 
@@ -19,6 +23,14 @@ public class ImageProcessorTerminalController implements ImageProcessorControlle
     private ImageProcessorView view;
     private Scanner scan;
 
+    /**
+     * A Constructor for an ImageProcessorTerminalController
+     * that takes in three arguments and ensures they are not Null.
+     *
+     * @param model the model this controller will call based on the user input.
+     * @param view  the view the controller will transmit to.
+     * @param scan  the scanner used to read inputs from the user.
+     */
     public ImageProcessorTerminalController(ImageProcessorModel model, ImageProcessorView view, Scanner scan) {
         ImageProcessorUtils.ensureNotNull(model, "model cannot be null.");
         ImageProcessorUtils.ensureNotNull(view, "view cannot be null.");
@@ -29,28 +41,35 @@ public class ImageProcessorTerminalController implements ImageProcessorControlle
         commandFactories = new HashMap<>();
     }
 
+    /**
+     * Runs the ImageProcessorProgram using terminal user inputs.
+     * This program allows the user to run any of the commands, quit the program,
+     * and provides feedback when a command has successfully been executed.
+     * It also catches exceptions so the program will not terminate if an
+     * exception is thrown.
+     */
     @Override
-    public void runProgram(){
-        while(scan.hasNext()){
+    public void runProgram() {
+        while (scan.hasNext()) {
             String input = scan.next();
-            if(input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit")){
+            if (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit")) {
                 transmit("Quitting program... ");
                 return;
             }
             CommandFactory cmdfac = commandFactories.getOrDefault(input, null);
-            if (cmdfac == null){
+            if (cmdfac == null) {
                 transmit("unknown command");
             } else {
                 Optional<Command> c = cmdfac.make();
-                if(c.isPresent()) {
-                    try{
+                if (c.isPresent()) {
+                    try {
                         c.get().go(model);
                         transmit("Successfully ran command!");
-                    } catch(IllegalArgumentException e){
+                    } catch (IllegalArgumentException e) {
                         transmit(e.getMessage());
                     }
                 } else {
-                    if(input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit")){
+                    if (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit")) {
                         transmit("Quitting program... ");
                         return;
                     }
@@ -59,19 +78,32 @@ public class ImageProcessorTerminalController implements ImageProcessorControlle
         }
     }
 
-    public void registerCommand(String name, CommandFactory cmd){
+    /**
+     * Adds a new CommandFactory to this Hashmap<String, CommandFactory> and ensures
+     * that the given String and CommandFactory are not null.
+     *
+     * @param name Name of new Command to be added.
+     * @param cmd  Command Factory for new Command to be added.
+     */
+    public void registerCommand(String name, CommandFactory cmd) {
         ImageProcessorUtils.ensureNotNull(name, "name cannot be null.");
         ImageProcessorUtils.ensureNotNull(cmd, "Command Factory cannot be null.");
-        if(name.equalsIgnoreCase("q") || name.equalsIgnoreCase("quit")){
+        if (name.equalsIgnoreCase("q") || name.equalsIgnoreCase("quit")) {
             throw new IllegalArgumentException("Command name cannot be 'q' or 'quit'.");
         }
         this.commandFactories.put(name, cmd);
     }
 
-    public void transmit(String message) throws IllegalStateException{
-        try{
+    /**
+     * Transmits a message by using this view's renderMessage method.
+     *
+     * @param message the message to be transmitted.
+     * @throws IllegalStateException if writing to view via appendable fails.
+     */
+    public void transmit(String message) throws IllegalStateException {
+        try {
             this.view.renderMessage(message + "\n");
-        } catch(IOException e){
+        } catch (IOException e) {
             throw new IllegalStateException("unable to transmit to view.");
         }
     }

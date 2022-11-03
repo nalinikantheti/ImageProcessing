@@ -4,9 +4,12 @@ import image.Image;
 
 import java.util.Set;
 
+/**
+ * An Image processorModelState that only allows users to make observations of Images.
+ */
 public interface ImageProcessorModelState {
-    public Image getImage(String name);
+    Image getImage(String name);
 
-    public Set<String> getImageNames();
+    Set<String> getImageNames();
 
 }
