@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Main Class for running an Image Processor through a terminal.
+ * Main class for running an Image Processor through a terminal.
  */
 public class Main {
 
