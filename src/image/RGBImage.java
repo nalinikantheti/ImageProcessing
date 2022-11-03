@@ -5,16 +5,15 @@ import java.util.ArrayList;
 import static util.ImageProcessorUtils.ensureNotNull;
 
 /**
- * An Image made up pixels using red, green, and blue values.
+ * An Image made up pixels with red, green, and blue values.
  */
 public class RGBImage implements Image {
     private ArrayList<ArrayList<Pixel>> pixels;
 
-
     /**
      * A Constructor for an RGBImage that takes in an ArrayList<ArrayList<Pixel>>,
      * ensures it's not null, checks that it is a rectangular array, and then copies
-     * each pixel from the given ArrayList<ArrayList<Pixel>> to this ArrayList<ArrayList<Pixel>>.
+     * each column from the given ArrayList<ArrayList<Pixel>> to this ArrayList<ArrayList<Pixel>>.
      *
      * @param image the ArrayList<ArrayList<Pixel>> to copy into our image.
      */

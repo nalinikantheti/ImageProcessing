@@ -29,7 +29,7 @@ public abstract class AbstractGreyScaleCommand implements Command {
     }
 
     /**
-     * runs this GreyScaleCommand by retrieving an image using the given model, iterating through
+     * Runs this GreyScaleCommand by retrieving an image using the given model, iterating through
      * each pixel in the image, and using a value function to determine the new value
      * for all three rgb values in the pixel.
      *

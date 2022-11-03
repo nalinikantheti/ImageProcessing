@@ -108,7 +108,7 @@ public class ImageProcessorModelImpl implements ImageProcessorModel {
      * HashMap<String,Image> and ensures it exists.
      *
      * @param name name of image to be retrieved.
-     * @return Image of given name.
+     * @return Image using given name.
      */
     @Override
     public Image getImage(String name) {
