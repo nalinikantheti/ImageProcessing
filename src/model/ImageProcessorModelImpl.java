@@ -1,13 +1,10 @@
 package model;
 
 import image.Image;
-
+import image.Pixel;
 import util.ImageUtil;
 
 import java.io.FileNotFoundException;
-
-import image.Pixel;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

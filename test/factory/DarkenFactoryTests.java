@@ -1,9 +1,7 @@
 package factory;
 
-import controller.factory.terminal.BrightenFactory;
 import controller.factory.terminal.CommandFactory;
 import controller.factory.terminal.DarkenFactory;
-import factory.AbstractFactoryTests;
 import view.ImageProcessorView;
 
 import java.util.Scanner;
@@ -67,12 +65,13 @@ public class DarkenFactoryTests extends AbstractFactoryTests {
 
     /**
      * Returns a {@link DarkenFactory} that uses the given view and scanner.
+     *
      * @param view the view to pass to the factory
-     * @param s the scanner to pass to the factory
+     * @param s    the scanner to pass to the factory
      * @return a {@link DarkenFactory}
      */
     @Override
-    public CommandFactory makeFactory(ImageProcessorView view, Scanner s){
+    public CommandFactory makeFactory(ImageProcessorView view, Scanner s) {
         return new DarkenFactory(view, s);
     }
 }

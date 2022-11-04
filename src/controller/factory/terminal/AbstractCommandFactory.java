@@ -1,6 +1,5 @@
 package controller.factory.terminal;
 
-import command.Command;
 import view.ImageProcessorView;
 
 import java.io.IOException;
@@ -20,8 +19,9 @@ public abstract class AbstractCommandFactory implements CommandFactory {
     /**
      * Creates a new AbstractCommandFactory with the given view and scanner. Throws an {@code IllegalArgumentException}
      * if either parameter is null.
+     *
      * @param view the view which this factory will transmit messages to
-     * @param s the scanner which this factory will read input from
+     * @param s    the scanner which this factory will read input from
      * @throws IllegalArgumentException if either parameter is null
      */
     public AbstractCommandFactory(ImageProcessorView view, Scanner s) {
@@ -38,6 +38,7 @@ public abstract class AbstractCommandFactory implements CommandFactory {
      * quit keyword ("q" or "quit", case insensitive) then a message is sent to the view that the user has quit the
      * program. In all these situations, an empty {@code Optional<String>} is returned. Otherwise, an {@code Optional<String>}
      * is returned that contains the user's string input.
+     *
      * @param hadPreviousValue whether previous {@code waitFor} methods returns non-empty {@code Optional}s.
      * @return an {@code Optional<String>}. See the above description for more details.
      */
@@ -56,9 +57,10 @@ public abstract class AbstractCommandFactory implements CommandFactory {
      * Waits for integer input very similarly to {@link #waitForString(boolean)}, except that if the user enters non
      * integer input, this method asks the user to re-enter a valid integer value. Otherwise, returns empty {@code Optional}s
      * in the same situations.
+     *
      * @param hadPreviousValue whether previous {@code waitFor} methods returns non-empty {@code Optional}s.
-     * @param message the error message to output if the user enters invalid input, in order to notify the user what
-     *                argument was expected.
+     * @param message          the error message to output if the user enters invalid input, in order to notify the user what
+     *                         argument was expected.
      * @return an {@code Optional<Integer>}. See {@link #waitForString(boolean)} for more details.
      */
     protected Optional<Integer> waitForInteger(boolean hadPreviousValue, String message) {
@@ -95,7 +97,7 @@ public abstract class AbstractCommandFactory implements CommandFactory {
     }
 
     private <T> Optional<T> endOfInputSequence(boolean hadPreviousValue) {
-        if(hadPreviousValue) {
+        if (hadPreviousValue) {
             transmit("Reached end of input.");
         }
         return Optional.empty();

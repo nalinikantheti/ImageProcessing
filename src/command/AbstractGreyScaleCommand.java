@@ -1,10 +1,8 @@
 package command;
 
-import model.ImageProcessorModel;
-
-
 import image.Image;
 import image.Pixel;
+import model.ImageProcessorModel;
 import util.ImageProcessorUtils;
 
 /**

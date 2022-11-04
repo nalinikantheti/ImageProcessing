@@ -31,7 +31,7 @@ public class ControllerTests {
     Scanner scan;
 
     @Before
-    public void setup(){
+    public void setup() {
 
         expectedModelOutput = new StringBuilder();
         expectedViewOutput = new StringBuilder();
@@ -61,11 +61,11 @@ public class ControllerTests {
         ImageProcessorTerminalController c = new ImageProcessorTerminalController
                 (new MockModel(new StringBuilder()), new ImageProcessorView() {
 
-            @Override
-            public void renderMessage(String message) throws IOException {
-                throw new IOException();
-            }
-        }, new Scanner(new StringReader("hello")));
+                    @Override
+                    public void renderMessage(String message) throws IOException {
+                        throw new IOException();
+                    }
+                }, new Scanner(new StringReader("hello")));
 
         assertThrows(IllegalStateException.class,
                 () -> c.runProgram());
@@ -73,7 +73,7 @@ public class ControllerTests {
 
 
     @Test
-    public void testRegisterCommandThrows(){
+    public void testRegisterCommandThrows() {
 
         makeMVC();
         assertThrows(IllegalArgumentException.class, () -> controller.registerCommand(null, mockFactory));
@@ -86,7 +86,7 @@ public class ControllerTests {
     }
 
     @Test
-    public void testConstructorThrows(){
+    public void testConstructorThrows() {
         assertThrows(IllegalArgumentException.class, () -> new ImageProcessorTerminalController(null, null, null));
         assertThrows(IllegalArgumentException.class, () -> new ImageProcessorTerminalController(null, view, scan));
         assertThrows(IllegalArgumentException.class, () -> new ImageProcessorTerminalController(model, null, scan));
@@ -94,7 +94,7 @@ public class ControllerTests {
     }
 
     @Test
-    public void testQuitRunProgram(){
+    public void testQuitRunProgram() {
         input("q");
         viewOutput("Quitting program... \n");
         makeMVC();
@@ -107,7 +107,8 @@ public class ControllerTests {
         runTest();
     }
 
-    @Test public void testRunProgram(){
+    @Test
+    public void testRunProgram() {
 
         input("mock");
         viewOutput("unknown command\n");
@@ -135,9 +136,11 @@ public class ControllerTests {
     private void modelOutput(String message) {
         expectedModelOutput.append(message);
     }
+
     private void viewOutput(String message) {
         expectedViewOutput.append(message);
     }
+
     private void input(String message) {
         inputBuilder.append(message + "\n");
     }

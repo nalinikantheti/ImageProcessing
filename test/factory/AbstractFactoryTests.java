@@ -1,7 +1,6 @@
 package factory;
 
 import command.Command;
-import controller.factory.terminal.BrightenFactory;
 import controller.factory.terminal.CommandFactory;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +13,6 @@ import java.util.Optional;
 import java.util.Scanner;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertFalse;
 
 /**
  * An abstract class to test all factories.
@@ -71,6 +69,7 @@ public abstract class AbstractFactoryTests {
         output("Reached end of input.");
         assertFalse(runTest().isPresent());
     }
+
     @Test
     public void testConstructorThrows() {
         assertThrows(IllegalArgumentException.class,
@@ -108,6 +107,7 @@ public abstract class AbstractFactoryTests {
 
     /**
      * Appends a line to the expected output.
+     *
      * @param message the message to append
      */
     protected void output(String message) {
@@ -116,6 +116,7 @@ public abstract class AbstractFactoryTests {
 
     /**
      * Appends a line to the given input.
+     *
      * @param message the message to append
      */
     protected void input(String message) {
@@ -124,6 +125,7 @@ public abstract class AbstractFactoryTests {
 
     /**
      * Gets a factory and makes a command, ensuring that the logs in the mock view are as expected.
+     *
      * @return the {@link Optional<Command>} returned by the factory
      */
     protected Optional<Command> runTest() {
@@ -143,7 +145,8 @@ public abstract class AbstractFactoryTests {
 
     /**
      * Gets a factory to test.
-     * @param view the view to pass to the factory
+     *
+     * @param view    the view to pass to the factory
      * @param scanner the scanner to pass to the factory
      * @return a {@link CommandFactory}
      */

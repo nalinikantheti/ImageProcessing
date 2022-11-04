@@ -1,6 +1,5 @@
 package controller.factory.terminal;
 
-import command.BrightenCommand;
 import command.Command;
 import view.ImageProcessorView;
 
@@ -11,12 +10,13 @@ import java.util.Scanner;
  * A helper factory for commands that change all pixels by some intensity. Handles input conversion for subclasses so
  * that implementors only need to map the arguments to the command constructors.
  */
-public abstract class AbstractShadeChangeFactory extends AbstractCommandFactory{
+public abstract class AbstractShadeChangeFactory extends AbstractCommandFactory {
     /**
      * Creates a new AbstractShadeChangeFactory with the given view and scanner. Throws an {@code IllegalArgumentException}
      * if either parameter is null.
+     *
      * @param view the view which this factory will transmit messages to
-     * @param s the scanner which this factory will read input from
+     * @param s    the scanner which this factory will read input from
      * @throws IllegalArgumentException if either parameter is null
      */
     public AbstractShadeChangeFactory(ImageProcessorView view, Scanner s) {
@@ -29,14 +29,15 @@ public abstract class AbstractShadeChangeFactory extends AbstractCommandFactory{
      * {@code Optional}. Otherwise, if the user enters a malformed integer, this method asks the user to re-enter a
      * valid value. If the end of input is reached, a message is sent to the view and an empty {@code Optional} is
      * returned.
+     *
      * @return an {@code Optional<Command>}. See the above description for details.
      */
     @Override
     public Optional<Command> make() {
         Optional<String> imageName = waitForString(true);
-        Optional<Integer> intensity = waitForInteger(imageName.isPresent(), "Expected integer for intensity") ;
+        Optional<Integer> intensity = waitForInteger(imageName.isPresent(), "Expected integer for intensity");
         Optional<String> newName = waitForString(intensity.isPresent());
-        if(imageName.isEmpty() || intensity.isEmpty() || newName.isEmpty()) {
+        if (imageName.isEmpty() || intensity.isEmpty() || newName.isEmpty()) {
             return Optional.empty();
         }
         return makeCommand(imageName, intensity, newName);
@@ -44,12 +45,13 @@ public abstract class AbstractShadeChangeFactory extends AbstractCommandFactory{
 
     /**
      * Creates a command following the (string, integer, string) constructor pattern, passing in the respective arguments.
-     * @param s1 the first string argument
+     *
+     * @param s1        the first string argument
      * @param intensity the integer argument
-     * @param s2 the second string argument
+     * @param s2        the second string argument
      * @return an {@code Optional<Command>} containing a command. Actual class may vary depending on the implementation.
      */
     protected abstract Optional<Command> makeCommand
-            (Optional<String> s1, Optional<Integer> intensity, Optional<String> s2);
+    (Optional<String> s1, Optional<Integer> intensity, Optional<String> s2);
 
 }

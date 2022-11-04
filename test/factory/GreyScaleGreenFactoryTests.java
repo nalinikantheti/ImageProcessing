@@ -1,9 +1,7 @@
 package factory;
 
-import controller.factory.terminal.BrightenFactory;
 import controller.factory.terminal.CommandFactory;
 import controller.factory.terminal.GreyScaleGreenFactory;
-import factory.AbstractFactoryTests;
 import view.ImageProcessorView;
 
 import java.util.Scanner;
@@ -14,7 +12,8 @@ import java.util.Scanner;
 public class GreyScaleGreenFactoryTests extends AbstractFactoryTests {
     /**
      * Returns a {@link GreyScaleGreenFactory} that uses the given view and scanner.
-     * @param view the view to pass to the factory
+     *
+     * @param view    the view to pass to the factory
      * @param scanner the scanner to pass to the factory
      * @return a {@link GreyScaleGreenFactory}
      */

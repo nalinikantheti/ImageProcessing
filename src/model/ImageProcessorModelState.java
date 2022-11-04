@@ -10,6 +10,7 @@ import java.util.Set;
 public interface ImageProcessorModelState {
     /**
      * Gets the image with the given name stored in the model.
+     *
      * @param name the name of the image
      * @return an image
      */
@@ -17,6 +18,7 @@ public interface ImageProcessorModelState {
 
     /**
      * Gets the names of all the images stored in this model.
+     *
      * @return a {@link Set<String>} containing all the names of the images
      */
 

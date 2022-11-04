@@ -14,8 +14,9 @@ public class GreyScaleGreenFactory extends AbstractTwoStringFactory {
     /**
      * Creates a new GreyScaleGreenFactory with the given view and scanner. Throws an {@code IllegalArgumentException}
      * if either parameter is null.
+     *
      * @param view the view which this factory will transmit messages to
-     * @param s the scanner which this factory will read input from
+     * @param s    the scanner which this factory will read input from
      * @throws IllegalArgumentException if either parameter is null
      */
     public GreyScaleGreenFactory(ImageProcessorView view, Scanner s) {
@@ -25,6 +26,7 @@ public class GreyScaleGreenFactory extends AbstractTwoStringFactory {
     /**
      * Creates a new {@link GreyScaleGreenCommand} that uses the image with the name of the first argument and saves
      * the resulting image using the name of the second argument.
+     *
      * @param s1 the name of the image to perform the greyscale operation
      * @param s2 the name of the resulting image
      * @return a {@link Optional<GreyScaleGreenCommand>} containing a valid command

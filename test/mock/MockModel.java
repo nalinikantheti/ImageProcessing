@@ -20,81 +20,89 @@ public class MockModel implements ImageProcessorModel {
 
     /**
      * Creates a MockModel that logs to the given StringBuilder.
+     *
      * @param ap the StringBuilder to log to
      */
 
-    public MockModel(StringBuilder ap){
-      this.log = ap;
-      lastSavedImage = new RGBImage(0,0);
-      this.dummy = new RGBImage(0,0);
+    public MockModel(StringBuilder ap) {
+        this.log = ap;
+        lastSavedImage = new RGBImage(0, 0);
+        this.dummy = new RGBImage(0, 0);
     }
 
     /**
      * Creates a MockModel that loges to the given StringBuilder and returns the given image whenever getImage is called.
-     * @param ap the string builder to log to
+     *
+     * @param ap    the string builder to log to
      * @param dummy the image to return on getImage calls
      */
-    public MockModel(StringBuilder ap, Image dummy){
+    public MockModel(StringBuilder ap, Image dummy) {
         this.log = ap;
-        lastSavedImage = new RGBImage(0,0);
+        lastSavedImage = new RGBImage(0, 0);
         this.dummy = dummy;
     }
 
     /**
      * Logs that this method was called with the given arguments.
-     * @param name the name of the image to save
+     *
+     * @param name     the name of the image to save
      * @param filepath the filepath of the image to save
      * @throws IOException
      */
     @Override
     public void saveImageToFileSystem(String name, String filepath) throws IOException {
-        log.append("saved " + name + " to filepath: " + filepath+"\n");
+        log.append("saved " + name + " to filepath: " + filepath + "\n");
     }
 
     /**
      * Logs that this method was called with the given arguments.
+     *
      * @param image the image to store
-     * @param name the name to give this image
+     * @param name  the name to give this image
      */
     @Override
     public void saveImageToModel(Image image, String name) {
-        log.append("saved " + name + " to model"+"\n");
+        log.append("saved " + name + " to model" + "\n");
         this.lastSavedImage = image;
     }
 
     /**
      * Logs that this method was called with the given arguments.
+     *
      * @param filepath the filepath to read the image from
-     * @param name the name to give the image
+     * @param name     the name to give the image
      * @throws FileNotFoundException never
      */
     @Override
     public void loadImage(String filepath, String name) throws FileNotFoundException {
-        log.append("loaded: " + name + " from filepath: " + filepath+"\n");
+        log.append("loaded: " + name + " from filepath: " + filepath + "\n");
     }
 
     /**
      * Logs that this method was called with the given arguments.
+     *
      * @param name the name of the image to remove
      */
     @Override
     public void removeImage(String name) {
-        log.append("removed: " + name+"\n");
+        log.append("removed: " + name + "\n");
     }
 
     /**
      * Logs that this method was called with the given arguments.
+     *
      * @param name the name of the image
      * @return the given dummy image
      */
     @Override
     public Image getImage(String name) {
-        log.append("retrieved: " + name +"\n");
+        log.append("retrieved: " + name + "\n");
         return this.dummy;
     }
 
     /**
      * Returns an empty hashset and logs that this method was called.
+     *
      * @return an empty hashset
      */
     @Override
@@ -105,9 +113,10 @@ public class MockModel implements ImageProcessorModel {
 
     /**
      * Gets the image last saved to this mock model.
+     *
      * @return the last saved image
      */
-    public Image getLastSavedImage(){
+    public Image getLastSavedImage() {
         return this.lastSavedImage;
     }
 }

@@ -4,7 +4,6 @@ import model.ImageProcessorModelImpl;
 import view.ImageProcessorTextView;
 import view.ImageProcessorView;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 /**

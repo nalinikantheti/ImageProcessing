@@ -7,7 +7,8 @@ import view.ImageProcessorView;
 
 import java.util.Scanner;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Tests for {@link BrightenFactory}.
@@ -78,7 +79,8 @@ public class BrightenFactoryTests extends AbstractFactoryTests {
 
     /**
      * Returns a {@link BrightenFactory} that uses the given view and scanner.
-     * @param view the view to pass to the factory
+     *
+     * @param view    the view to pass to the factory
      * @param scanner the scanner to pass to the factory
      * @return a {@link BrightenFactory}
      */

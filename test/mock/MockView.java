@@ -12,6 +12,7 @@ public class MockView implements ImageProcessorView {
 
     /**
      * Creates a MockView that logs everything to the given StringBuilder.
+     *
      * @param actualViewOutput the log
      */
     public MockView(StringBuilder actualViewOutput) {
@@ -20,6 +21,7 @@ public class MockView implements ImageProcessorView {
 
     /**
      * Logs the given message called to be rendered.
+     *
      * @param message the message to log
      * @throws IOException never
      */

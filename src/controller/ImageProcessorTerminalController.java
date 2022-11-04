@@ -1,7 +1,7 @@
 package controller;
 
-import command.*;
-import controller.factory.terminal.*;
+import command.Command;
+import controller.factory.terminal.CommandFactory;
 import model.ImageProcessorModel;
 import util.ImageProcessorUtils;
 import view.ImageProcessorView;

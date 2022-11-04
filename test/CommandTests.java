@@ -6,7 +6,9 @@ import org.junit.Test;
 import util.ImageUtil;
 
 import java.io.FileNotFoundException;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 /**
  * Tests all the functionalities of a commands.
@@ -48,8 +50,9 @@ public class CommandTests {
     }
 
     private void assertLog(StringBuilder log, String name, String newName) {
-        assertEquals("retrieved: " + name +"\n"+"saved " + newName + " to model"+"\n", log.toString());
+        assertEquals("retrieved: " + name + "\n" + "saved " + newName + " to model" + "\n", log.toString());
     }
+
     private void assertLog(StringBuilder log, String newName) {
         assertLog(log, "original", newName);
     }
@@ -226,6 +229,6 @@ public class CommandTests {
         save.go(mock);
         assertEquals(log.toString(), "saved sixbit.ppm to filepath: ./C:\n");
     }
-    
+
 
 }

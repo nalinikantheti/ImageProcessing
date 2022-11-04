@@ -8,6 +8,7 @@ import java.io.IOException;
 public interface ImageProcessorView {
     /**
      * Renders the given message to the view.
+     *
      * @param message the message to render
      * @throws IOException if the message cannot be rendered
      */

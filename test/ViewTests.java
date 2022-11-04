@@ -2,7 +2,6 @@ import org.junit.Before;
 import org.junit.Test;
 import view.ImageProcessorTextView;
 
-import javax.swing.text.View;
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
@@ -19,6 +18,7 @@ public class ViewTests {
         actualOutput = new StringBuilder();
         view = new ImageProcessorTextView(actualOutput);
     }
+
     @Test
     public void testRenderMessage() throws IOException {
 

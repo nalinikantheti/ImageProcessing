@@ -21,27 +21,29 @@ import static org.junit.Assert.*;
 public class ModelTests {
     private ImageProcessorModel model;
     private Pixel black;
-    
+
     private Pixel grey;
 
     private Pixel white;
     private Pixel red;
     private Pixel green;
     private Pixel blue;
+
     @Before
     public void setup() {
         model = new ImageProcessorModelImpl();
-        black = new Pixel(0,0,0);
+        black = new Pixel(0, 0, 0);
         grey = new Pixel(127, 127, 127);
-        white = new Pixel(255, 255,255);
-        red = new Pixel(255,0,0);
+        white = new Pixel(255, 255, 255);
+        red = new Pixel(255, 0, 0);
         green = new Pixel(0, 255, 0);
-        blue = new Pixel(0,0,255);
+        blue = new Pixel(0, 0, 255);
     }
+
     @Test
     public void testMain() {
-        Image image = new RGBImage(3,4);
-        image.setPixel(new Pixel(255,0,0), 1,2);
+        Image image = new RGBImage(3, 4);
+        image.setPixel(new Pixel(255, 0, 0), 1, 2);
 
         model.saveImageToModel(image, "red");
 
@@ -74,21 +76,21 @@ public class ModelTests {
 
     @Test
     public void testLoad() throws FileNotFoundException {
-        model.loadImage("test.ppm","test");
+        model.loadImage("test.ppm", "test");
         Image image = model.getImage("test");
 
-        assertEquals(black, image.getPixel(0,0));
-        assertEquals(grey, image.getPixel(1,0));
-        assertEquals(white, image.getPixel(2,0));
-        assertEquals(red, image.getPixel(0,1));
-        assertEquals(green, image.getPixel(1,1));
-        assertEquals(blue, image.getPixel(2,1));
+        assertEquals(black, image.getPixel(0, 0));
+        assertEquals(grey, image.getPixel(1, 0));
+        assertEquals(white, image.getPixel(2, 0));
+        assertEquals(red, image.getPixel(0, 1));
+        assertEquals(green, image.getPixel(1, 1));
+        assertEquals(blue, image.getPixel(2, 1));
     }
 
     @Test
     public void testSaveToFileSystem() throws IOException {
-        Image image = new RGBImage(2,2);
-        image.setPixel(blue, 0,1);
+        Image image = new RGBImage(2, 2);
+        image.setPixel(blue, 0, 1);
 
         Path path = Paths.get("blue.ppm");
 
@@ -102,10 +104,10 @@ public class ModelTests {
         model.loadImage("blue.ppm", "blue2");
         Image newImage = model.getImage("blue2");
 
-        assertEquals(black, newImage.getPixel(0,0));
-        assertEquals(blue, newImage.getPixel(0,1));
-        assertEquals(black, newImage.getPixel(1,0));
-        assertEquals(black, newImage.getPixel(1,1));
+        assertEquals(black, newImage.getPixel(0, 0));
+        assertEquals(blue, newImage.getPixel(0, 1));
+        assertEquals(black, newImage.getPixel(1, 0));
+        assertEquals(black, newImage.getPixel(1, 1));
 
         Files.delete(path);
     }
