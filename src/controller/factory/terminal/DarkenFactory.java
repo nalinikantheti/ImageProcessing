@@ -37,8 +37,8 @@ public class DarkenFactory extends AbstractShadeChangeFactory {
    */
   @Override
   protected Optional<Command> makeCommand(Optional<String> s1,
-                                           Optional<Integer> intensity,
-                                           Optional<String> s2) {
+                                          Optional<Integer> intensity,
+                                          Optional<String> s2) {
     return Optional.of(new DarkenCommand(s1.get(), intensity.get(), s2.get()));
   }
 

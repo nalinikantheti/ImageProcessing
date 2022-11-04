@@ -27,26 +27,26 @@ import static org.junit.Assert.assertThrows;
  * Tests all the functionalities of a commands.
  */
 public class CommandTests {
-    private final String sixbitRoot = "./res/sixbit/";
-    private final String koalaRoot = "./res/koala/";
-    private StringBuilder log;
-    private StringBuilder log2;
-    private MockModel mock;
+  private final String sixbitRoot = "./res/sixbit/";
+  private final String koalaRoot = "./res/koala/";
+  private StringBuilder log;
+  private StringBuilder log2;
+  private MockModel mock;
 
   private MockModel mock2;
   private Image sixbit;
   private Image koala;
 
 
-    @Before
-    public void setup() throws FileNotFoundException {
-        log = new StringBuilder();
-        log2 = new StringBuilder();
-        sixbit = ImageUtil.readPPM(sixbitRoot + "test.ppm");
-        koala = ImageUtil.readPPM(koalaRoot + "Koala.ppm");
-        mock = new MockModel(log, koala);
-        mock2 = new MockModel(log2, sixbit);
-    }
+  @Before
+  public void setup() throws FileNotFoundException {
+    log = new StringBuilder();
+    log2 = new StringBuilder();
+    sixbit = ImageUtil.readPPM(sixbitRoot + "test.ppm");
+    koala = ImageUtil.readPPM(koalaRoot + "Koala.ppm");
+    mock = new MockModel(log, koala);
+    mock2 = new MockModel(log2, sixbit);
+  }
 
   private void assertImageEquals(Image expected, Image actual) {
     assertEquals(expected.getWidth(), actual.getWidth());
@@ -110,8 +110,8 @@ public class CommandTests {
     Command darken = new DarkenCommand("original", 50, "original-dark");
     Command darkenMax = new DarkenCommand("original", 1000, "original-dark-max");
 
-        Image sixbitDark = ImageUtil.readPPM(sixbitRoot + "sixbit-darken.ppm");
-        Image sixbitDarkMax = ImageUtil.readPPM(sixbitRoot + "sixbit-darken-max.ppm");
+    Image sixbitDark = ImageUtil.readPPM(sixbitRoot + "sixbit-darken.ppm");
+    Image sixbitDarkMax = ImageUtil.readPPM(sixbitRoot + "sixbit-darken-max.ppm");
 
     runTest(darken, sixbitDark, mock2);
     assertLog(log2, "original", "original-dark");
@@ -235,7 +235,7 @@ public class CommandTests {
 
     load.run(mock);
     assertEquals(log.toString(), "loaded: sixbit-goat from filepath: ./res/sixbit/sixbit" +
-                ".ppm\n");
+            ".ppm\n");
   }
 
   @Test

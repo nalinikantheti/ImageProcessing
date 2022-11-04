@@ -105,7 +105,7 @@ public class ControllerTests {
 
   @Test
   public void testQuitRunProgram() {
-    assertEquals(1,Integer.parseInt("1"));
+    assertEquals(1, Integer.parseInt("1"));
 
     input("q");
     viewOutput("Quitting program... \n");
@@ -121,7 +121,7 @@ public class ControllerTests {
 
   @Test
   public void testRunProgram() {
-    assertEquals(1,Integer.parseInt("1"));
+    assertEquals(1, Integer.parseInt("1"));
 
     input("mock");
     viewOutput("unknown command\n");

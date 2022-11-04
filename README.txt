@@ -5,8 +5,8 @@ alterations. The javadoc on the classes and methods go into more detail about
 the exact functionality of the code, but a brief overview is as follows:
 
 To represent an actual image in our processor, we made our own data type for an 
-Image, which basically held an ArrayList<ArrayList<Pixel>>, and the interface 
-for our Image had methods for getting a pixel, setting a pixel, cloning  an 
+Image, which basically holds an ArrayList<ArrayList<Pixel>>. The interface 
+for Image had methods for getting a pixel, setting a pixel, cloning  an 
 image, and retrieving the dimensions of the image. This also led to us writing 
 our own data type to represent a pixel, which is a very primitive class that 
 only stores three integer values for red, green and blue, and has methods that 

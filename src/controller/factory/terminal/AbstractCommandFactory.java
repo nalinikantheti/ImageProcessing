@@ -44,7 +44,7 @@ public abstract class AbstractCommandFactory implements CommandFactory {
    * is returned that contains the user's string input.
    *
    * @param hadPreviousValue whether previous {@code waitFor} methods
-   *                        returns non-empty {@code Optional}s.
+   *                         returns non-empty {@code Optional}s.
    * @return an {@code Optional<String>}. See the above description for more details.
    */
   protected Optional<String> waitForString(boolean hadPreviousValue) {
