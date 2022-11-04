@@ -23,3 +23,6 @@ save sixbit res/sixbit/sixbit-bright.ppm
 
 #save darkened sixbit to filesystem
 save res/sixbit/sixbit-dark.ppm sixbit
+
+#quit the program
+quit
