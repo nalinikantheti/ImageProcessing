@@ -7,6 +7,9 @@ import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests for {@link ImageProcessorTextView}.
+ */
 public class ViewTests {
     StringBuilder actualOutput;
     ImageProcessorTextView view;

@@ -9,6 +9,9 @@ import java.util.Scanner;
 
 import static org.junit.Assert.*;
 
+/**
+ * Tests for {@link BrightenFactory}.
+ */
 public class BrightenFactoryTests extends AbstractFactoryTests {
 
     @Override
@@ -73,6 +76,12 @@ public class BrightenFactoryTests extends AbstractFactoryTests {
         assertFalse(runTest().isPresent());
     }
 
+    /**
+     * Returns a {@link BrightenFactory} that uses the given view and scanner.
+     * @param view the view to pass to the factory
+     * @param scanner the scanner to pass to the factory
+     * @return a {@link BrightenFactory}
+     */
     @Override
     protected CommandFactory makeFactory(ImageProcessorView view, Scanner scanner) {
         return new BrightenFactory(view, scanner);

@@ -10,6 +10,9 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
+/**
+ * Tests for {@link RGBImageTests}.
+ */
 public class RGBImageTests {
     private Pixel black;
     private Pixel grey;

@@ -15,6 +15,9 @@ import java.util.Set;
 
 import static org.junit.Assert.*;
 
+/**
+ * Tests for {@link ImageProcessorModelImpl}.
+ */
 public class ModelTests {
     private ImageProcessorModel model;
     private Pixel black;

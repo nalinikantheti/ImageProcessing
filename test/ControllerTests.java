@@ -14,6 +14,9 @@ import java.util.Scanner;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
+/**
+ * Tests all the functionality of {@link ImageProcessorTerminalController}.
+ */
 public class ControllerTests {
 
     StringBuilder expectedModelOutput;
@@ -57,10 +60,6 @@ public class ControllerTests {
     public void testViewTransmitFail() {
         ImageProcessorTerminalController c = new ImageProcessorTerminalController
                 (new MockModel(new StringBuilder()), new ImageProcessorView() {
-            @Override
-            public void show() throws IOException {
-                throw new IOException();
-            }
 
             @Override
             public void renderMessage(String message) throws IOException {
@@ -133,13 +132,13 @@ public class ControllerTests {
         runTest();
     }
 
-    protected void modelOutput(String message) {
+    private void modelOutput(String message) {
         expectedModelOutput.append(message);
     }
-    protected void viewOutput(String message) {
+    private void viewOutput(String message) {
         expectedViewOutput.append(message);
     }
-    protected void input(String message) {
+    private void input(String message) {
         inputBuilder.append(message + "\n");
     }
 

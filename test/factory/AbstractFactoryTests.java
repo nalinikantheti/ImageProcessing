@@ -16,6 +16,9 @@ import java.util.Scanner;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertFalse;
 
+/**
+ * An abstract class to test all factories.
+ */
 public abstract class AbstractFactoryTests {
     StringBuilder expectedOutput;
     StringBuilder actualOuptut;
@@ -103,14 +106,26 @@ public abstract class AbstractFactoryTests {
 
     }
 
+    /**
+     * Appends a line to the expected output.
+     * @param message the message to append
+     */
     protected void output(String message) {
         expectedOutput.append(message + "\n");
     }
 
+    /**
+     * Appends a line to the given input.
+     * @param message the message to append
+     */
     protected void input(String message) {
         inputBuilder.append(message + "\n");
     }
 
+    /**
+     * Gets a factory and makes a command, ensuring that the logs in the mock view are as expected.
+     * @return the {@link Optional<Command>} returned by the factory
+     */
     protected Optional<Command> runTest() {
         CommandFactory factory = this.makeFactory(makeView(), makeScanner());
         Optional<Command> command = factory.make();
@@ -125,6 +140,13 @@ public abstract class AbstractFactoryTests {
     private ImageProcessorView makeView() {
         return new ImageProcessorTextView(actualOuptut);
     }
+
+    /**
+     * Gets a factory to test.
+     * @param view the view to pass to the factory
+     * @param scanner the scanner to pass to the factory
+     * @return a {@link CommandFactory}
+     */
 
     protected abstract CommandFactory makeFactory(ImageProcessorView view, Scanner scanner);
 }

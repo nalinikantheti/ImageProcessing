@@ -8,6 +8,9 @@ import util.ImageUtil;
 import java.io.FileNotFoundException;
 import static org.junit.Assert.*;
 
+/**
+ * Tests all the functionalities of a commands.
+ */
 public class CommandTests {
     private StringBuilder log;
     private StringBuilder log2;

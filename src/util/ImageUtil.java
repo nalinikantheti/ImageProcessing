@@ -15,11 +15,13 @@ import java.io.FileInputStream;
  */
 public class ImageUtil {
 
-  /**
-   * Read an image file in the PPM format and print the colors.
-   *
-   * @param filename the path of the file. 
-   */
+
+    /**
+     * Reads a PPM at the given filepath and returns it as an image.
+     * @param filename the filepath of the PPM image
+     * @return an {@link Image} representing the PPM
+     * @throws FileNotFoundException if the file cannot be found
+     */
   public static Image readPPM(String filename) throws FileNotFoundException {
 
     Scanner sc;
@@ -71,20 +73,6 @@ public class ImageUtil {
     }
 
     return image;
-  }
-
-  //demo main
-  public static void main(String []args) throws FileNotFoundException {
-      String filename;
-      
-      if (args.length>0) {
-          filename = args[0];
-      }
-      else {
-          filename = "Koala.ppm";
-      }
-      
-      ImageUtil.readPPM(filename);
   }
 }
 
