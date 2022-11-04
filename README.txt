@@ -46,57 +46,58 @@ large part of the functionality of the model and controller, respectively.
 
 Documentation for the commands our program accepts:
 
-“Load”  <filepath>  <name>: to load an image; “load” must be followed by the 
+“load”  <filepath>  <name>: to load an image from the filesystem; “load” must be followed by the
 location of the image to be loaded, and then the name the loaded image will be 
 saved to.
 
-“Save”  <name>  <filepath> : to save an image; “save” must be followed by the 
+“save”  <name>  <filepath> : to save an image to the filesystem; “save” must be followed by the
 name of the image to be saved, and then the location it’s being saved to.
 
-“Brighten”  <imageName>  <intensity>  <newName> : to brighten an image; 
+“brighten”  <imageName>  <intensity>  <newName> : to brighten an image;
 “brighten” must be followed by the name of the image to be brightened, the 
 value by which it needs to be brightened, and the name the brightened image 
 will be saved to. 
 
-“Darken”  <imageName>  <intensity>  <newName> : to darken an image; “darken” 
+“darken”  <imageName>  <intensity>  <newName> : to darken an image; “darken”
 must be followed by the name of the image to be darkened, the value by which it 
 needs to be darkened, and the name the darkened image will be saved to. 
 
-“FlipHorizontal”  <imageName>   <newName> : to flip an image on its vertical 
-axis; “FlipHorizontal” must be followed by the name of the image to be flipped 
+“flipHorizontal”  <imageName>   <newName> : to flip an image on its vertical
+axis; "flipHorizontal” must be followed by the name of the image to be flipped
 and the name the flipped image will be saved to. 
 
-“FlipVertical”  <imageName>   <newName> : to flip an image on its horizontal 
-axis; “FlipVertical” must be followed by the name of the image to be flipped 
+“flipVertical”  <imageName>   <newName> : to flip an image on its horizontal
+axis; “flipVertical” must be followed by the name of the image to be flipped
 and the name the flipped image will be saved to. 
 
-“Luma”  <imageName>   <newName> : to greyscaled an image by its luma value; 
-“Luma” must be followed by the name of the image to be grayscaled and the name 
+“luma”  <imageName>   <newName> : to greyscaled an image by its luma value;
+“luma” must be followed by the name of the image to be grayscaled and the name
 the grayscaled image will be saved to. 
 
-“Intensity”  <imageName>   <newName> : to greyscaled an image by its intensity; 
-“Intensity” must be followed by the name of the image to be grayscaled and the 
+“intensity”  <imageName>   <newName> : to greyscaled an image by its intensity;
+“intensity” must be followed by the name of the image to be grayscaled and the
 name the grayscaled image will be saved to. 
 
-“Value”  <imageName>   <newName> : to greyscaled an image by its value; “Value” 
+“value”  <imageName>   <newName> : to greyscaled an image by its value; “value”
 must be followed by the name of the image to be grayscaled and the name the 
 grayscaled image will be saved to. 
 
-“GreyScaleRed”  <imageName>   <newName> : to greyscaled an image by its red 
-value; “GreyScaleRed” must be followed by the name of the image to be 
+“greyScaleRed”  <imageName>   <newName> : to greyscaled an image by its red
+value; “greyScaleRed” must be followed by the name of the image to be
 grayscaled and the name the grayscaled image will be saved to. 
 
-“GreyScaleGreen”  <imageName>   <newName> : to greyscaled an image by its green 
-value; “GreyScaleGreen” must be followed by the name of the image to be 
+“greyScaleGreen”  <imageName>   <newName> : to greyscaled an image by its green
+value; “greyScaleGreen” must be followed by the name of the image to be
 grayscaled and the name the grayscaled image will be saved to. 
 
-“GreyScaleBlue”  <imageName>   <newName> : to greyscaled an image by its blue 
-value; “GreyScaleBlue” must be followed by the name of the image to be 
+“greyScaleBlue”  <imageName>   <newName> : to greyscaled an image by its blue
+value; gGreyScaleBlue” must be followed by the name of the image to be
 grayscaled and the name the grayscaled image will be saved to. 
 
-In order to run the script provided, simply type it into the console when the program runs.
+In order to run Script.txt, simply type each line (that doesn't begin with a #) when
+the program runs and press ENTER after each line.
 
 IMAGE CITATIONS:
 
 Koala: assignment 4 canvas page; starter code
-sixbit: created ourselves using paint.net
+sixbit: created ourselves using paint.net for use in this project
