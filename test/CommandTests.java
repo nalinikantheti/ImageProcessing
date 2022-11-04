@@ -14,6 +14,8 @@ import static org.junit.Assert.assertThrows;
  * Tests all the functionalities of a commands.
  */
 public class CommandTests {
+    private final String sixbitRoot = "./res/sixbit/";
+    private final String koalaRoot = "./res/koala/";
     private StringBuilder log;
     private StringBuilder log2;
     private MockModel mock;
@@ -27,8 +29,8 @@ public class CommandTests {
     public void setup() throws FileNotFoundException {
         log = new StringBuilder();
         log2 = new StringBuilder();
-        sixbit = ImageUtil.readPPM("test.ppm");
-        koala = ImageUtil.readPPM("Koala.ppm");
+        sixbit = ImageUtil.readPPM(sixbitRoot+"test.ppm");
+        koala = ImageUtil.readPPM(koalaRoot+"Koala.ppm");
         mock = new MockModel(log, koala);
         mock2 = new MockModel(log2, sixbit);
     }
@@ -61,7 +63,7 @@ public class CommandTests {
     public void testAssertImageEquals() throws FileNotFoundException {
         assertThrows(AssertionError.class,
                 () -> assertImageEquals(sixbit, koala));
-        assertImageEquals(sixbit, ImageUtil.readPPM("test.ppm"));
+        assertImageEquals(sixbit, ImageUtil.readPPM(sixbitRoot+"test.ppm"));
     }
 
 
@@ -75,9 +77,9 @@ public class CommandTests {
         Command brighten = new BrightenCommand("original", 50, "original-bright");
         Command brightenMax = new BrightenCommand("original", 1000, "original-bright-max");
 
-        Image koalaBright = ImageUtil.readPPM("koala-brighter-by-50.ppm");
-        Image sixbitBright = ImageUtil.readPPM("sixbit-brighten.ppm");
-        Image sixbitBrightMax = ImageUtil.readPPM("sixbit-brighten-max.ppm");
+        Image koalaBright = ImageUtil.readPPM(koalaRoot + "koala-brighter-by-50.ppm");
+        Image sixbitBright = ImageUtil.readPPM(sixbitRoot+"sixbit-brighten.ppm");
+        Image sixbitBrightMax = ImageUtil.readPPM(sixbitRoot+"sixbit-brighten-max.ppm");
 
         runTest(brighten, koalaBright, mock);
         runTest(brighten, sixbitBright, mock2);
@@ -95,8 +97,8 @@ public class CommandTests {
         Command darken = new DarkenCommand("original", 50, "original-dark");
         Command darkenMax = new DarkenCommand("original", 1000, "original-dark-max");
 
-        Image sixbitDark = ImageUtil.readPPM("sixbit-darken.ppm");
-        Image sixbitDarkMax = ImageUtil.readPPM("sixbit-darken-max.ppm");
+        Image sixbitDark = ImageUtil.readPPM(sixbitRoot+"sixbit-darken.ppm");
+        Image sixbitDarkMax = ImageUtil.readPPM(sixbitRoot+"sixbit-darken-max.ppm");
 
         runTest(darken, sixbitDark, mock2);
         assertLog(log2, "original", "original-dark");
@@ -108,8 +110,8 @@ public class CommandTests {
 
     @Test
     public void testFlipHorizontalCommand() throws FileNotFoundException {
-        Image sixbitFlipHorizontal = ImageUtil.readPPM("sixbit-horizontal-flip.ppm");
-        Image koalaFlipHorizontal = ImageUtil.readPPM("koala-horizontal.ppm");
+        Image sixbitFlipHorizontal = ImageUtil.readPPM(sixbitRoot+"sixbit-horizontal-flip.ppm");
+        Image koalaFlipHorizontal = ImageUtil.readPPM(koalaRoot + "koala-horizontal.ppm");
 
         Command flipHorizontal = new FlipHorizontalCommand("original", "original-flip-horizontal");
 
@@ -121,8 +123,8 @@ public class CommandTests {
 
     @Test
     public void testFlipVerticalCommand() throws FileNotFoundException {
-        Image sixbitFlipVertical = ImageUtil.readPPM("sixbit-vertical-flip.ppm");
-        Image koalaFlipVertical = ImageUtil.readPPM("koala-vertical.ppm");
+        Image sixbitFlipVertical = ImageUtil.readPPM(sixbitRoot+"sixbit-vertical-flip.ppm");
+        Image koalaFlipVertical = ImageUtil.readPPM(koalaRoot + "koala-vertical.ppm");
 
         Command flipVertical = new FlipVerticalCommand("boriginal", "original-flip-vertical");
 
@@ -134,8 +136,8 @@ public class CommandTests {
 
     @Test
     public void testLumaCommand() throws FileNotFoundException {
-        Image sixbitLuma = ImageUtil.readPPM("sixbit-luma-greyscale.ppm");
-        Image koalaLuma = ImageUtil.readPPM("koala-luma-greyscale.ppm");
+        Image sixbitLuma = ImageUtil.readPPM(sixbitRoot+"sixbit-luma-greyscale.ppm");
+        Image koalaLuma = ImageUtil.readPPM(koalaRoot + "koala-luma-greyscale.ppm");
 
         Command luma = new LumaCommand("hi", "original-luma");
 
@@ -148,8 +150,8 @@ public class CommandTests {
 
     @Test
     public void testValueCommand() throws FileNotFoundException {
-        Image sixbitValue = ImageUtil.readPPM("sixbit-value-greyscale.ppm");
-        Image koalaValue = ImageUtil.readPPM("koala-value-greyscale.ppm");
+        Image sixbitValue = ImageUtil.readPPM(sixbitRoot+"sixbit-value-greyscale.ppm");
+        Image koalaValue = ImageUtil.readPPM(koalaRoot + "koala-value-greyscale.ppm");
 
         Command value = new ValueCommand("original", "original-value");
 
@@ -162,8 +164,8 @@ public class CommandTests {
 
     @Test
     public void testIntensityCommand() throws FileNotFoundException {
-        Image sixbitIntensity = ImageUtil.readPPM("sixbit-intensity-greyscale.ppm");
-        Image koalaIntensity = ImageUtil.readPPM("koala-intensity-greyscale.ppm");
+        Image sixbitIntensity = ImageUtil.readPPM(sixbitRoot+"sixbit-intensity-greyscale.ppm");
+        Image koalaIntensity = ImageUtil.readPPM(koalaRoot + "koala-intensity-greyscale.ppm");
 
         Command intensity = new IntensityCommand("original", "original-intensity");
 
@@ -175,8 +177,8 @@ public class CommandTests {
 
     @Test
     public void testGreyScaleRedCommand() throws FileNotFoundException {
-        Image sixbitGreyScaleRed = ImageUtil.readPPM("sixbit-red-greyscale.ppm");
-        Image koalaGreyScaleRed = ImageUtil.readPPM("koala-red-greyscale.ppm");
+        Image sixbitGreyScaleRed = ImageUtil.readPPM(sixbitRoot+"sixbit-red-greyscale.ppm");
+        Image koalaGreyScaleRed = ImageUtil.readPPM(koalaRoot + "koala-red-greyscale.ppm");
 
         Command greyScaleRed = new GreyScaleRedCommand("original", "original-red");
 
@@ -188,8 +190,8 @@ public class CommandTests {
 
     @Test
     public void testGreyScaleGreenCommand() throws FileNotFoundException {
-        Image sixbitGreyScaleGreen = ImageUtil.readPPM("sixbit-green-greyscale.ppm");
-        Image koalaGreyScaleGreen = ImageUtil.readPPM("koala-green-greyscale.ppm");
+        Image sixbitGreyScaleGreen = ImageUtil.readPPM(sixbitRoot+"sixbit-green-greyscale.ppm");
+        Image koalaGreyScaleGreen = ImageUtil.readPPM(koalaRoot + "koala-green-greyscale.ppm");
 
         Command greyScaleGreen = new GreyScaleGreenCommand("original", "original-greyscale-green");
 
@@ -202,8 +204,8 @@ public class CommandTests {
 
     @Test
     public void testGreyScaleBlueCommand() throws FileNotFoundException {
-        Image sixbitGreyScaleBlue = ImageUtil.readPPM("sixbit-blue-greyscale.ppm");
-        Image koalaGreyScaleBlue = ImageUtil.readPPM("koala-blue-greyscale.ppm");
+        Image sixbitGreyScaleBlue = ImageUtil.readPPM(sixbitRoot+"sixbit-blue-greyscale.ppm");
+        Image koalaGreyScaleBlue = ImageUtil.readPPM(koalaRoot + "koala-blue-greyscale.ppm");
 
         Command greyScaleBlue = new GreyScaleBlueCommand("original", "original-greyscale-blue");
 
@@ -216,10 +218,11 @@ public class CommandTests {
     @Test
     public void testLoad() {
 
-        Command load = new LoadCommand("./sixbit.ppm", "sixbit-goat");
+        Command load = new LoadCommand(sixbitRoot+"sixbit.ppm", "sixbit-goat");
 
         load.go(mock);
-        assertEquals(log.toString(), "loaded: sixbit-goat from filepath: ./sixbit.ppm\n");
+        assertEquals(log.toString(), "loaded: sixbit-goat from filepath: ./res/sixbit/sixbit" +
+                ".ppm\n");
     }
 
     @Test

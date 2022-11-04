@@ -76,7 +76,7 @@ public class ModelTests {
 
     @Test
     public void testLoad() throws FileNotFoundException {
-        model.loadImage("test.ppm", "test");
+        model.loadImage("./res/sixbit/test.ppm", "test");
         Image image = model.getImage("test");
 
         assertEquals(black, image.getPixel(0, 0));

@@ -193,7 +193,7 @@ public class RGBImageTests {
 
     @Test
     public void testImageUtilReadPPM() throws FileNotFoundException {
-        Image image = ImageUtil.readPPM("test.ppm");
+        Image image = ImageUtil.readPPM("./res/sixbit/test.ppm");
 
         assertEquals(black, image.getPixel(0, 0));
         assertEquals(grey, image.getPixel(1, 0));
