@@ -19,6 +19,11 @@ public class LumaCommand extends AbstractGreyScaleCommand {
     super(imageName, newName);
   }
 
+  /**
+   * Returns the luma of the given pixel, which is used in the greyscale image.
+   * @param pixel the pixel that is used to determine the value
+   * @return the luma of the given pixel
+   */
   @Override
   protected int getValue(Pixel pixel) {
     return (int) (0.2126 * pixel.getRed() + 0.7152 * pixel.getGreen() + 0.0722 * pixel.getBlue());

@@ -49,6 +49,13 @@ public abstract class AbstractGreyScaleCommand implements Command {
     model.saveImageToModel(image, newName);
   }
 
+  /**
+   * Gets a value to use for each pixel in the greyscale image, as such, returned values will become
+   * the red, green, and blue values for each pixel. The value returned varies depending on the
+   * subclass.
+   * @param pixel the pixel that is used to determine the value
+   * @return a value representing the RGB values of a greyscale pixel
+   */
   protected abstract int getValue(Pixel pixel);
 }
 

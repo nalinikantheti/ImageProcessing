@@ -17,6 +17,11 @@ public class GreyScaleBlueCommand extends AbstractGreyScaleCommand {
     super(imageName, newName);
   }
 
+  /**
+   * Returns the blue component of the given pixel, which is used in the greyscale image.
+   * @param pixel the pixel that is used to determine the value
+   * @return the blue component of the given pixel
+   */
   @Override
   protected int getValue(Pixel pixel) {
     return pixel.getBlue();
