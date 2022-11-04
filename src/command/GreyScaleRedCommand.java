@@ -9,19 +9,19 @@ import image.Pixel;
  */
 public class GreyScaleRedCommand extends AbstractGreyScaleCommand {
 
-    /**
-     * a constructor for a GreyScaleRedCommand using two arguments.
-     *
-     * @param imageName the name of the image to be processed.
-     * @param newName   the name the processed image will be saved as.
-     */
-    public GreyScaleRedCommand(String imageName, String newName) {
-        super(imageName, newName);
-    }
+  /**
+   * a constructor for a GreyScaleRedCommand using two arguments.
+   *
+   * @param imageName the name of the image to be processed.
+   * @param newName   the name the processed image will be saved as.
+   */
+  public GreyScaleRedCommand(String imageName, String newName) {
+    super(imageName, newName);
+  }
 
-    @Override
-    protected int getValue(Pixel pixel) {
-        return pixel.getRed();
-    }
+  @Override
+  protected int getValue(Pixel pixel) {
+    return pixel.getRed();
+  }
 }
 
