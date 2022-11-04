@@ -44,7 +44,7 @@ factories as they were very similar across all of them. The bulk of our testing
 was for the commands themselves and the command factories, since they stored a 
 large part of the functionality of the model and controller, respectively.
 
-A Script of commands our program accepts includes:
+Documentation for the commands our program accepts:
 
 “Load”  <filepath>  <name>: to load an image; “load” must be followed by the 
 location of the image to be loaded, and then the name the loaded image will be 
@@ -94,8 +94,9 @@ grayscaled and the name the grayscaled image will be saved to.
 value; “GreyScaleBlue” must be followed by the name of the image to be 
 grayscaled and the name the grayscaled image will be saved to. 
 
+In order to run the script provided, simply type it into the console when the program runs.
+
 IMAGE CITATIONS:
 
-Koala: assignment 4 canvas page
-Blerner: https://www.ccs.neu.edu/home/blerner/personal.html
+Koala: assignment 4 canvas page; starter code
 sixbit: created ourselves using paint.net

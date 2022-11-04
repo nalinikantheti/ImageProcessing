@@ -1,0 +1,25 @@
+# Script:
+
+#load test.ppm and call it 'sixbit'
+load ./res/sixbit/test.ppm sixbit
+
+#brighten sixbit by value of 10
+brighten sixbit 10 sixbit-bright
+
+#darken sixbit by 30
+darken sixbit 30 sixbit-dark
+
+#flip darkened sixbit horizontally
+flipHorizontal sixbit-dark sixbit-dark-flip-horizontal
+
+#flip sixbit vertically
+flipVertical sixbit sixbit-flip-vertical
+
+#create a greyscale of brightened sixbit using only red component
+greyscalered sixbit-bright sixbit-bright-greyscale-red
+
+#save brightened sixbit to filesystem
+save sixbit res/sixbit/sixbit-bright.ppm
+
+#save darkened sixbit to filesystem
+save res/sixbit/sixbit-dark.ppm sixbit
