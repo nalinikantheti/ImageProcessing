@@ -70,47 +70,12 @@ public class ModelTests {
     assertThrows(IllegalArgumentException.class, () -> model.getImage("red"));
     assertThrows(IllegalArgumentException.class, () -> model.removeImage("red"));
 
-    assertThrows(IllegalArgumentException.class, () -> model.saveImageToFileSystem("red",
-            "bread.ppm"));
-    assertThrows(FileNotFoundException.class, () -> model.loadImage("nonexistent.ppm",
-            "bad"));
+//    assertThrows(IllegalArgumentException.class, () -> model.saveImageToFileSystem("red",
+//            "bread.ppm"));
+
   }
 
-  @Test
-  public void testLoad() throws FileNotFoundException {
-    model.loadImage("./res/sixbit/test.ppm", "test");
-    Image image = model.getImage("test");
 
-    assertEquals(black, image.getPixel(0, 0));
-    assertEquals(grey, image.getPixel(1, 0));
-    assertEquals(white, image.getPixel(2, 0));
-    assertEquals(red, image.getPixel(0, 1));
-    assertEquals(green, image.getPixel(1, 1));
-    assertEquals(blue, image.getPixel(2, 1));
-  }
 
-  @Test
-  public void testSaveToFileSystem() throws IOException {
-    Image image = new RGBImage(2, 2);
-    image.setPixel(blue, 0, 1);
 
-    Path path = Paths.get("blue.ppm");
-
-    assertTrue(Files.notExists(path));
-
-    model.saveImageToModel(image, "blue");
-    model.saveImageToFileSystem("blue", "blue.ppm");
-
-    assertTrue(Files.exists(path));
-
-    model.loadImage("blue.ppm", "blue2");
-    Image newImage = model.getImage("blue2");
-
-    assertEquals(black, newImage.getPixel(0, 0));
-    assertEquals(blue, newImage.getPixel(0, 1));
-    assertEquals(black, newImage.getPixel(1, 0));
-    assertEquals(black, newImage.getPixel(1, 1));
-
-    Files.delete(path);
-  }
 }

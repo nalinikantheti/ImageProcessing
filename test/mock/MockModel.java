@@ -46,18 +46,6 @@ public class MockModel implements ImageProcessorModel {
   /**
    * Logs that this method was called with the given arguments.
    *
-   * @param name     the name of the image to save
-   * @param filepath the filepath of the image to save
-   * @throws IOException if writing to appendable fails.
-   */
-  @Override
-  public void saveImageToFileSystem(String name, String filepath) throws IOException {
-    log.append("saved " + name + " to filepath: " + filepath + "\n");
-  }
-
-  /**
-   * Logs that this method was called with the given arguments.
-   *
    * @param image the image to store
    * @param name  the name to give this image
    */
@@ -65,18 +53,6 @@ public class MockModel implements ImageProcessorModel {
   public void saveImageToModel(Image image, String name) {
     log.append("saved " + name + " to model" + "\n");
     this.lastSavedImage = image;
-  }
-
-  /**
-   * Logs that this method was called with the given arguments.
-   *
-   * @param filepath the filepath to read the image from
-   * @param name     the name to give the image
-   * @throws FileNotFoundException never
-   */
-  @Override
-  public void loadImage(String filepath, String name) throws FileNotFoundException {
-    log.append("loaded: " + name + " from filepath: " + filepath + "\n");
   }
 
   /**

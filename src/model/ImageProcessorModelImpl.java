@@ -33,36 +33,6 @@ public class ImageProcessorModelImpl implements ImageProcessorModel {
   }
 
   /**
-   * Retrieves an Image using a given name, constructs a portable pixel map
-   * from it using a StringBuilder, and then saves it to a given filepath.
-   *
-   * @param name     name of image to be saved.
-   * @param filepath location of image to be saved to.
-   * @throws IOException if writing to file fails.
-   */
-  @Override
-  public void saveImageToFileSystem(String name, String filepath) throws IOException {
-    Image image = this.getImage(name);
-    StringBuilder ppm = new StringBuilder();
-    ppm.append("P3\n");
-    ppm.append(image.getWidth() + " " + image.getHeight() + "\n");
-    ppm.append("255\n"); //TODO fix it??
-    for (int y = 0; y < image.getHeight(); y++) {
-      for (int x = 0; x < image.getWidth(); x++) {
-        Pixel pix = image.getPixel(x, y);
-        ppm.append(pix.getRed() + "\n");
-        ppm.append(pix.getGreen() + "\n");
-        ppm.append(pix.getBlue() + "\n");
-      }
-    }
-
-    Path file = Paths.get(filepath);
-    Files.writeString(file, ppm);
-
-
-  }
-
-  /**
    * Saves a given image to this model by adding it to this
    * Hashmap<\String,Image>, and ensures given image is not null.
    *
@@ -75,18 +45,7 @@ public class ImageProcessorModelImpl implements ImageProcessorModel {
     imageNames.put(name, image);
   }
 
-  /**
-   * Loads image of given name from given filepath.
-   *
-   * @param filepath location of image to be loaded.
-   * @param name     name of image to be loaded.
-   * @throws FileNotFoundException if given file cannot be found.
-   */
-  @Override
-  public void loadImage(String filepath, String name) throws FileNotFoundException {
-    Image loadImage = ImageUtil.readPPM(filepath);
-    this.saveImageToModel(loadImage, name);
-  }
+
 
   /**
    * Ensures given image exists before
@@ -109,6 +68,7 @@ public class ImageProcessorModelImpl implements ImageProcessorModel {
    */
   @Override
   public Image getImage(String name) {
+    //TODO: write test to check model is saving clones
     ensureImageExists(name);
     return imageNames.get(name);
   }

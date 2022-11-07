@@ -4,11 +4,11 @@ import java.util.Optional;
 import java.util.Scanner;
 
 import command.Command;
-import command.LoadCommand;
+import command.LoadPPMCommand;
 import view.ImageProcessorView;
 
 /**
- * A factory for creating {@link LoadCommand}s.
+ * A factory for creating {@link LoadPPMCommand}s.
  */
 public class LoadFactory extends AbstractTwoStringFactory {
   /**
@@ -25,7 +25,7 @@ public class LoadFactory extends AbstractTwoStringFactory {
   }
 
   /**
-   * Creates a new {@link LoadCommand} that loads an image from a filepath
+   * Creates a new {@link LoadPPMCommand} that loads an image from a filepath
    * (indicated by the first argument) and saves
    * it to the model using a name provided by the second argument.
    *
@@ -35,6 +35,6 @@ public class LoadFactory extends AbstractTwoStringFactory {
    */
   @Override
   protected Optional<Command> makeCommand(Optional<String> s1, Optional<String> s2) {
-    return Optional.of(new LoadCommand(s1.get(), s2.get()));
+    return Optional.of(new LoadPPMCommand(s1.get(), s2.get()));
   }
 }

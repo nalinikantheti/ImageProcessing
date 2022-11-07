@@ -9,7 +9,7 @@ import image.Image;
  */
 public interface ImageProcessorModelState {
   /**
-   * Gets the image with the given name stored in the model.
+   * Returns a clone of the Image with the given name stored in the model.
    *
    * @param name the name of the image
    * @return an image

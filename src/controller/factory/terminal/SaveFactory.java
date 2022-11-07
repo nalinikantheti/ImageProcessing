@@ -4,11 +4,11 @@ import java.util.Optional;
 import java.util.Scanner;
 
 import command.Command;
-import command.SaveCommand;
+import command.SavePPMCommand;
 import view.ImageProcessorView;
 
 /**
- * A factory for creating {@link SaveCommand}s.
+ * A factory for creating {@link SavePPMCommand}s.
  */
 public class SaveFactory extends AbstractTwoStringFactory {
   /**
@@ -25,7 +25,7 @@ public class SaveFactory extends AbstractTwoStringFactory {
   }
 
   /**
-   * Creates a new {@link SaveCommand} that takes in a filepath and an image
+   * Creates a new {@link SavePPMCommand} that takes in a filepath and an image
    * name and saves the image to that filepath.
    *
    * @param s1 the filepath
@@ -34,6 +34,6 @@ public class SaveFactory extends AbstractTwoStringFactory {
    */
   @Override
   protected Optional<Command> makeCommand(Optional<String> s1, Optional<String> s2) {
-    return Optional.of(new SaveCommand(s1.get(), s2.get()));
+    return Optional.of(new SavePPMCommand(s1.get(), s2.get()));
   }
 }
