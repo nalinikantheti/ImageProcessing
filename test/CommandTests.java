@@ -1,3 +1,4 @@
+import command.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -7,21 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import command.BrightenCommand;
-import command.Command;
-import command.DarkenCommand;
-import command.FlipHorizontalCommand;
-import command.FlipVerticalCommand;
-import command.GreyScaleBlueCommand;
-import command.GreyScaleGreenCommand;
-import command.GreyScaleRedCommand;
-import command.IntensityCommand;
-import command.LoadPPMCommand;
-import command.LumaCommand;
-import command.ReadImageIOCommand;
-import command.SaveImageIOCommand;
-import command.SavePPMCommand;
-import command.ValueCommand;
 import image.Image;
 import image.Pixel;
 import image.RGBImage;
@@ -38,6 +24,7 @@ import static org.junit.Assert.assertTrue;
 public class CommandTests {
   private final String sixbitRoot = "./res/sixbit/";
   private final String koalaRoot = "./res/koala/";
+  private final TestUtils testUtils = new TestUtils();
   private StringBuilder log;
   private StringBuilder log2;
   private MockModel mock;
@@ -58,19 +45,8 @@ public class CommandTests {
   }
 
   private void assertImageEquals(Image expected, Image actual) {
-    assertEquals(expected.getWidth(), actual.getWidth());
-    assertEquals(expected.getHeight(), actual.getHeight());
 
-    for (int x = 0; x < expected.getWidth(); x++) {
-      for (int y = 0; y < expected.getHeight(); y++) {
-        //assertEquals(expected.getPixel(x, y), actual.getPixel(x, y));
-        if (!expected.getPixel(x, y).equals(actual.getPixel(x, y))) {
-          throw new AssertionError("[" + x + ", " + y + "]: "
-                  + "expected: " + expected.getPixel(x, y).toString() + "; "
-                  + "actual: " + actual.getPixel(x, y).toString());
-        }
-      }
-    }
+    testUtils.assertImageEquals(expected, actual);
   }
 
   private void assertLog(StringBuilder log, String name, String newName) {
@@ -84,14 +60,14 @@ public class CommandTests {
 
   @Test
   public void testAssertImageEquals() throws FileNotFoundException {
-    assertThrows(AssertionError.class, () -> assertImageEquals(sixbit, koala));
-    assertImageEquals(sixbit, ImageUtil.readPPM(sixbitRoot + "test.ppm"));
+    assertThrows(AssertionError.class, () -> testUtils.assertImageEquals(sixbit, koala));
+    testUtils.assertImageEquals(sixbit, ImageUtil.readPPM(sixbitRoot + "test.ppm"));
   }
 
 
   private void runTest(Command command, Image expectedImage, MockModel mock) {
     command.run(mock);
-    assertImageEquals(expectedImage, mock.getLastSavedImage());
+    testUtils.assertImageEquals(expectedImage, mock.getLastSavedImage());
   }
 
   @Test
@@ -244,7 +220,7 @@ public class CommandTests {
 
     load.run(mock);
     assertEquals(log.toString(), "saved sixbit-goat to model\n");
-    assertImageEquals(sixbit, mock.getLastSavedImage());
+    testUtils.assertImageEquals(sixbit, mock.getLastSavedImage());
   }
 
   @Test
@@ -266,13 +242,13 @@ public class CommandTests {
     Command readPNG = new ReadImageIOCommand(sixbitRoot + "sixbit.png", "sixbitp");
     readPNG.run(mock);
     assertEquals("saved sixbit to model\nsaved sixbitp to model\n", log.toString());
-    assertImageEquals(sixbit, mock.getLastSavedImage());
+    testUtils.assertImageEquals(sixbit, mock.getLastSavedImage());
 
     Command readBMP = new ReadImageIOCommand(sixbitRoot + "sixbit.bmp", "sixbitb");
     readBMP.run(mock);
     assertEquals(log.toString(), "saved sixbit to model\nsaved sixbitp to model\nsaved " +
             "sixbitb to" + " model\n");
-    assertImageEquals(sixbit, mock.getLastSavedImage());
+    testUtils.assertImageEquals(sixbit, mock.getLastSavedImage());
 
 
   }
@@ -303,12 +279,12 @@ public class CommandTests {
     log2.setLength(0);
     savePNG.run(mock2);
     readPNG.run(mock2);
-    assertImageEquals(sixbit, mock2.getLastSavedImage());
+    testUtils.assertImageEquals(sixbit, mock2.getLastSavedImage());
     assertEquals(log2.toString(), "retrieved: sixbit\nsaved sixbit to model\n");
     log2.setLength(0);
     saveBMP.run(mock2);
     readBMP.run(mock2);
-    assertImageEquals(sixbit, mock2.getLastSavedImage());
+    testUtils.assertImageEquals(sixbit, mock2.getLastSavedImage());
     assertEquals(log2.toString(), "retrieved: sixbit\nsaved sixbit to model\n");
 
   }
@@ -377,6 +353,16 @@ public class CommandTests {
     MockModel mock = new MockModel(log);
     LoadPPMCommand load = new LoadPPMCommand("nonexistent.ppm","bad");
     assertThrows(IllegalArgumentException.class, () -> load.run(mock));
+  }
+
+  @Test
+  public void testSepia() throws FileNotFoundException {
+    Image sixbitSepia = ImageUtil.readPPM(sixbitRoot + "sixbit-sepia.ppm");
+
+    Command sepia = new SepiaCommand("original", "original-sepia");
+
+    runTest(sepia, sixbitSepia, mock2);
+    assertLog(log2, "original-sepia");
   }
 
 

@@ -70,7 +70,7 @@ public class ImageProcessorModelImpl implements ImageProcessorModel {
   public Image getImage(String name) {
     //TODO: write test to check model is saving clones
     ensureImageExists(name);
-    return imageNames.get(name);
+    return imageNames.get(name).clone();
   }
 
   /**

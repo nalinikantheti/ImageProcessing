@@ -14,10 +14,7 @@ import image.RGBImage;
 import model.ImageProcessorModel;
 import model.ImageProcessorModelImpl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Tests for {@link ImageProcessorModelImpl}.
@@ -51,7 +48,8 @@ public class ModelTests {
 
     model.saveImageToModel(image, "red");
 
-    assertEquals(image, model.getImage("red"));
+    assertNotEquals(image, model.getImage("red")); //TESTS IT CLONES HAHAHAHAAHAHA
+    TestUtils.assertImageEquals(image, model.getImage("red"));
     Set<String> names = model.getImageNames();
     assertEquals(1, names.size());
     assertTrue(names.contains("red"));

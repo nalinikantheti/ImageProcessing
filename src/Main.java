@@ -1,18 +1,11 @@
+import java.io.IOException;
+import java.io.StringReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 import controller.ImageProcessorTerminalController;
-import controller.factory.terminal.BrightenFactory;
-import controller.factory.terminal.DarkenFactory;
-import controller.factory.terminal.FlipHorizontalFactory;
-import controller.factory.terminal.FlipVerticalFactory;
-import controller.factory.terminal.GreyScaleBlueFactory;
-import controller.factory.terminal.GreyScaleGreenFactory;
-import controller.factory.terminal.GreyScaleRedFactory;
-import controller.factory.terminal.IntensityFactory;
-import controller.factory.terminal.LoadFactory;
-import controller.factory.terminal.LumaFactory;
-import controller.factory.terminal.SaveFactory;
-import controller.factory.terminal.ValueFactory;
+import controller.factory.terminal.*;
 import model.ImageProcessorModelImpl;
 import view.ImageProcessorTextView;
 import view.ImageProcessorView;
@@ -29,6 +22,13 @@ public class Main {
    */
   public static void main(String[] args) {
     Scanner scan = new Scanner(System.in);
+    if(args.length >= 2) {
+      try {
+        scan = new Scanner(new StringReader(Files.readString(Paths.get(args[1]))));
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+    }
     ImageProcessorView view = new ImageProcessorTextView(System.out);
 
     ImageProcessorTerminalController controller = new ImageProcessorTerminalController(
@@ -55,6 +55,9 @@ public class Main {
     controller.registerCommand("flipVertical", new FlipVerticalFactory(view, scan));
     controller.registerCommand("load", new LoadFactory(view, scan));
     controller.registerCommand("save", new SaveFactory(view, scan));
+    controller.registerCommand("blur", new BlurFactory(view, scan));
+    controller.registerCommand("sharpen", new SharpenFactory(view, scan));
+    controller.registerCommand("sepia", new SepiaFactory(view, scan));
 
   }
 }

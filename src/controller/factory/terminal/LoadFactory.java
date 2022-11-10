@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import command.Command;
 import command.LoadPPMCommand;
+import command.ReadImageIOCommand;
 import view.ImageProcessorView;
 
 /**
@@ -35,6 +36,13 @@ public class LoadFactory extends AbstractTwoStringFactory {
    */
   @Override
   protected Optional<Command> makeCommand(Optional<String> s1, Optional<String> s2) {
-    return Optional.of(new LoadPPMCommand(s1.get(), s2.get()));
+    String filepath = s1.get();
+    String imageName = s2.get();
+    String filetype = filepath.substring(filepath.lastIndexOf(".") + 1);
+    if(filetype.equalsIgnoreCase("ppm")) {
+      return Optional.of(new LoadPPMCommand(filepath, imageName));
+    } else {
+      return Optional.of(new ReadImageIOCommand(filepath, imageName));
+    }
   }
 }

@@ -10,7 +10,7 @@ import util.ImageProcessorUtils;
  * using either luma, intensity, value, red, green, or blue values to do so.
  * This command saves the greyscale version as a new file.
  */
-public abstract class AbstractGreyScaleCommand implements Command {
+public abstract class AbstractGreyScaleCommand extends ColorTransformationCommand{
   protected String imageName;
   protected String newName;
 
@@ -22,31 +22,7 @@ public abstract class AbstractGreyScaleCommand implements Command {
    * @param newName   the name the processed image is being saved as
    */
   protected AbstractGreyScaleCommand(String imageName, String newName) {
-    this.imageName = imageName;
-    this.newName = newName;
-  }
-
-  /**
-   * Runs this GreyScaleCommand by retrieving an image using the given model, iterating through
-   * each pixel in the image, and using a value function to determine the new value
-   * for all three rgb values in the pixel.
-   *
-   * @param model model used to retrieve image using given imageName.
-   */
-  @Override
-  public void run(ImageProcessorModel model) {
-    Image image = model.getImage(imageName);
-    for (int y = 0; y < image.getHeight(); y++) {
-      for (int x = 0; x < image.getWidth(); x++) {
-        Pixel old = image.getPixel(x, y);
-        Pixel newPix = ImageProcessorUtils.createValidPixel(getValue(old),
-                getValue(old),
-                getValue(old));
-        image.setPixel(newPix, x, y);
-      }
-    }
-
-    model.saveImageToModel(image, newName);
+    super(imageName, newName);
   }
 
   /**
@@ -57,5 +33,18 @@ public abstract class AbstractGreyScaleCommand implements Command {
    * @return a value representing the RGB values of a greyscale pixel
    */
   protected abstract int getValue(Pixel pixel);
+
+  @Override
+  protected int getRed(Pixel pixel) {
+    return getValue(pixel);
+  }
+  @Override
+  protected int getGreen(Pixel pixel) {
+    return getValue(pixel);
+  }
+  @Override
+  protected int getBlue(Pixel pixel) {
+    return getValue(pixel);
+  }
 }
 
