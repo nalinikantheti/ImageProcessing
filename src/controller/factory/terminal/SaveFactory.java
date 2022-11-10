@@ -25,11 +25,13 @@ public class SaveFactory extends AbstractTwoStringFactory {
 
   /**
    * Creates a new {@link SavePPMCommand} that takes in a filepath and an image
-   * name and saves the image to that filepath.
+   * name and saves the image to that filepath. If the file extension of the first
+   * argument is a ppm, it will create a SavePPMCommand, and a SaveImageIOCommand
+   * otherwise.
    *
    * @param s1 the filepath
    * @param s2 the name of the image to save to the filesystem
-   * @return an Optional of a new Save Command containing a valid command
+   * @return an Optional of a new Save Command containing a valid command.
    */
   @Override
   protected Optional<Command> makeCommand(Optional<String> s1, Optional<String> s2) {

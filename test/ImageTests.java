@@ -5,6 +5,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Tests for {@link Image}.
+ */
 public abstract class ImageTests {
     protected Pixel black;
     protected Pixel grey;
@@ -88,5 +91,11 @@ public abstract class ImageTests {
         assertThrows(IllegalArgumentException.class, () -> image.setPixel(null, 1, 2));
     }
 
+    /**
+     * Gets an image to test on.
+     * @param width width of image to be tested.
+     * @param height height of image to be tested.
+     * @return an Image.
+     */
     protected abstract Image getImage(int width, int height);
 }

@@ -8,16 +8,16 @@ import util.ImageProcessorUtils;
 import util.ImageUtil;
 
 /**
- * A command that loads an image from a given filepath and saves it to a given string.
+ * A command that loads a PPM image from a given filepath and saves it to a given name.
  */
 public class LoadPPMCommand implements Command {
   private String filepath;
   private String newName;
 
   /**
-   * A Constructor for a LoadCommand with two arguments.
+   * A Constructor for a LoadPPMCommand with two arguments.
    *
-   * @param filepath the filepath the image will be loaded from.
+   * @param filepath the filepath the PPM image will be loaded from.
    * @param newName  the name by which the loaded image will be saved as.
    */
   public LoadPPMCommand(String filepath, String newName) {
@@ -27,7 +27,7 @@ public class LoadPPMCommand implements Command {
 
 
   /**
-   * Loads an image from the filesystem into the model with the given name.
+   * Loads a PPM image from the filesystem into the model with the given name.
    * Loads image of given name from given filepath.
    *
    * @param model model used to retrieve image from filepath.

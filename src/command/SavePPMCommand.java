@@ -10,14 +10,14 @@ import image.Pixel;
 import model.ImageProcessorModel;
 
 /**
- * A command that saves a given image to a filesystem using a given filepath.
+ * A command that saves a given image as a PPM to a filesystem using a given filepath.
  */
 public class SavePPMCommand implements Command {
   private String filepath;
   private String name;
 
   /**
-   * A constructor for a SaveCommand that uses two arguments.
+   * A constructor for a SavePPMCommand that uses two arguments.
    *
    * @param filepath the filepath the image is being saved to.
    * @param name     the name of the image being saved.
@@ -43,7 +43,7 @@ public class SavePPMCommand implements Command {
 
 
   /**
-   * Saves the image with the given name to the filesystem.
+   * Saves the image as a PPM with the given name to the filesystem.
    * Retrieves an Image using a given name, constructs a portable pixel map
    * from it using a StringBuilder, and then saves it to a given filepath.
    *

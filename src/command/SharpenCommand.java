@@ -1,10 +1,22 @@
 package command;
 
+
+/**
+ * A Command that sharpens an image.
+ */
 public class SharpenCommand extends FilterCommand{
+    /**
+     * A Constructor for a SharpenCommand with two arguments.
+     * @param imageName the name of the image to be sharpened.
+     * @param newName the name the sharpened image will be saved to.
+     */
     public SharpenCommand(String imageName, String newName) {
         super(imageName, newName);
     }
 
+    /**
+     * provides the filter that will blur an image.
+     */
     @Override
     protected double[][] makeFilter() {
         //THESE ARE COLUMNS!!!!!

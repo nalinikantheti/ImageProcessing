@@ -27,8 +27,9 @@ public class LoadFactory extends AbstractTwoStringFactory {
 
   /**
    * Creates a new {@link LoadPPMCommand} that loads an image from a filepath
-   * (indicated by the first argument) and saves
-   * it to the model using a name provided by the second argument.
+   * (indicated by the first argument) and saves it to the model using a name
+   * provided by the second argument. If the file extension is a PPM, it will
+   * create a LoadPPMCommand, and a ReadImageIOCommand otherwise.
    *
    * @param s1 the filepath of the image to load
    * @param s2 the name of the image in the model

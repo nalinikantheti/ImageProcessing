@@ -9,11 +9,19 @@ import java.util.function.Function;
 import static util.ImageProcessorUtils.createValidPixel;
 import static util.ImageProcessorUtils.ensureNotNull;
 
+/**
+ * A Command that applies a given filter, or a double array of doubles to each pixel of an image.
+ */
 public abstract class FilterCommand implements Command {
     protected final String imageName;
     protected final String newName;
     protected final double[][] filter;
 
+    /**
+     * A Constructor for a Filter Command with two arguments.
+     * @param imageName the name of the image the filter will be applied to.
+     * @param newName the name the processed image will be saved to.
+     */
     public FilterCommand(String imageName, String newName) {
         this.imageName = imageName;
         this.newName = newName;
@@ -22,6 +30,10 @@ public abstract class FilterCommand implements Command {
         ensureOddSquare(filter);
     }
 
+    /**
+     * Runs this FilterCommand by applying a given filter to each pixel of a given image.
+     * @param model model used to retrieve image for command to then process.
+     */
     @Override
     public void run(ImageProcessorModel model) {
         Image image = model.getImage(imageName);
@@ -34,8 +46,16 @@ public abstract class FilterCommand implements Command {
         model.saveImageToModel(newImage, newName);
     }
 
+    /**
+     * returns the filter that will be applied to this image.
+     * @return a double array of doubles for the filter.
+     */
     protected abstract double[][] makeFilter();
 
+    /**
+     * ensures the given filter is of odd length and square shape.
+     * @param filter the filter that is checked to be well formed.
+     */
     protected void ensureOddSquare(double[][] filter) {
         for (int x = 0; x < filter.length; x += 1) {
             if (filter.length != filter[x].length || filter.length % 2 == 0) {
@@ -60,6 +80,12 @@ public abstract class FilterCommand implements Command {
         return ox >= 0 && ox < image.getWidth() && oy >= 0 && oy < image.getHeight();
     }
 
+    /**
+     * produces a double array of integers of the specified size with all black pixels.
+     * @param width the width of the array.
+     * @param height the height of the array.
+     * @return an array of black pixels.
+     */
     protected int[][] make2dArray(int width, int height) {
         int[][] arr = new int[width][];
         for (int x = 0; x < width; x += 1) {

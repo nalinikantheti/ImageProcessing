@@ -1,20 +1,24 @@
 package command;
 
-import image.Image;
-import image.Pixel;
-import model.ImageProcessorModel;
-
-import java.util.function.Function;
-
-import static util.ImageProcessorUtils.ensureNotNull;
-
+/**
+ * A Command that blurs a given image.
+ */
 public class BlurCommand extends FilterCommand {
 
+    /**
+     * A constructor for a blurCommand with two arguments.
+     * @param imageName the name of the image to be blurred.
+     * @param newName the name the blurred image will be saved as.
+     */
     public BlurCommand(String imageName, String newName) {
         super(imageName, newName);
 
     }
 
+    /**
+     * provides a filter that will sharpen an image.
+     * @return the filter to sharpen an image.
+     */
     @Override
     protected double[][] makeFilter() {
         //THESE ARE COLUMNS!!!!!!
