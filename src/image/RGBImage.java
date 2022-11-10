@@ -7,7 +7,7 @@ import static util.ImageProcessorUtils.ensureNotNull;
 /**
  * An Image made up pixels with red, green, and blue values.
  */
-public class RGBImage implements Image {
+public class RGBImage extends AbstractImage {
   private ArrayList<ArrayList<Pixel>> pixels;
 
   /**
@@ -114,11 +114,4 @@ public class RGBImage implements Image {
   public Image clone() {
     return new RGBImage(this.pixels);
   }
-
-  private void ensureInBounds(int x, int y) {
-    if (x < 0 || x >= this.getWidth() || y < 0 || y >= this.getHeight()) {
-      throw new IllegalArgumentException("Coordinates out of bounds.");
-    }
-  }
-
 }

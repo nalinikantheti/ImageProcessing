@@ -17,41 +17,8 @@ import static org.junit.Assert.assertTrue;
 /**
  * Tests for {@link RGBImageTests}.
  */
-public class RGBImageTests {
-  private Pixel black;
-  private Pixel grey;
-  private Pixel white;
-  private Pixel red;
-  private Pixel green;
-  private Pixel blue;
+public class RGBImageTests extends ImageTests {
 
-
-  @Before
-  public void setup() {
-    black = new Pixel(0, 0, 0);
-    grey = new Pixel(127, 127, 127);
-    white = new Pixel(255, 255, 255);
-    red = new Pixel(255, 0, 0);
-    green = new Pixel(0, 255, 0);
-    blue = new Pixel(0, 0, 255);
-  }
-
-  @Test
-  public void testMain() {
-    Image image = new RGBImage(2, 3);
-    Pixel expected = new Pixel(0, 0, 0);
-    assertEquals(2, image.getWidth());
-    assertEquals(3, image.getHeight());
-    assertEquals(expected, image.getPixel(0, 0));
-    assertEquals(expected, image.getPixel(0, 1));
-    assertEquals(expected, image.getPixel(0, 2));
-    assertEquals(expected, image.getPixel(1, 0));
-    assertEquals(expected, image.getPixel(1, 1));
-    assertEquals(expected, image.getPixel(1, 2));
-
-    image.setPixel(new Pixel(255, 127, 0), 1, 2);
-    assertEquals(new Pixel(255, 127, 0), image.getPixel(1, 2));
-  }
 
   @Test
   public void testPixelEquals() {
@@ -126,46 +93,6 @@ public class RGBImageTests {
   }
 
   @Test
-  public void testClone() {
-    Image oldImage = new RGBImage(3, 2);
-    oldImage.setPixel(new Pixel(0, 0, 255), 2, 1);
-    Image newImage = oldImage.clone();
-
-    for (int x = 0; x < oldImage.getWidth(); x += 1) {
-      for (int y = 0; y < oldImage.getHeight(); y += 1) {
-        assertEquals(oldImage.getPixel(x, y), newImage.getPixel(x, y));
-      }
-    }
-
-    assertEquals(3, newImage.getWidth());
-    assertEquals(2, newImage.getHeight());
-
-    oldImage.setPixel(new Pixel(255, 0, 0), 1, 1);
-
-    assertFalse(oldImage.getPixel(1, 1).equals(newImage.getPixel(1, 1)));
-  }
-
-  @Test
-  public void testImageThrows() {
-    Image image = new RGBImage(2, 3);
-
-    assertThrows(IllegalArgumentException.class, () -> image.getPixel(1, 3));
-    assertThrows(IllegalArgumentException.class, () -> image.getPixel(5, 2));
-    assertThrows(IllegalArgumentException.class, () -> image.getPixel(-3, 2));
-    assertThrows(IllegalArgumentException.class, () -> image.getPixel(1, -300));
-    assertThrows(IllegalArgumentException.class, () -> image.getPixel(2, 2));
-
-    Pixel pix = new Pixel(255, 255, 255);
-    assertThrows(IllegalArgumentException.class, () -> image.setPixel(pix, 1, 3));
-    assertThrows(IllegalArgumentException.class, () -> image.setPixel(pix, 5, 2));
-    assertThrows(IllegalArgumentException.class, () -> image.setPixel(pix, -3, 2));
-    assertThrows(IllegalArgumentException.class, () -> image.setPixel(pix, 1, -300));
-    assertThrows(IllegalArgumentException.class, () -> image.setPixel(pix, 2, 2));
-
-    assertThrows(IllegalArgumentException.class, () -> image.setPixel(null, 1, 2));
-  }
-
-  @Test
   public void testPixelThrows() {
     assertThrows(IllegalArgumentException.class, () -> new Pixel(-3, 128, 233));
     assertThrows(IllegalArgumentException.class, () -> new Pixel(0, -499, 233));
@@ -189,4 +116,8 @@ public class RGBImageTests {
   }
 
 
+  @Override
+  protected Image getImage(int width, int height) {
+    return new RGBImage(width, height);
+  }
 }

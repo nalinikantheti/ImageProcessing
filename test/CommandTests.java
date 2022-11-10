@@ -249,56 +249,76 @@ public class CommandTests {
 
   @Test
   public void testSavePPMCommand() {
-    Command save = new SavePPMCommand("./C:", "sixbit");
+    Command save = new SavePPMCommand(sixbitRoot+"/savePPM.ppm", "sixbit");
 
     save.run(mock);
     assertEquals(log.toString(), "retrieved: sixbit\n");
   }
 
   @Test
-  public void readImageIOCommand(){
+  public void readImageIOCommand() throws FileNotFoundException {
     Command readJPG = new ReadImageIOCommand(sixbitRoot + "sixbit.jpg", "sixbit");
+    Image realJPG = ImageUtil.readPPM(sixbitRoot + "sixbit.jpg.ppm");
     readJPG.run(mock);
     assertEquals(log.toString(), "saved sixbit to model\n");
-    assertImageEquals(sixbit, mock.getLastSavedImage());
+//    TODO assertImageEquals(realJPG, mock.getLastSavedImage());
 
     Command readPNG = new ReadImageIOCommand(sixbitRoot + "sixbit.png", "sixbitp");
     readPNG.run(mock);
-    assertEquals(log.toString(), "saved sixbit to model\n");
+    assertEquals("saved sixbit to model\nsaved sixbitp to model\n", log.toString());
     assertImageEquals(sixbit, mock.getLastSavedImage());
 
     Command readBMP = new ReadImageIOCommand(sixbitRoot + "sixbit.bmp", "sixbitb");
     readBMP.run(mock);
-    assertEquals(log.toString(), "saved sixbit to model\n");
+    assertEquals(log.toString(), "saved sixbit to model\nsaved sixbitp to model\nsaved " +
+            "sixbitb to" + " model\n");
     assertImageEquals(sixbit, mock.getLastSavedImage());
 
+
+  }
+  @Test
+  public void readImageIOThrowsUndread() {
+    assertThrows(IllegalArgumentException.class, () -> {
+      Command readJPG = new ReadImageIOCommand(sixbitRoot + "sixbit.jpg.ppm", "sixbit");
+      readJPG.run(mock);
+    });
 
   }
 
   @Test
   public void testSaveImageIOCommand() {
-    Command readJPG = new ReadImageIOCommand("sixbit.jpg", "sixbit");
-    Command readPNG = new ReadImageIOCommand("sixbit.jpg", "sixbit");
-    Command readBMP = new ReadImageIOCommand("sixbit.jpg", "sixbit");
+    Command readJPG = new ReadImageIOCommand(sixbitRoot + "sixbitmod.jpg", "sixbit");
+    Command readPNG = new ReadImageIOCommand(sixbitRoot + "sixbitmod.png", "sixbit");
+    Command readBMP = new ReadImageIOCommand(sixbitRoot + "sixbitmod.bmp", "sixbit");
 
-    Command saveJPG = new SaveImageIOCommand("sixbit.jpg", "sixbit", "jpg");
-    Command savePNG = new SaveImageIOCommand("sixbit.png", "sixbit", "png");
-    Command saveBMP = new SaveImageIOCommand("sixbit.bmp", "sixbit", "bmp");
+    Command saveJPG = new SaveImageIOCommand(sixbitRoot + "sixbitmod.jpg", "sixbit", "jpg");
+    Command savePNG = new SaveImageIOCommand(sixbitRoot + "sixbitmod.png", "sixbit", "png");
+    Command saveBMP = new SaveImageIOCommand(sixbitRoot + "sixbitmod.bmp", "sixbit", "bmp");
 
 
-    saveJPG.run(mock);
-    readJPG.run(mock);
-    assertImageEquals(sixbit, mock.getLastSavedImage());
-    assertEquals(log.toString(), "retrieved: sixbit\n");
-    savePNG.run(mock);
-    readPNG.run(mock);
-    assertImageEquals(sixbit, mock.getLastSavedImage());
-    assertEquals(log.toString(), "retrieved: sixbit\n");
-    saveBMP.run(mock);
-    readBMP.run(mock);
-    assertImageEquals(sixbit, mock.getLastSavedImage());
-    assertEquals(log.toString(), "retrieved: sixbit\n");
+    saveJPG.run(mock2);
+    readJPG.run(mock2);
+//    assertImageEquals(sixbit, mock2.getLastSavedImage());
+    assertEquals(log2.toString(), "retrieved: sixbit\nsaved sixbit to model\n");
+    log2.setLength(0);
+    savePNG.run(mock2);
+    readPNG.run(mock2);
+    assertImageEquals(sixbit, mock2.getLastSavedImage());
+    assertEquals(log2.toString(), "retrieved: sixbit\nsaved sixbit to model\n");
+    log2.setLength(0);
+    saveBMP.run(mock2);
+    readBMP.run(mock2);
+    assertImageEquals(sixbit, mock2.getLastSavedImage());
+    assertEquals(log2.toString(), "retrieved: sixbit\nsaved sixbit to model\n");
 
+  }
+  @Test
+  public void testSaveImageIOThrows() {
+    assertThrows(IllegalArgumentException.class, () -> {
+      Command saveJPG = new SaveImageIOCommand(sixbitRoot + "sixbitmod.jpg", "sixbit",
+              "oweifjwioe");
+      saveJPG.run(mock);
+    });
   }
 
   @Test

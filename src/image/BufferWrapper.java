@@ -4,20 +4,26 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
 
-public class BufferWrapper implements Image{
+import static util.ImageProcessorUtils.ensureNotNull;
+
+public class BufferWrapper extends AbstractImage{
   BufferedImage buffer;
 
   public BufferWrapper(BufferedImage buffer) {
+    ensureNotNull(buffer, "Buffer cannot be null.");
     this.buffer = buffer;
   }
 
   @Override
   public void setPixel(Pixel pix, int x, int y) {
+    ensureInBounds(x,y);
+    ensureNotNull(pix, "Pixel cannot be null.");
     buffer.setRGB(x,y, this.pixToRGB(pix));
   }
 
   @Override
   public Pixel getPixel(int x, int y) {
+    ensureInBounds(x,y);
     int rgb = buffer.getRGB(x,y);
     int red = (rgb >> 16) & 0xFF;
     int green = (rgb >> 8) & 0xFF;
@@ -37,7 +43,6 @@ public class BufferWrapper implements Image{
 
   @Override
   public Image clone() {
-    //TODO: test!
     ColorModel cm = buffer.getColorModel();
     boolean isAlphaPremutiplied = cm.isAlphaPremultiplied();
     WritableRaster raster = buffer.copyData(buffer.getRaster().createCompatibleWritableRaster());
@@ -47,6 +52,6 @@ public class BufferWrapper implements Image{
 
 
   private int pixToRGB(Pixel pix){
-    return pix.getRed() << 16 + pix.getGreen() << 8 + pix.getBlue();
+    return pix.getRed() << 16 | pix.getGreen() << 8 | pix.getBlue();
   }
 }

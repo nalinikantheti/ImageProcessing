@@ -9,6 +9,8 @@ import javax.imageio.ImageIO;
 import image.BufferWrapper;
 import model.ImageProcessorModel;
 
+import static util.ImageProcessorUtils.ensureNotNull;
+
 public class ReadImageIOCommand implements Command{
   private String filepath;
   private String name;
@@ -23,6 +25,7 @@ public class ReadImageIOCommand implements Command{
     BufferedImage image = null;
     try {
       image = ImageIO.read(new File(filepath));
+      ensureNotNull(image, "Could not read image.");
     } catch (IOException e) {
       throw new IllegalStateException(e);
     }
