@@ -1,0 +1,25 @@
+Assignment 4: Image Processor
+
+
+Documentation for the commands our program accepts:
+
+“load”  <filepath>  <name>: to load an image from the filesystem
+“save”  <filepath> <name> : to save an image to the filesystem 
+“brighten”  <imageName>  <intensity>  <newName> : to brighten an image
+“darken”  <imageName>  <intensity>  <newName> : to darken an image
+“flipHorizontal”  <imageName>   <newName> : to flip an image on its vertical axis
+“flipVertical”  <imageName>   <newName> : to flip an image on its horizontal axis
+“luma”  <imageName>   <newName> : to greyscaled an image by its luma value
+“intensity”  <imageName>   <newName> : to greyscaled an image by its intensity
+“value”  <imageName>   <newName> : to greyscaled an image by its value
+“greyscaleRed”  <imageName>   <newName> : to greyscaled an image by its red value
+“greyscaleGreen”  <imageName>   <newName> : to greyscaled an image by its green value
+“greyscaleBlue”  <imageName>   <newName> : to greyscaled an image by its blue value
+“blur”  <imageName>   <newName> : to blur an image
+“sharpen”  <imageName>   <newName> : to sharpen an image
+“sepia”  <imageName>   <newName> : to sepia an image
+
+Quitting the program can be accomplished by writing "q" or "quit" in place of any command names
+or arguments. These keywords are case-insensitive.
+
+In order to run Script.txt, simply type “-file <filepath of script>" into the command line and run the program.
