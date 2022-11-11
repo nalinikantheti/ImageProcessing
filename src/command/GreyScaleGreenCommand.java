@@ -19,6 +19,7 @@ public class GreyScaleGreenCommand extends AbstractGreyScaleCommand {
 
   /**
    * Returns the green value of the given pixel, which is used in the greyscale image.
+   *
    * @param pixel the pixel that is used to determine the value
    * @return the green value of the given pixel
    */

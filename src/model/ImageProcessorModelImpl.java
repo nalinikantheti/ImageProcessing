@@ -1,16 +1,9 @@
 package model;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Set;
 
 import image.Image;
-import image.Pixel;
-import util.ImageUtil;
 
 import static util.ImageProcessorUtils.ensureNotNull;
 
@@ -44,8 +37,6 @@ public class ImageProcessorModelImpl implements ImageProcessorModel {
     ensureNotNull(image, "Image cannot be null.");
     imageNames.put(name, image);
   }
-
-
 
   /**
    * Ensures given image exists before

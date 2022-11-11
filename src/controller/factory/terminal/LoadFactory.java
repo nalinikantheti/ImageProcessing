@@ -40,7 +40,7 @@ public class LoadFactory extends AbstractTwoStringFactory {
     String filepath = s1.get();
     String imageName = s2.get();
     String filetype = filepath.substring(filepath.lastIndexOf(".") + 1);
-    if(filetype.equalsIgnoreCase("ppm")) {
+    if (filetype.equalsIgnoreCase("ppm")) {
       return Optional.of(new LoadPPMCommand(filepath, imageName));
     } else {
       return Optional.of(new ReadImageIOCommand(filepath, imageName));

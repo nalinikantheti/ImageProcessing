@@ -1,11 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Set;
 
 import image.Image;
@@ -14,24 +9,29 @@ import image.RGBImage;
 import model.ImageProcessorModel;
 import model.ImageProcessorModelImpl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Tests for {@link ImageProcessorModelImpl}.
  */
 public class ModelTests {
   private ImageProcessorModel model;
-  private Pixel black;
 
-  private Pixel grey;
-
-  private Pixel white;
-  private Pixel red;
-  private Pixel green;
-  private Pixel blue;
 
   @Before
   public void setup() {
+    Pixel black;
+
+    Pixel grey;
+
+    Pixel white;
+    Pixel red;
+    Pixel green;
+    Pixel blue;
     model = new ImageProcessorModelImpl();
     black = new Pixel(0, 0, 0);
     grey = new Pixel(127, 127, 127);
@@ -67,13 +67,7 @@ public class ModelTests {
             "red"));
     assertThrows(IllegalArgumentException.class, () -> model.getImage("red"));
     assertThrows(IllegalArgumentException.class, () -> model.removeImage("red"));
-
-//    assertThrows(IllegalArgumentException.class, () -> model.saveImageToFileSystem("red",
-//            "bread.ppm"));
-
   }
-
-
 
 
 }

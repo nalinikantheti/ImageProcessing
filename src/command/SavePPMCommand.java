@@ -52,7 +52,8 @@ public class SavePPMCommand implements Command {
    * @throws IOException if writing to file fails.
    */
 
-  public void savePPMToFileSystem(String name, String filepath, ImageProcessorModel model) throws IOException {
+  public void savePPMToFileSystem(String name, String filepath, ImageProcessorModel model)
+          throws IOException {
     Image image = model.getImage(name);
     StringBuilder ppm = new StringBuilder();
     ppm.append("P3\n");

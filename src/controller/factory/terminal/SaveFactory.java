@@ -3,7 +3,9 @@ package controller.factory.terminal;
 import java.util.Optional;
 import java.util.Scanner;
 
-import command.*;
+import command.Command;
+import command.SaveImageIOCommand;
+import command.SavePPMCommand;
 import view.ImageProcessorView;
 
 /**
@@ -38,7 +40,7 @@ public class SaveFactory extends AbstractTwoStringFactory {
     String filepath = s1.get();
     String imageName = s2.get();
     String filetype = filepath.substring(filepath.lastIndexOf(".") + 1);
-    if(filetype.equalsIgnoreCase("ppm")) {
+    if (filetype.equalsIgnoreCase("ppm")) {
       return Optional.of(new SavePPMCommand(filepath, imageName));
     } else {
       return Optional.of(new SaveImageIOCommand(filepath, imageName, filetype));

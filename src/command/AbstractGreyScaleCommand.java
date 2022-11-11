@@ -1,16 +1,13 @@
 package command;
 
-import image.Image;
 import image.Pixel;
-import model.ImageProcessorModel;
-import util.ImageProcessorUtils;
 
 /**
  * A command that processes an image into some sort of greyscale version of itself,
  * using either luma, intensity, value, red, green, or blue values to do so.
  * This command saves the greyscale version as a new file.
  */
-public abstract class AbstractGreyScaleCommand extends ColorTransformationCommand{
+public abstract class AbstractGreyScaleCommand extends ColorTransformationCommand {
   protected String imageName;
   protected String newName;
 
@@ -29,6 +26,7 @@ public abstract class AbstractGreyScaleCommand extends ColorTransformationComman
    * Gets a value to use for each pixel in the greyscale image, as such, returned values will become
    * the red, green, and blue values for each pixel. The value returned varies depending on the
    * subclass.
+   *
    * @param pixel the pixel that is used to determine the value
    * @return a value representing the RGB values of a greyscale pixel
    */
@@ -38,10 +36,12 @@ public abstract class AbstractGreyScaleCommand extends ColorTransformationComman
   protected int getRed(Pixel pixel) {
     return getValue(pixel);
   }
+
   @Override
   protected int getGreen(Pixel pixel) {
     return getValue(pixel);
   }
+
   @Override
   protected int getBlue(Pixel pixel) {
     return getValue(pixel);

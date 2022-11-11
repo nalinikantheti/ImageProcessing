@@ -20,6 +20,7 @@ public class IntensityCommand extends AbstractGreyScaleCommand {
 
   /**
    * Returns the intensity of the given pixel, which is used in the greyscale image.
+   *
    * @param pixel the pixel that is used to determine the value
    * @return the intensity of the given pixel
    */

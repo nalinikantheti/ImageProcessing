@@ -5,7 +5,21 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 import controller.ImageProcessorTerminalController;
-import controller.factory.terminal.*;
+import controller.factory.terminal.BlurFactory;
+import controller.factory.terminal.BrightenFactory;
+import controller.factory.terminal.DarkenFactory;
+import controller.factory.terminal.FlipHorizontalFactory;
+import controller.factory.terminal.FlipVerticalFactory;
+import controller.factory.terminal.GreyScaleBlueFactory;
+import controller.factory.terminal.GreyScaleGreenFactory;
+import controller.factory.terminal.GreyScaleRedFactory;
+import controller.factory.terminal.IntensityFactory;
+import controller.factory.terminal.LoadFactory;
+import controller.factory.terminal.LumaFactory;
+import controller.factory.terminal.SaveFactory;
+import controller.factory.terminal.SepiaFactory;
+import controller.factory.terminal.SharpenFactory;
+import controller.factory.terminal.ValueFactory;
 import model.ImageProcessorModelImpl;
 import view.ImageProcessorTextView;
 import view.ImageProcessorView;
@@ -22,7 +36,7 @@ public class Main {
    */
   public static void main(String[] args) {
     Scanner scan = new Scanner(System.in);
-    if(args.length >= 2) {
+    if (args.length >= 2) {
       try {
         scan = new Scanner(new StringReader(Files.readString(Paths.get(args[1]))));
       } catch (IOException e) {

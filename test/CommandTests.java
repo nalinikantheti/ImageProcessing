@@ -1,4 +1,3 @@
-import command.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -8,6 +7,22 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import command.BrightenCommand;
+import command.Command;
+import command.DarkenCommand;
+import command.FlipHorizontalCommand;
+import command.FlipVerticalCommand;
+import command.GreyScaleBlueCommand;
+import command.GreyScaleGreenCommand;
+import command.GreyScaleRedCommand;
+import command.IntensityCommand;
+import command.LoadPPMCommand;
+import command.LumaCommand;
+import command.ReadImageIOCommand;
+import command.SaveImageIOCommand;
+import command.SavePPMCommand;
+import command.SepiaCommand;
+import command.ValueCommand;
 import image.Image;
 import image.Pixel;
 import image.RGBImage;
@@ -225,7 +240,7 @@ public class CommandTests {
 
   @Test
   public void testSavePPMCommand() {
-    Command save = new SavePPMCommand(sixbitRoot+"/savePPM.ppm", "sixbit");
+    Command save = new SavePPMCommand(sixbitRoot + "/savePPM.ppm", "sixbit");
 
     save.run(mock);
     assertEquals(log.toString(), "retrieved: sixbit\n");
@@ -237,7 +252,7 @@ public class CommandTests {
     Image realJPG = ImageUtil.readPPM(sixbitRoot + "sixbit.jpg.ppm");
     readJPG.run(mock);
     assertEquals(log.toString(), "saved sixbit to model\n");
-//    TODO assertImageEquals(realJPG, mock.getLastSavedImage());
+    //TODO assertImageEquals(realJPG, mock.getLastSavedImage());
 
     Command readPNG = new ReadImageIOCommand(sixbitRoot + "sixbit.png", "sixbitp");
     readPNG.run(mock);
@@ -252,9 +267,10 @@ public class CommandTests {
 
 
   }
+
   @Test
   public void readImageIOThrowsUndread() {
-    assertThrows(IllegalArgumentException.class, () -> {
+    assertThrows(IllegalStateException.class, () -> {
       Command readJPG = new ReadImageIOCommand(sixbitRoot + "sixbit.jpg.ppm", "sixbit");
       readJPG.run(mock);
     });
@@ -274,7 +290,7 @@ public class CommandTests {
 
     saveJPG.run(mock2);
     readJPG.run(mock2);
-//    assertImageEquals(sixbit, mock2.getLastSavedImage());
+    // assertImageEquals(sixbit, mock2.getLastSavedImage());
     assertEquals(log2.toString(), "retrieved: sixbit\nsaved sixbit to model\n");
     log2.setLength(0);
     savePNG.run(mock2);
@@ -288,6 +304,7 @@ public class CommandTests {
     assertEquals(log2.toString(), "retrieved: sixbit\nsaved sixbit to model\n");
 
   }
+
   @Test
   public void testSaveImageIOThrows() {
     assertThrows(IllegalArgumentException.class, () -> {
@@ -301,8 +318,8 @@ public class CommandTests {
   public void testSaveToFileSystem() throws IOException {
     StringBuilder log = new StringBuilder();
     SavePPMCommand save = new SavePPMCommand("blue.ppm", "blue");
-    Pixel black = new Pixel(0,0,0);
-    Pixel blue = new Pixel(0,0,255);
+    Pixel black = new Pixel(0, 0, 0);
+    Pixel blue = new Pixel(0, 0, 255);
     Image image = new RGBImage(2, 2);
     image.setPixel(blue, 0, 1);
     MockModel model = new MockModel(log, image);
@@ -329,12 +346,12 @@ public class CommandTests {
   public void testLoadPPM() throws FileNotFoundException {
     StringBuilder log = new StringBuilder();
     LoadPPMCommand load = new LoadPPMCommand(sixbitRoot + "test.ppm", "test");
-    Pixel black = new Pixel(0,0,0);
-    Pixel grey = new Pixel(127,127,127);
+    Pixel black = new Pixel(0, 0, 0);
+    Pixel grey = new Pixel(127, 127, 127);
     Pixel white = new Pixel(255, 255, 255);
     Pixel red = new Pixel(255, 0, 0);
-    Pixel green = new Pixel(0,255,0);
-    Pixel blue = new Pixel(0,0,255);
+    Pixel green = new Pixel(0, 255, 0);
+    Pixel blue = new Pixel(0, 0, 255);
     MockModel model = new MockModel(log);
     load.run(model);
     Image test = model.getLastSavedImage();
@@ -348,10 +365,10 @@ public class CommandTests {
   }
 
   @Test
-  public void testThrows(){
+  public void testThrows() {
     StringBuilder log = new StringBuilder();
     MockModel mock = new MockModel(log);
-    LoadPPMCommand load = new LoadPPMCommand("nonexistent.ppm","bad");
+    LoadPPMCommand load = new LoadPPMCommand("nonexistent.ppm", "bad");
     assertThrows(IllegalArgumentException.class, () -> load.run(mock));
   }
 
@@ -364,7 +381,6 @@ public class CommandTests {
     runTest(sepia, sixbitSepia, mock2);
     assertLog(log2, "original-sepia");
   }
-
 
 
 }
