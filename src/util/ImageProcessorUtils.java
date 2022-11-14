@@ -1,5 +1,9 @@
 package util;
 
+import java.awt.image.BufferedImage;
+
+import image.BufferWrapper;
+import image.Image;
 import image.Pixel;
 
 /**
@@ -21,6 +25,20 @@ public class ImageProcessorUtils {
       throw new IllegalArgumentException(message);
     }
   }
+  //TODO test imageToBuffer
+  public static BufferedImage imageToBuffer(Image image){
+    BufferedImage buffer = new BufferedImage(image.getWidth(), image.getHeight(),
+            BufferedImage.TYPE_INT_RGB);
+    BufferWrapper wrapper = new BufferWrapper(buffer);
+    for (int x = 0; x < image.getWidth(); x += 1) {
+      for (int y = 0; y < image.getHeight(); y += 1) {
+        wrapper.setPixel(image.getPixel(x, y), x, y);
+      }
+    }
+    return buffer;
+  }
+
+
 
   /**
    * Takes in red, green, and blue values and clamps them in the range [0,255]

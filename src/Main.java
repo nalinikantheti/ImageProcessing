@@ -47,7 +47,8 @@ public class Main {
   }
 
   private static void startGUI() {
-    ImageProcessorGUIBasic gui = new ImageProcessorGUIBasic();
+
+    ImageProcessorGUIBasic gui = new ImageProcessorGUIBasic(new ImageProcessorModelImpl());
 
 
   }

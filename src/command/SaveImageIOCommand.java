@@ -10,6 +10,8 @@ import image.BufferWrapper;
 import image.Image;
 import model.ImageProcessorModel;
 
+import static util.ImageProcessorUtils.imageToBuffer;
+
 
 /**
  * A command that saves an Image of a specified filetype to a given filepath.
@@ -43,14 +45,7 @@ public class SaveImageIOCommand implements Command {
   @Override
   public void run(ImageProcessorModel model) {
     Image image = model.getImage(name);
-    BufferedImage buffer = new BufferedImage(image.getWidth(), image.getHeight(),
-            BufferedImage.TYPE_INT_RGB);
-    BufferWrapper wrapper = new BufferWrapper(buffer);
-    for (int x = 0; x < image.getWidth(); x += 1) {
-      for (int y = 0; y < image.getHeight(); y += 1) {
-        wrapper.setPixel(image.getPixel(x, y), x, y);
-      }
-    }
+    BufferedImage buffer = imageToBuffer(image);
     try {
       if (!ImageIO.write(buffer, filetype, new File(filepath))) {
         throw new IllegalArgumentException("Could not write image as " + filetype);
@@ -60,5 +55,4 @@ public class SaveImageIOCommand implements Command {
     }
   }
 
-  private Image
 }
