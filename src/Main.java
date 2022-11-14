@@ -21,6 +21,7 @@ import controller.factory.terminal.SepiaFactory;
 import controller.factory.terminal.SharpenFactory;
 import controller.factory.terminal.ValueFactory;
 import model.ImageProcessorModelImpl;
+import view.ImageProcessorGUIBasic;
 import view.ImageProcessorTextView;
 import view.ImageProcessorView;
 
@@ -35,6 +36,23 @@ public class Main {
    * @param args user input
    */
   public static void main(String[] args) {
+    boolean isTerm = false;
+
+
+    if(isTerm){
+      startTerminal(args);
+    } else {
+      startGUI();
+    }
+  }
+
+  private static void startGUI() {
+    ImageProcessorGUIBasic gui = new ImageProcessorGUIBasic();
+
+
+  }
+
+  private static void startTerminal(String[] args){
     Scanner scan = new Scanner(System.in);
     if (args.length >= 2) {
       try {

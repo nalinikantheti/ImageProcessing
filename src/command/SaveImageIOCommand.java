@@ -59,4 +59,6 @@ public class SaveImageIOCommand implements Command {
       throw new IllegalStateException(e.getMessage());
     }
   }
+
+  private Image
 }
