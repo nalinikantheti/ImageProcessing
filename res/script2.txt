@@ -1,6 +1,6 @@
-load ./res/25bit/25bit.png pic
-load ./res/25bit/25bit.jpg pic2
-load ./res/25bit/25bit.ppm pic3
+load ./res/25bit/25bit.ppm pic
+load ./res/25bit/25bit.png pic2
+load ./res/25bit/25bit.jpg pic3
 load ./res/25bit/25bit.bmp pic4
 
 flipHorizontal pic pic-hflip
