@@ -3,7 +3,7 @@ package mock;
 import java.util.Optional;
 
 import command.Command;
-import controller.factory.terminal.CommandFactory;
+import controller.factory.CommandFactory;
 
 /**
  * A Mock Command Factory that is used for testing the controller.

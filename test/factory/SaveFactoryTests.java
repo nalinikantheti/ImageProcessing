@@ -2,7 +2,7 @@ package factory;
 
 import java.util.Scanner;
 
-import controller.factory.terminal.CommandFactory;
+import controller.factory.CommandFactory;
 import controller.factory.terminal.SaveFactory;
 import view.ImageProcessorView;
 

@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.Scanner;
 
 import controller.factory.terminal.BrightenFactory;
-import controller.factory.terminal.CommandFactory;
+import controller.factory.CommandFactory;
 import view.ImageProcessorView;
 
 import static org.junit.Assert.assertFalse;

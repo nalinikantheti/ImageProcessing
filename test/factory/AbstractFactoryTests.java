@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.Scanner;
 
 import command.Command;
-import controller.factory.terminal.CommandFactory;
+import controller.factory.CommandFactory;
 import view.ImageProcessorTextView;
 import view.ImageProcessorView;
 

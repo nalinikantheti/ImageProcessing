@@ -3,7 +3,7 @@ package factory;
 import java.util.Scanner;
 
 import controller.factory.terminal.BlurFactory;
-import controller.factory.terminal.CommandFactory;
+import controller.factory.CommandFactory;
 import view.ImageProcessorView;
 
 /**

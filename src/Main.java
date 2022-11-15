@@ -2,9 +2,36 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.Scanner;
+import java.util.function.BiFunction;
+import java.util.function.Supplier;
 
+import static java.util.Optional.of;
+
+import command.BlurCommand;
+import command.BrightenCommand;
+import command.BrightenGuiCommand;
+import command.Command;
+import command.DarkenCommand;
+import command.DarkenGuiCommand;
+import command.FlipHorizontalCommand;
+import command.FlipVerticalCommand;
+import command.GreyScaleBlueCommand;
+import command.GreyScaleGreenCommand;
+import command.GreyScaleRedCommand;
+import command.IntensityCommand;
+import command.LoadPPMCommand;
+import command.LumaCommand;
+import command.OpenGuiCommand;
+import command.ReadImageIOCommand;
+import command.SaveAsGuiCommand;
+import command.SepiaCommand;
+import command.SharpenCommand;
+import command.ValueCommand;
+import controller.GUIController;
 import controller.ImageProcessorTerminalController;
+import controller.factory.CommandFactory;
 import controller.factory.terminal.BlurFactory;
 import controller.factory.terminal.BrightenFactory;
 import controller.factory.terminal.DarkenFactory;
@@ -47,10 +74,35 @@ public class Main {
   }
 
   private static void startGUI() {
+    ImageProcessorModelImpl model = new ImageProcessorModelImpl();
+    ImageProcessorGUIBasic gui = new ImageProcessorGUIBasic(model);
+    GUIController controller = new GUIController(model, gui);
+    gui.setListener(controller);
+    controller.registerFactory("blur", () -> of(new BlurCommand
+            ("working", "working")));
+    controller.registerFactory("brighten", () -> of(new BrightenGuiCommand(gui)));
+    controller.registerFactory("darken",() -> of(new DarkenGuiCommand(gui)));
+    controller.registerFactory("sharp", make(SharpenCommand::new));
+    controller.registerFactory("fliph", make(FlipHorizontalCommand::new));
+    controller.registerFactory("flipv", make(FlipVerticalCommand::new));
+    controller.registerFactory("greyr", make(GreyScaleRedCommand::new));
+    controller.registerFactory("greyg", make(GreyScaleGreenCommand::new));
+    controller.registerFactory("greyb", make(GreyScaleBlueCommand::new));
+    controller.registerFactory("greyi", make(IntensityCommand::new));
+    controller.registerFactory("greyl", make(LumaCommand::new));
+    controller.registerFactory("greyv", make(ValueCommand::new));
+    controller.registerFactory("sepia", make(SepiaCommand::new));
+    controller.registerFactory("open",() -> of(new OpenGuiCommand(gui)));
+    controller.registerFactory("saveAs",() -> of(new SaveAsGuiCommand(gui)));
+    LoadPPMCommand load = new LoadPPMCommand("./res/blerner-examples/blerner.ppm",
+            "working");
+    load.run(model);
+    gui.display("working");
 
-    ImageProcessorGUIBasic gui = new ImageProcessorGUIBasic(new ImageProcessorModelImpl());
+  }
 
-
+  private static CommandFactory make(BiFunction<String, String, Command> constructor) {
+    return () -> of(constructor.apply("working", "working"));
   }
 
   private static void startTerminal(String[] args){

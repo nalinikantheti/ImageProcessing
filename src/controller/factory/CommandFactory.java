@@ -1,4 +1,4 @@
-package controller.factory.terminal;
+package controller.factory;
 
 import java.util.Optional;
 
