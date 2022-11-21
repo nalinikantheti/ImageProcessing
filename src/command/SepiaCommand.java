@@ -22,6 +22,7 @@ public class SepiaCommand extends ColorTransformationCommand {
 
   /**
    * Returns the new sepia blue value of the given pixel.
+   *
    * @param pixel the pixel whose blue value will be transformed.
    * @return the new blue value for this pixel.
    */
@@ -32,6 +33,7 @@ public class SepiaCommand extends ColorTransformationCommand {
 
   /**
    * Returns the new sepia green value of the given pixel.
+   *
    * @param pixel the pixel whose green value will be transformed.
    * @return the new green value for this pixel.
    */
@@ -42,6 +44,7 @@ public class SepiaCommand extends ColorTransformationCommand {
 
   /**
    * Returns the new sepia red value of the given pixel.
+   *
    * @param pixel the pixel whose red value will be transformed.
    * @return the new red value for this pixel.
    */

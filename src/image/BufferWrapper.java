@@ -44,7 +44,7 @@ public class BufferWrapper extends AbstractImage {
    * @param x the x coordinate of the pixel to be retrieved.
    * @param y the y coordinate of the pixel to be retrieved.
    * @return a Pixel with the same RGB values of the pixel at
-   *         the given position in the buffered image.
+   * the given position in the buffered image.
    */
   @Override
   public Pixel getPixel(int x, int y) {

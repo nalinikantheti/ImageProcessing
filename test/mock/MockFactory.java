@@ -1,6 +1,5 @@
 package mock;
 
-import java.io.IOException;
 import java.util.Optional;
 
 import command.Command;

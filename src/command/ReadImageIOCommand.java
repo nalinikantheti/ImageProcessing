@@ -8,7 +8,6 @@ import javax.imageio.ImageIO;
 
 import image.BufferWrapper;
 import model.ImageProcessorModel;
-import view.ImageProcessorGUI;
 
 import static util.ImageProcessorUtils.ensureNotNull;
 

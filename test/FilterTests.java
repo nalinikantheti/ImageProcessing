@@ -15,11 +15,10 @@ import static org.junit.Assert.assertEquals;
  * Tests for {@link command.FilterCommand}.
  */
 public class FilterTests {
-  MockModel mock;
-  StringBuilder log;
-
-  Image twenBit;
-  String root = "./res/25bit/";
+  private MockModel mock;
+  private StringBuilder log;
+  private Image twenBit;
+  private String root = "./res/25bit/";
 
   @Before
   public void setup() throws FileNotFoundException {

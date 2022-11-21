@@ -6,7 +6,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import image.BufferWrapper;
 import image.Image;
 import model.ImageProcessorModel;
 

@@ -18,7 +18,6 @@ import static org.junit.Assert.assertTrue;
  */
 public class RGBImageTests extends ImageTests {
 
-
   @Test
   public void testPixelEquals() {
     Pixel pix1 = new Pixel(0, 1, 2);

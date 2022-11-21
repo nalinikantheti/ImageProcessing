@@ -11,8 +11,8 @@ import static org.junit.Assert.assertEquals;
  * Tests for {@link ImageProcessorTextView}.
  */
 public class ViewTests {
-  StringBuilder actualOutput;
-  ImageProcessorTextView view;
+  private StringBuilder actualOutput;
+  private ImageProcessorTextView view;
 
   @Before
   public void setup() {

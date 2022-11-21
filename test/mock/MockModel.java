@@ -12,7 +12,6 @@ import model.ImageProcessorModel;
  */
 public class MockModel implements ImageProcessorModel {
   private StringBuilder log;
-
   private Image lastSavedImage;
   private Image dummy;
 

@@ -1,15 +1,31 @@
 package view;
 
-import java.io.IOException;
-
 import controller.Listener;
 
+/**
+ * Represents a Graphical User Interface for an Image Processor.
+ */
 public interface ImageProcessorGUI {
 
-  public void display(String imageName);
+  /**
+   * updates the image in the processor with the given image.
+   *
+   * @param imageName
+   */
+  void display(String imageName);
 
-  public void setListener(Listener listener);
+  /**
+   * Sets the listener for this gui to the given listener.
+   *
+   * @param listener
+   */
+  void setListener(Listener listener);
 
-  public void makeErrorPopUp(String message);
+  /**
+   * Creates an error popup window with the given message.
+   *
+   * @param message
+   */
+  void makeErrorPopUp(String message);
 
 }

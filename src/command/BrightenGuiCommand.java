@@ -2,19 +2,19 @@ package command;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.util.Optional;
 
 import javax.swing.*;
 
 import model.ImageProcessorModel;
 import view.ImageProcessorGUI;
 
-public class BrightenGuiCommand implements Command{
+public class BrightenGuiCommand implements Command {
+  ImageProcessorGUI gui;
+
   public BrightenGuiCommand(ImageProcessorGUI gui) {
     this.gui = gui;
   }
 
-  ImageProcessorGUI gui;
   @Override
   public void run(ImageProcessorModel model) {
     JFrame popup = new JFrame();
@@ -23,7 +23,7 @@ public class BrightenGuiCommand implements Command{
     slider.setMinimum(0);
     popup.setLayout(new FlowLayout());
     JButton brighten = new JButton("Brighten by " + slider.getValue());
-    slider.addChangeListener( e -> brighten.setText("Brighten by " + slider.getValue()));
+    slider.addChangeListener(e -> brighten.setText("Brighten by " + slider.getValue()));
     popup.add(slider);
     popup.add(brighten);
     Rectangle bounds = new Rectangle(400, 100);

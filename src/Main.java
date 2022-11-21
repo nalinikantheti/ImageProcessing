@@ -2,18 +2,12 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Optional;
 import java.util.Scanner;
 import java.util.function.BiFunction;
-import java.util.function.Supplier;
-
-import static java.util.Optional.of;
 
 import command.BlurCommand;
-import command.BrightenCommand;
 import command.BrightenGuiCommand;
 import command.Command;
-import command.DarkenCommand;
 import command.DarkenGuiCommand;
 import command.FlipHorizontalCommand;
 import command.FlipVerticalCommand;
@@ -24,7 +18,6 @@ import command.IntensityCommand;
 import command.LoadPPMCommand;
 import command.LumaCommand;
 import command.OpenGuiCommand;
-import command.ReadImageIOCommand;
 import command.SaveAsGuiCommand;
 import command.SepiaCommand;
 import command.SharpenCommand;
@@ -52,6 +45,8 @@ import view.ImageProcessorGUIBasic;
 import view.ImageProcessorTextView;
 import view.ImageProcessorView;
 
+import static java.util.Optional.of;
+
 /**
  * Main class for running an Image Processor through a terminal.
  */
@@ -64,9 +59,23 @@ public class Main {
    */
   public static void main(String[] args) {
     boolean isTerm = false;
+    if (args.length >= 3) {
+      Scanner scan = new Scanner(System.in);
+      try {
+        if(args[2].equals("-text")){
+          isTerm = true;
+        }
+        if(args[2].equals("-file")){
+          isTerm = true;
+          scan = new Scanner(new StringReader(Files.readString(Paths.get(args[3]))));
+        }
 
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+    }
 
-    if(isTerm){
+    if (isTerm) {
       startTerminal(args);
     } else {
       startGUI();
@@ -81,7 +90,7 @@ public class Main {
     controller.registerFactory("blur", () -> of(new BlurCommand
             ("working", "working")));
     controller.registerFactory("brighten", () -> of(new BrightenGuiCommand(gui)));
-    controller.registerFactory("darken",() -> of(new DarkenGuiCommand(gui)));
+    controller.registerFactory("darken", () -> of(new DarkenGuiCommand(gui)));
     controller.registerFactory("sharp", make(SharpenCommand::new));
     controller.registerFactory("fliph", make(FlipHorizontalCommand::new));
     controller.registerFactory("flipv", make(FlipVerticalCommand::new));
@@ -92,8 +101,8 @@ public class Main {
     controller.registerFactory("greyl", make(LumaCommand::new));
     controller.registerFactory("greyv", make(ValueCommand::new));
     controller.registerFactory("sepia", make(SepiaCommand::new));
-    controller.registerFactory("open",() -> of(new OpenGuiCommand(gui)));
-    controller.registerFactory("saveAs",() -> of(new SaveAsGuiCommand(gui)));
+    controller.registerFactory("open", () -> of(new OpenGuiCommand(gui)));
+    controller.registerFactory("saveAs", () -> of(new SaveAsGuiCommand(gui)));
     LoadPPMCommand load = new LoadPPMCommand("./res/blerner-examples/blerner.ppm",
             "working");
     load.run(model);
@@ -105,7 +114,7 @@ public class Main {
     return () -> of(constructor.apply("working", "working"));
   }
 
-  private static void startTerminal(String[] args){
+  private static void startTerminal(String[] args) {
     Scanner scan = new Scanner(System.in);
     if (args.length >= 2) {
       try {

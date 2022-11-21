@@ -10,21 +10,23 @@ import mock.MockGuiView;
 import mock.MockModel;
 import model.ImageProcessorModel;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * tests the functionality of {@link GUIController}.
+ */
 public class GUIControllerTest {
-  GUIController controller;
-  MockModel mockModel;
-  MockGuiView mockgui;
-  StringBuilder log;
-  MockFactory mockBrighten;
-  MockFactory mockSepia;
-  MockFactory mockBlur;
-  String brighten;
-  String sepia;
-  String blur;
+  private GUIController controller;
+  private MockModel mockModel;
+  private MockGuiView mockgui;
+  private StringBuilder log;
+  private MockFactory mockBrighten;
+  private MockFactory mockSepia;
+  private MockFactory mockBlur;
+  private String brighten;
+  private String sepia;
+  private String blur;
 
   @Before
   public void setup() {
@@ -40,16 +42,16 @@ public class GUIControllerTest {
     blur = "Blur";
   }
 
-  private void assertLog(String message){
-    try{
+  private void assertLog(String message) {
+    try {
       assertTrue(log.toString().contains(message));
-    } catch(AssertionError e) {
+    } catch (AssertionError e) {
       throw new ComparisonFailure("AssertLog Failed", message, log.toString());
     }
   }
 
   @Test
-  public void testController(){
+  public void testController() {
     controller.registerFactory("Brighten", mockBrighten);
     controller.registerFactory("Sepia", mockSepia);
     controller.registerFactory("Blur", mockBlur);
@@ -75,14 +77,14 @@ public class GUIControllerTest {
                     (ImageProcessorModel model) -> {
                       throw new IllegalArgumentException("Broken command");
                     }
-    ));
+            ));
 
     controller.actionPerformed("failed-command");
     assertLog("Made error popup: Broken command");
   }
 
   @Test
-  public void testControllerThrows(){
+  public void testControllerThrows() {
     assertThrows(IllegalArgumentException.class, () -> controller.registerFactory("null", null));
     assertThrows(IllegalArgumentException.class, () -> new GUIController(null, mockgui));
     assertThrows(IllegalArgumentException.class, () -> new GUIController(mockModel, null));
@@ -90,7 +92,6 @@ public class GUIControllerTest {
     controller.registerFactory("Brighten", mockBrighten);
 
   }
-
 
 
 }

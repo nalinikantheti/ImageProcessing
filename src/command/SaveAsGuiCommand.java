@@ -11,12 +11,13 @@ public class SaveAsGuiCommand implements Command {
   public SaveAsGuiCommand(ImageProcessorGUI gui) {
     this.gui = gui;
   }
+
   @Override
   public void run(ImageProcessorModel model) {
     JFileChooser file = new JFileChooser();
     int returnVal = file.showSaveDialog(null);
 
-    if(returnVal == JFileChooser.APPROVE_OPTION){
+    if (returnVal == JFileChooser.APPROVE_OPTION) {
       String filepath = file.getSelectedFile().getAbsolutePath();
       String filetype = filepath.substring(filepath.lastIndexOf(".") + 1);
       if (filetype.equalsIgnoreCase("ppm")) {

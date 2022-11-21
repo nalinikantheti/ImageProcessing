@@ -24,7 +24,7 @@ public class MockCommand implements Command {
   /**
    * Constructor for a Mock Command with a log to append to and command name.
    *
-   * @param log a stringbuilder that logs when this command is used.
+   * @param log  a stringbuilder that logs when this command is used.
    * @param name a String that logs when this command is used.
    */
   public MockCommand(StringBuilder log, String name) {

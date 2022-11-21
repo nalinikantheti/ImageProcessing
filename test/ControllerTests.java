@@ -20,16 +20,16 @@ import static org.junit.Assert.assertThrows;
  */
 public class ControllerTests {
 
-  StringBuilder expectedModelOutput;
-  StringBuilder expectedViewOutput;
-  StringBuilder actualModelOutput;
-  StringBuilder actualViewOutput;
-  StringBuilder inputBuilder;
-  ImageProcessorTerminalController controller;
-  MockFactory mockFactory;
-  MockView view;
-  MockModel model;
-  Scanner scan;
+  private StringBuilder expectedModelOutput;
+  private StringBuilder expectedViewOutput;
+  private StringBuilder actualModelOutput;
+  private StringBuilder actualViewOutput;
+  private StringBuilder inputBuilder;
+  private ImageProcessorTerminalController controller;
+  private MockFactory mockFactory;
+  private MockView view;
+  private MockModel model;
+  private Scanner scan;
 
   @Before
   public void setup() {
@@ -62,11 +62,11 @@ public class ControllerTests {
     ImageProcessorTerminalController c = new ImageProcessorTerminalController(
             new MockModel(new StringBuilder()), new ImageProcessorView() {
 
-              @Override
-              public void renderMessage(String message) throws IOException {
-                throw new IOException();
-              }
-            }, new Scanner(new StringReader("hello")));
+      @Override
+      public void renderMessage(String message) throws IOException {
+        throw new IOException();
+      }
+    }, new Scanner(new StringReader("hello")));
 
     assertThrows(IllegalStateException.class, () -> c.runProgram());
   }

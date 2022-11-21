@@ -3,7 +3,7 @@ package command;
 import model.ImageProcessorModel;
 import view.ImageProcessorGUI;
 
-public class UpdateViewCommand implements Command{
+public class UpdateViewCommand implements Command {
 
 
   private ImageProcessorGUI view;

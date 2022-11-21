@@ -22,9 +22,9 @@ import static org.junit.Assert.assertTrue;
  * An abstract class to test all factories.
  */
 public abstract class AbstractFactoryTests {
-  StringBuilder expectedOutput;
-  StringBuilder actualOuptut;
-  StringBuilder inputBuilder;
+  private StringBuilder expectedOutput;
+  private StringBuilder actualOuptut;
+  private StringBuilder inputBuilder;
 
   @Before
   public void setup() {

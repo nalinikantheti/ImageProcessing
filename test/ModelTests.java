@@ -21,7 +21,6 @@ import static org.junit.Assert.assertTrue;
 public class ModelTests {
   private ImageProcessorModel model;
 
-
   @Before
   public void setup() {
     Pixel black;

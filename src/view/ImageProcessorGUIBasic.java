@@ -15,22 +15,30 @@ import model.ImageProcessorModelState;
 
 import static util.ImageProcessorUtils.imageToBuffer;
 
-public class ImageProcessorGUIBasic extends JFrame implements ImageProcessorGUI{
-  Listener listener;
-  ActionListener redirect;
-  JScrollPane imageBorder;
-  JLabel image;
-  Histogram histogram;
+/**
+ * Represents a basic Graphical User Interface for this Image Processor.
+ */
+public class ImageProcessorGUIBasic extends JFrame implements ImageProcessorGUI {
+  private Listener listener;
+  private ActionListener redirect;
+  private JScrollPane imageBorder;
+  private JLabel image;
+  private Histogram histogram;
   private ImageProcessorModelState model;
 
 
-  public ImageProcessorGUIBasic(ImageProcessorModelState model) throws HeadlessException {
+  /**
+   * A constructor for a {@link ImageProcessorGUIBasic}. This gui uses
+   * a border layout to display all of its components.
+   *
+   * @param model the model that this gui will use to manipulate images.
+   */
+  public ImageProcessorGUIBasic(ImageProcessorModelState model) {
     this.model = model;
     this.image = new JLabel(new ImageIcon(getDefaultImage()));
     this.imageBorder = new JScrollPane(image);
     this.redirect = e -> listener.actionPerformed(e.getActionCommand());
     this.histogram = new Histogram();
-
     this.setLayout(new BorderLayout());
 
 
@@ -39,18 +47,18 @@ public class ImageProcessorGUIBasic extends JFrame implements ImageProcessorGUI{
     this.add(imageBorder, BorderLayout.CENTER);
     this.addHistogram();
 
-    this.setPreferredSize(new Dimension(1280,720));
+    this.setPreferredSize(new Dimension(1280, 720));
     this.pack();
     this.setVisible(true);
   }
 
   private void addHistogram() {
     JPanel hist = new JPanel();
-    Dimension size = new Dimension(500,700);
+    Dimension size = new Dimension(500, 700);
     hist.setPreferredSize(size);
     JPanel histChecks = new JPanel();
-    hist.setLayout(new GridLayout(2,1));
-    histChecks.setLayout(new GridLayout(4,1));
+    hist.setLayout(new GridLayout(2, 1));
+    histChecks.setLayout(new GridLayout(4, 1));
     hist.add(this.histogram);
 
     JCheckBox red = new JCheckBox("Red");
@@ -76,7 +84,7 @@ public class ImageProcessorGUIBasic extends JFrame implements ImageProcessorGUI{
     this.add(hist, BorderLayout.EAST);
   }
 
-  private void addFileButtons(){
+  private void addFileButtons() {
     JButton open = new JButton("Open");
     open.addActionListener(redirect);
     open.setActionCommand("open");
@@ -132,7 +140,7 @@ public class ImageProcessorGUIBasic extends JFrame implements ImageProcessorGUI{
     sharp.addActionListener(redirect);
     sharp.setActionCommand("sharp");
     JPanel commands = new JPanel();
-    commands.setLayout(new GridLayout(20,1));
+    commands.setLayout(new GridLayout(20, 1));
     commands.add(brighten);
     commands.add(blur);
     commands.add(darken);
@@ -151,11 +159,11 @@ public class ImageProcessorGUIBasic extends JFrame implements ImageProcessorGUI{
   }
 
   private BufferedImage getDefaultImage() {
-    Pixel grey = new Pixel(127,127,127);
+    Pixel grey = new Pixel(127, 127, 127);
     ArrayList<ArrayList<Pixel>> pix = new ArrayList<ArrayList<Pixel>>();
-    for(int i = 0; i < 300; i ++){
+    for (int i = 0; i < 300; i++) {
       pix.add(new ArrayList<Pixel>());
-      for(int j = 0; j< 300 ; j++){
+      for (int j = 0; j < 300; j++) {
         pix.get(i).add(grey);
       }
     }
@@ -163,6 +171,14 @@ public class ImageProcessorGUIBasic extends JFrame implements ImageProcessorGUI{
     return imageToBuffer(image);
   }
 
+  /**
+   * Updates the current image by using a model to retrieve
+   * the image from the given name, making a buffered image
+   * from it, and then setting the icon of a Jlabel to that
+   * buffered image.
+   *
+   * @param imageName the name of the new image to be displayed.
+   */
   @Override
   public void display(String imageName) {
     Image img = model.getImage(imageName);
@@ -170,17 +186,28 @@ public class ImageProcessorGUIBasic extends JFrame implements ImageProcessorGUI{
     histogram.update(img);
   }
 
+  /**
+   * Sets this listener to the given listener.
+   *
+   * @param listener the listener that will listen
+   *                 to this gui.
+   */
   @Override
   public void setListener(Listener listener) {
     this.listener = listener;
   }
 
+  /**
+   * Creates a simple popup window displaying a given error message.
+   *
+   * @param message the error message to be displayed.
+   */
   @Override
   public void makeErrorPopUp(String message) {
     JFrame errorPane = new JFrame();
     JLabel error = new JLabel();
     error.setText(message);
-    Rectangle bounds = new Rectangle(300,200);
+    Rectangle bounds = new Rectangle(300, 200);
     errorPane.setBounds(bounds);
     errorPane.setTitle("ERROR:");
     errorPane.add(error);

@@ -25,8 +25,9 @@ public class ImageProcessorUtils {
       throw new IllegalArgumentException(message);
     }
   }
+
   //TODO test imageToBuffer
-  public static BufferedImage imageToBuffer(Image image){
+  public static BufferedImage imageToBuffer(Image image) {
     BufferedImage buffer = new BufferedImage(image.getWidth(), image.getHeight(),
             BufferedImage.TYPE_INT_RGB);
     BufferWrapper wrapper = new BufferWrapper(buffer);
@@ -37,7 +38,6 @@ public class ImageProcessorUtils {
     }
     return buffer;
   }
-
 
 
   /**

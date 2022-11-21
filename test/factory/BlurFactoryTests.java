@@ -2,8 +2,8 @@ package factory;
 
 import java.util.Scanner;
 
-import controller.factory.terminal.BlurFactory;
 import controller.factory.CommandFactory;
+import controller.factory.terminal.BlurFactory;
 import view.ImageProcessorView;
 
 /**

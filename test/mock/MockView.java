@@ -5,7 +5,7 @@ import java.io.IOException;
 import view.ImageProcessorView;
 
 /**
- * A mock view which lLogs all the messages transmitted to this view.
+ * A mock view which logs all the messages transmitted to this view.
  */
 public class MockView implements ImageProcessorView {
   private StringBuilder output;
