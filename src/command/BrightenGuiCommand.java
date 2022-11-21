@@ -22,7 +22,7 @@ public class BrightenGuiCommand implements Command{
     slider.setMaximum(255);
     slider.setMinimum(0);
     popup.setLayout(new FlowLayout());
-    JButton brighten = new JButton("Brighten");
+    JButton brighten = new JButton("Brighten by " + slider.getValue());
     slider.addChangeListener( e -> brighten.setText("Brighten by " + slider.getValue()));
     popup.add(slider);
     popup.add(brighten);

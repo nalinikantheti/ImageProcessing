@@ -1,14 +1,13 @@
 package view;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.*;
 
-import controller.GUIController;
+import controller.Listener;
 import image.Image;
 import image.Pixel;
 import image.RGBImage;
@@ -17,10 +16,11 @@ import model.ImageProcessorModelState;
 import static util.ImageProcessorUtils.imageToBuffer;
 
 public class ImageProcessorGUIBasic extends JFrame implements ImageProcessorGUI{
-  ActionListener listener;
+  Listener listener;
   ActionListener redirect;
   JScrollPane imageBorder;
   JLabel image;
+  Histogram histogram;
   private ImageProcessorModelState model;
 
 
@@ -28,17 +28,52 @@ public class ImageProcessorGUIBasic extends JFrame implements ImageProcessorGUI{
     this.model = model;
     this.image = new JLabel(new ImageIcon(getDefaultImage()));
     this.imageBorder = new JScrollPane(image);
-    this.redirect = e -> listener.actionPerformed(e);
+    this.redirect = e -> listener.actionPerformed(e.getActionCommand());
+    this.histogram = new Histogram();
+
     this.setLayout(new BorderLayout());
-
-
 
 
     this.addCommands();
     this.addFileButtons();
     this.add(imageBorder, BorderLayout.CENTER);
+    this.addHistogram();
+
+    this.setPreferredSize(new Dimension(1280,720));
     this.pack();
     this.setVisible(true);
+  }
+
+  private void addHistogram() {
+    JPanel hist = new JPanel();
+    Dimension size = new Dimension(500,700);
+    hist.setPreferredSize(size);
+    JPanel histChecks = new JPanel();
+    hist.setLayout(new GridLayout(2,1));
+    histChecks.setLayout(new GridLayout(4,1));
+    hist.add(this.histogram);
+
+    JCheckBox red = new JCheckBox("Red");
+    red.setSelected(true);
+    red.addChangeListener(e -> histogram.toggleRed());
+    histChecks.add(red);
+
+    JCheckBox green = new JCheckBox("Green");
+    green.setSelected(true);
+    green.addChangeListener(e -> histogram.toggleGreen());
+    histChecks.add(green);
+
+    JCheckBox blue = new JCheckBox("Blue");
+    blue.setSelected(true);
+    blue.addChangeListener(e -> histogram.toggleBlue());
+    histChecks.add(blue);
+
+    JCheckBox intensity = new JCheckBox("Intensity");
+    intensity.setSelected(true);
+    intensity.addChangeListener(e -> histogram.toggleIntensity());
+    histChecks.add(intensity);
+    hist.add(histChecks);
+    this.add(hist, BorderLayout.EAST);
   }
 
   private void addFileButtons(){
@@ -131,12 +166,12 @@ public class ImageProcessorGUIBasic extends JFrame implements ImageProcessorGUI{
   @Override
   public void display(String imageName) {
     Image img = model.getImage(imageName);
-
     image.setIcon(new ImageIcon(imageToBuffer(img)));
+    histogram.update(img);
   }
 
   @Override
-  public void setListener(ActionListener listener) {
+  public void setListener(Listener listener) {
     this.listener = listener;
   }
 

@@ -22,7 +22,7 @@ public class DarkenGuiCommand implements Command{
     slider.setMaximum(255);
     slider.setMinimum(0);
     popup.setLayout(new FlowLayout());
-    JButton darken = new JButton("Darken");
+    JButton darken = new JButton("Darken by " + slider.getValue());
     slider.addChangeListener( e -> darken.setText("Darken by " + slider.getValue()));
     popup.add(slider);
     popup.add(darken);
