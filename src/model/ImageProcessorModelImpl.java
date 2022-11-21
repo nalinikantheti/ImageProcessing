@@ -1,6 +1,7 @@
 package model;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import image.Image;
@@ -13,7 +14,7 @@ import static util.ImageProcessorUtils.ensureNotNull;
  * operations are handled by the command function objects.
  */
 public class ImageProcessorModelImpl implements ImageProcessorModel {
-  private HashMap<String, Image> imageNames;
+  private Map<String, Image> imageNames;
 
 
   /**

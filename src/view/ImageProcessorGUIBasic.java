@@ -1,11 +1,20 @@
 package view;
 
-import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.ImageIcon;
+import java.awt.BorderLayout;
+import java.awt.Rectangle;
+import java.awt.GridLayout;
+import java.awt.Dimension;
 
 import controller.Listener;
 import image.Image;
@@ -21,7 +30,7 @@ import static util.ImageProcessorUtils.imageToBuffer;
 public class ImageProcessorGUIBasic extends JFrame implements ImageProcessorGUI {
   private Listener listener;
   private ActionListener redirect;
-  private JScrollPane imageBorder;
+
   private JLabel image;
   private Histogram histogram;
   private ImageProcessorModelState model;
@@ -34,9 +43,10 @@ public class ImageProcessorGUIBasic extends JFrame implements ImageProcessorGUI 
    * @param model the model that this gui will use to manipulate images.
    */
   public ImageProcessorGUIBasic(ImageProcessorModelState model) {
+    JScrollPane imageBorder;
     this.model = model;
     this.image = new JLabel(new ImageIcon(getDefaultImage()));
-    this.imageBorder = new JScrollPane(image);
+    imageBorder = new JScrollPane(image);
     this.redirect = e -> listener.actionPerformed(e.getActionCommand());
     this.histogram = new Histogram();
     this.setLayout(new BorderLayout());

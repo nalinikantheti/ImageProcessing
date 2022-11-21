@@ -71,7 +71,7 @@ public abstract class AbstractCommandFactory implements CommandFactory {
    *                         enters invalid input, in order to notify the user what
    *                         argument was expected.
    * @return an {@code Optional<Integer>}.
-   * See {@link #waitForString(boolean)} for more details.
+   *         See {@link #waitForString(boolean)} for more details.
    */
   protected Optional<Integer> waitForInteger(boolean hadPreviousValue, String message) {
     while (hadPreviousValue && s.hasNext()) {

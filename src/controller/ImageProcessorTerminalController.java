@@ -3,6 +3,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -18,7 +19,7 @@ import view.ImageProcessorView;
  * errors thrown due to bad inputs.
  */
 public class ImageProcessorTerminalController implements ImageProcessorController {
-  private HashMap<String, CommandFactory> commandFactories;
+  private Map<String, CommandFactory> commandFactories;
 
   private ImageProcessorModel model;
   private ImageProcessorView view;
@@ -52,6 +53,7 @@ public class ImageProcessorTerminalController implements ImageProcessorControlle
    */
   @Override
   public void runProgram() {
+    transmit("Welcome to Image Processor! Enter a command to begin:");
     while (scan.hasNext()) {
       String input = scan.next();
       if (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit")) {

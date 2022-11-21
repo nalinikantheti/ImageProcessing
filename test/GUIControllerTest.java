@@ -24,9 +24,7 @@ public class GUIControllerTest {
   private MockFactory mockBrighten;
   private MockFactory mockSepia;
   private MockFactory mockBlur;
-  private String brighten;
-  private String sepia;
-  private String blur;
+
 
   @Before
   public void setup() {
@@ -37,9 +35,6 @@ public class GUIControllerTest {
     mockBrighten = new MockFactory(log, "Brighten");
     mockSepia = new MockFactory(log, "Sepia");
     mockBlur = new MockFactory(log, "Blur");
-    brighten = "Brighten";
-    sepia = "Sepia";
-    blur = "Blur";
   }
 
   private void assertLog(String message) {
@@ -73,10 +68,10 @@ public class GUIControllerTest {
     assertLog("Made error popup: Command failed to run.");
 
     controller.registerFactory("failed-command",
-            () -> Optional.of(
-                    (ImageProcessorModel model) -> {
-                      throw new IllegalArgumentException("Broken command");
-                    }
+        () -> Optional.of(
+            (ImageProcessorModel model) -> {
+            throw new IllegalArgumentException("Broken command");
+            }
             ));
 
     controller.actionPerformed("failed-command");

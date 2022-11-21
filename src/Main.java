@@ -59,20 +59,8 @@ public class Main {
    */
   public static void main(String[] args) {
     boolean isTerm = false;
-    if (args.length >= 3) {
-      Scanner scan = new Scanner(System.in);
-      try {
-        if(args[2].equals("-text")){
-          isTerm = true;
-        }
-        if(args[2].equals("-file")){
-          isTerm = true;
-          scan = new Scanner(new StringReader(Files.readString(Paths.get(args[3]))));
-        }
-
-      } catch (IOException e) {
-        throw new RuntimeException(e);
-      }
+    if (args.length >= 1) {
+      isTerm = true;
     }
 
     if (isTerm) {
@@ -87,8 +75,8 @@ public class Main {
     ImageProcessorGUIBasic gui = new ImageProcessorGUIBasic(model);
     GUIController controller = new GUIController(model, gui);
     gui.setListener(controller);
-    controller.registerFactory("blur", () -> of(new BlurCommand
-            ("working", "working")));
+    controller.registerFactory("blur", () -> of(new BlurCommand("working",
+            "working")));
     controller.registerFactory("brighten", () -> of(new BrightenGuiCommand(gui)));
     controller.registerFactory("darken", () -> of(new DarkenGuiCommand(gui)));
     controller.registerFactory("sharp", make(SharpenCommand::new));

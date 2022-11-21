@@ -1,17 +1,21 @@
 package command;
 
-import javax.swing.*;
+import javax.swing.JFileChooser;
 
 import model.ImageProcessorModel;
-import view.ImageProcessorGUI;
 
+/**
+ * A Command that creates the appropriate save command
+ * based on the users interaction with the gui.
+ */
 public class SaveAsGuiCommand implements Command {
-  ImageProcessorGUI gui;
 
-  public SaveAsGuiCommand(ImageProcessorGUI gui) {
-    this.gui = gui;
-  }
-
+  /**
+   * Runs this command by opening a JFileChooser, and then creating
+   * a new SavePPMCommand or a SaveImageIOCommand based on the user
+   * interaction with the file chooser.
+   * @param model model used to retrieve image for command to then process.
+   */
   @Override
   public void run(ImageProcessorModel model) {
     JFileChooser file = new JFileChooser();

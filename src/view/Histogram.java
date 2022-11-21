@@ -1,8 +1,9 @@
 package view;
 
-import java.awt.*;
-
-import javax.swing.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Color;
+import javax.swing.JPanel;
 
 import image.Image;
 import image.Pixel;
@@ -97,7 +98,8 @@ public class Histogram extends JPanel {
       g.setColor(Color.lightGray);
       g.drawLine(0, y * height / 100, width, y * height / 100);
       g.setColor(Color.black);
-      g.drawString(String.valueOf((int) ((double) y * getPeak() / 100)), 0, (100 - y) * height / 100);
+      g.drawString(String.valueOf((int) ((double) y * getPeak() / 100)),
+              0, (100 - y) * height / 100);
     }
   }
 

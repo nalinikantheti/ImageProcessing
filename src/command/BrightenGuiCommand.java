@@ -1,20 +1,34 @@
 package command;
 
-import java.awt.*;
+import java.awt.Rectangle;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
-
-import javax.swing.*;
-
+import javax.swing.JFrame;
+import javax.swing.JSlider;
+import javax.swing.JButton;
+import javax.swing.AbstractAction;
 import model.ImageProcessorModel;
 import view.ImageProcessorGUI;
 
+/**
+ * A command that creates a {@link BrightenCommand} using inputs from a gui.
+ */
 public class BrightenGuiCommand implements Command {
-  ImageProcessorGUI gui;
+  private ImageProcessorGUI gui;
 
+  /**
+   * A constructor for a {@link BrightenGuiCommand}.
+   * @param gui the GUI this command will take input from.
+   */
   public BrightenGuiCommand(ImageProcessorGUI gui) {
     this.gui = gui;
   }
 
+  /**
+   * Runs this command by creating a slider popup that retrieves a value from the user,
+   *    * and then using that value to create a {@link BrightenCommand}.
+   * @param model model used to retrieve image for command to then process.
+   */
   @Override
   public void run(ImageProcessorModel model) {
     JFrame popup = new JFrame();

@@ -26,7 +26,11 @@ public class ImageProcessorUtils {
     }
   }
 
-  //TODO test imageToBuffer
+  /**
+   * Converts the givne {@link Image} into a buffered image.
+   * @param image the image to be converted.
+   * @return a buffered image derived from the given image.
+   */
   public static BufferedImage imageToBuffer(Image image) {
     BufferedImage buffer = new BufferedImage(image.getWidth(), image.getHeight(),
             BufferedImage.TYPE_INT_RGB);

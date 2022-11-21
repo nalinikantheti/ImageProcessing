@@ -17,11 +17,11 @@ import static org.junit.Assert.assertEquals;
 public class FilterTests {
   private MockModel mock;
   private StringBuilder log;
-  private Image twenBit;
   private String root = "./res/25bit/";
 
   @Before
   public void setup() throws FileNotFoundException {
+    Image twenBit;
     log = new StringBuilder();
     twenBit = ImageUtil.readPPM(root + "25bit.ppm");
     mock = new MockModel(log, twenBit);

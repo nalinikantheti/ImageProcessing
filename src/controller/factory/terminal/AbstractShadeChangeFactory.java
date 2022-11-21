@@ -55,7 +55,7 @@ public abstract class AbstractShadeChangeFactory extends AbstractCommandFactory 
    * @param intensity the integer argument
    * @param s2        the second string argument
    * @return an {@code Optional<Command>} containing a command.
-   * Actual class may vary depending on the implementation.
+   *         Actual class may vary depending on the implementation.
    */
   protected abstract Optional<Command> makeCommand(Optional<String> s1,
                                                    Optional<Integer> intensity,
