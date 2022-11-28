@@ -89,8 +89,8 @@ public class Main {
     controller.registerFactory("greyl", make(LumaCommand::new));
     controller.registerFactory("greyv", make(ValueCommand::new));
     controller.registerFactory("sepia", make(SepiaCommand::new));
-    controller.registerFactory("open", () -> of(new OpenGuiCommand(gui)));
-    controller.registerFactory("saveAs", () -> of(new SaveAsGuiCommand(gui)));
+    controller.registerFactory("open", () -> of(new OpenGuiCommand()));
+    controller.registerFactory("saveAs", () -> of(new SaveAsGuiCommand()));
     LoadPPMCommand load = new LoadPPMCommand("./res/blerner-examples/blerner.ppm",
             "working");
     load.run(model);
